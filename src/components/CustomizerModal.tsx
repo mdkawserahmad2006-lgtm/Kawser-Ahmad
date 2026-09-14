@@ -283,6 +283,24 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
                 </div>
               </div>
 
+              {/* CV / Resume URL Link Input */}
+              <div>
+                <label className="block text-xs font-semibold text-cyan-300 mb-1.5 flex items-center justify-between">
+                  <span>CV / Resume URL (Google Drive, Dropbox or PDF Link)</span>
+                  <span className="text-[10px] text-navy-steel font-normal">Directly downloadable from website</span>
+                </label>
+                <input
+                  type="url"
+                  value={tempProfile.resumeUrl || ''}
+                  onChange={(e) => setTempProfile({ ...tempProfile, resumeUrl: e.target.value })}
+                  placeholder="https://drive.google.com/... or your custom CV PDF link"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#020e1a] border border-cyan-500/30 text-sm text-white focus:border-cyan-400 focus:outline-none"
+                />
+                <p className="text-[11px] text-navy-mist mt-1">
+                  Leave empty to use the built-in printable CV generator, or paste your Google Drive / Dropbox link anytime.
+                </p>
+              </div>
+
               {/* Stats Counters */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <div>
@@ -354,7 +372,7 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
                       type="text"
                       value={tempProfile.logoSubtext}
                       onChange={(e) => setTempProfile({ ...tempProfile, logoSubtext: e.target.value })}
-                      placeholder="CREATIVE LAB"
+                      placeholder="THEORY"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-[#020e1a] border border-cyan-500/20 text-sm text-white"
                     />
                   </div>

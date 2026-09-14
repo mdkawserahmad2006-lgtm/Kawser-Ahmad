@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Menu, X, Settings2, Send, Palette, Film, TrendingUp } from 'lucide-react';
+import { Sparkles, Menu, X, Settings2, Send, FileText } from 'lucide-react';
 import { ProfileData } from '../types';
 
 interface NavbarProps {
   profile: ProfileData;
   onOpenCustomizer: () => void;
+  onOpenResume?: () => void;
   onSelectCategory?: (category: 'all' | 'graphics' | 'video' | 'meta') => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   profile,
   onOpenCustomizer,
+  onOpenResume,
   onSelectCategory
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -37,30 +39,30 @@ export const Navbar: React.FC<NavbarProps> = ({
       id="main-navbar"
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#030d17]/90 backdrop-blur-md border-b border-cyan-500/15 py-3 shadow-lg shadow-black/60'
+          ? 'bg-[#030f22]/95 backdrop-blur-md border-b border-sky-500/20 py-3 shadow-lg shadow-[#020814]/80'
           : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo in the corner as requested */}
+        {/* Brand Logo in the corner: KAWSER THEORY */}
         <a
           id="brand-logo"
           href="#hero"
           className="flex items-center gap-3 group focus:outline-none"
         >
-          {/* Logo Box exactly as in Screenshot 1 */}
-          <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-b from-[#062038] to-[#020e1c] border-2 border-cyan-400/90 shadow-[0_0_20px_rgba(0,229,255,0.45)] flex items-center justify-center group-hover:shadow-[0_0_25px_rgba(0,229,255,0.7)] group-hover:border-cyan-300 transition-all duration-300">
-            <span className="font-['Syne',sans-serif] font-black text-2xl tracking-tighter flex items-center select-none">
+          {/* Logo Box KT monogram */}
+          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-b from-[#08284c] to-[#031124] border-2 border-sky-400/80 shadow-[0_0_20px_rgba(56,189,248,0.35)] flex items-center justify-center group-hover:shadow-[0_0_25px_rgba(56,189,248,0.6)] group-hover:border-sky-300 transition-all duration-300">
+            <span className="font-['Syne',sans-serif] font-black text-xl sm:text-2xl tracking-tighter flex items-center select-none">
               <span className="text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)]">K</span>
-              <span className="bg-gradient-to-r from-cyan-300 to-teal-200 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,229,255,0.6)]">A</span>
+              <span className="bg-gradient-to-r from-sky-300 to-cyan-200 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(56,189,248,0.6)]">T</span>
             </span>
           </div>
           <div className="flex flex-col">
-            <span className="font-['Syne',sans-serif] text-lg sm:text-xl font-black tracking-wider text-white group-hover:text-cyan-300 transition-colors">
+            <span className="font-['Syne',sans-serif] text-lg sm:text-xl font-black tracking-wider text-white group-hover:text-sky-300 transition-colors">
               {profile.logoText || 'KAWSER'}
             </span>
-            <span className="text-[11px] font-bold tracking-[0.18em] text-[#00e5ff] uppercase -mt-0.5">
-              {profile.logoSubtext || 'CREATIVE LAB'}
+            <span className="text-[11px] font-bold tracking-[0.22em] text-sky-400 uppercase -mt-0.5">
+              {profile.logoSubtext || 'THEORY'}
             </span>
           </div>
         </a>
@@ -71,24 +73,45 @@ export const Navbar: React.FC<NavbarProps> = ({
             <a
               key={link.href}
               href={link.href}
-              className="px-3.5 py-1.5 text-sm font-medium text-navy-mist hover:text-navy-ice hover:bg-[#061e30] rounded-lg transition-colors"
+              className="px-3.5 py-1.5 text-sm font-medium text-navy-mist hover:text-white hover:bg-[#072545] rounded-lg transition-colors"
             >
               {link.label}
             </a>
           ))}
+          {onOpenResume && (
+            <button
+              onClick={onOpenResume}
+              className="px-3.5 py-1.5 text-sm font-semibold text-sky-300 hover:text-white hover:bg-[#072545] rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <FileText className="w-3.5 h-3.5 text-sky-400" />
+              <span>Resume / CV</span>
+            </button>
+          )}
         </nav>
 
         {/* Action Buttons */}
-        <div className="hidden sm:flex items-center gap-3">
-          {/* Quick link & customizer button */}
+        <div className="hidden sm:flex items-center gap-2.5">
+          {/* Resume/CV Button */}
+          {onOpenResume && (
+            <button
+              onClick={onOpenResume}
+              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-sky-200 hover:text-white bg-[#06203d]/80 hover:bg-[#0a2e58] border border-sky-500/30 hover:border-sky-400 rounded-xl transition-all shadow-sm"
+              title="View & Download Curriculum Vitae"
+            >
+              <FileText className="w-3.5 h-3.5 text-sky-400" />
+              <span>View CV</span>
+            </button>
+          )}
+
+          {/* Quick customizer button */}
           <button
             id="btn-open-customizer"
             onClick={onOpenCustomizer}
-            className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-navy-mist hover:text-navy-ice bg-[#041727]/90 hover:bg-[#08243c] border border-cyan-500/25 hover:border-cyan-400/50 rounded-xl transition-all shadow-sm group"
+            className="flex items-center gap-2 px-3 py-2 text-xs font-semibold text-navy-mist hover:text-white bg-[#041930]/80 hover:bg-[#072648] border border-sky-500/20 hover:border-sky-400/40 rounded-xl transition-all shadow-sm group"
             title="Edit Profile, Photo & Portfolio Links"
           >
-            <Settings2 className="w-3.5 h-3.5 text-cyan-400 group-hover:rotate-45 transition-transform duration-300" />
-            <span>Edit Profile</span>
+            <Settings2 className="w-3.5 h-3.5 text-sky-400 group-hover:rotate-45 transition-transform duration-300" />
+            <span>Settings</span>
           </button>
 
           {/* Hire Me / Contact Button */}
@@ -104,21 +127,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Mobile menu button */}
         <div className="flex sm:hidden items-center gap-2">
+          {onOpenResume && (
+            <button
+              onClick={onOpenResume}
+              className="p-2 text-sky-300 bg-[#051c35] border border-sky-500/30 rounded-xl text-xs flex items-center gap-1"
+              aria-label="View CV"
+              title="View CV"
+            >
+              <FileText className="w-4 h-4" />
+              <span className="text-[11px] font-bold">CV</span>
+            </button>
+          )}
           <button
             id="btn-mobile-customizer"
             onClick={onOpenCustomizer}
-            className="p-2 text-cyan-300 bg-[#041727] border border-cyan-500/30 rounded-xl text-xs"
+            className="p-2 text-sky-300 bg-[#051c35] border border-sky-500/30 rounded-xl text-xs"
             aria-label="Customize"
           >
-            <Settings2 className="w-4 h-4 text-cyan-400" />
+            <Settings2 className="w-4 h-4 text-sky-400" />
           </button>
           <button
             id="btn-mobile-menu-toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-slate-200 hover:text-white bg-[#041727] border border-cyan-500/30 rounded-xl"
+            className="p-2 text-slate-200 hover:text-white bg-[#051c35] border border-sky-500/30 rounded-xl"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 text-cyan-400" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-sky-400" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -127,27 +161,39 @@ export const Navbar: React.FC<NavbarProps> = ({
       {mobileMenuOpen && (
         <div
           id="mobile-drawer-menu"
-          className="sm:hidden px-4 pt-3 pb-6 bg-[#020b16]/98 border-b border-cyan-500/30 backdrop-blur-xl mt-2 space-y-2 animate-in fade-in duration-200"
+          className="sm:hidden px-4 pt-3 pb-6 bg-[#031024]/98 border-b border-sky-500/30 backdrop-blur-xl mt-2 space-y-2 animate-in fade-in duration-200"
         >
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-cyan-300 hover:bg-[#062038] rounded-lg transition-colors"
+              className="block px-3 py-2 text-sm font-medium text-slate-200 hover:text-sky-300 hover:bg-[#072545] rounded-lg transition-colors"
             >
               {link.label}
             </a>
           ))}
+          {onOpenResume && (
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenResume();
+              }}
+              className="w-full text-left px-3 py-2 text-sm font-medium text-sky-300 hover:text-white hover:bg-[#072545] rounded-lg transition-colors flex items-center gap-2"
+            >
+              <FileText className="w-4 h-4 text-sky-400" />
+              <span>Curriculum Vitae (CV)</span>
+            </button>
+          )}
           <div className="pt-3 flex flex-col gap-2">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
                 onOpenCustomizer();
               }}
-              className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold text-slate-200 bg-[#061c2e] border border-cyan-500/30 rounded-xl"
+              className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold text-slate-200 bg-[#061e38] border border-sky-500/30 rounded-xl"
             >
-              <Settings2 className="w-3.5 h-3.5 text-cyan-400" />
+              <Settings2 className="w-3.5 h-3.5 text-sky-400" />
               <span>Edit Profile & Links</span>
             </button>
             <a

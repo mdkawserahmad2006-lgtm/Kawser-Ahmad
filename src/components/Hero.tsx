@@ -1,17 +1,18 @@
 import React from 'react';
-import { Palette, Film, TrendingUp, ArrowRight, MessageCircle, Download, CheckCircle, Award, Sparkles, ExternalLink } from 'lucide-react';
+import { Palette, Film, TrendingUp, ArrowRight, MessageCircle, Download, CheckCircle, Award, Sparkles, ExternalLink, FileText } from 'lucide-react';
 import { ProfileData } from '../types';
 
 interface HeroProps {
   profile: ProfileData;
   onOpenCustomizer: () => void;
+  onOpenResume?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
+export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer, onOpenResume }) => {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-[#020a14] via-[#04192b] to-[#020b16]"
+      className="relative min-h-[90vh] pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden bg-gradient-to-b from-[#020814] via-[#04152a] to-[#020b18]"
     >
       {/* 
         WATERMARK PROFILE IMAGE (Behind the hero backdrop)
@@ -21,7 +22,7 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
         className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden"
         aria-hidden="true"
       >
-        <div className="relative w-[480px] h-[580px] md:w-[680px] md:h-[780px] lg:w-[860px] lg:h-[940px] opacity-[0.14] select-none mix-blend-screen filter contrast-125">
+        <div className="relative w-[480px] h-[580px] md:w-[680px] md:h-[780px] lg:w-[860px] lg:h-[940px] opacity-[0.16] select-none mix-blend-screen filter contrast-125">
           <img
             src={profile.watermarkUrl || profile.avatarUrl || '/profile.png'}
             alt="Profile Watermark Silhouette"
@@ -35,10 +36,10 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
             }}
           />
         </div>
-        {/* Deep teal-cyan atmospheric glow overlays matching the picture's palette */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-sky-600/12 rounded-full blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#020b16_85%)]" />
+        {/* Studio Navy blue atmospheric glow overlays matching the picture's palette */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-900/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-sky-900/15 rounded-full blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_20%,_#020814_85%)]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,34 +210,48 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer }) => {
               </div>
             </div>
 
-            {/* Action Buttons matching Screenshot 2 button */}
-            <div className="flex flex-wrap items-center gap-4 w-full">
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full">
               <a
                 id="hero-btn-portfolio"
                 href="#portfolio"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold rounded-xl btn-cyan-gradient transition-all transform hover:-translate-y-0.5 active:scale-95"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold rounded-xl btn-cyan-gradient transition-all transform hover:-translate-y-0.5 active:scale-95 shadow-lg shadow-sky-950"
               >
                 <span>View Featured Works</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
+
+              {/* CV / Resume Button */}
+              {onOpenResume && (
+                <button
+                  id="hero-btn-resume"
+                  onClick={onOpenResume}
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-sky-200 hover:text-white bg-[#06203d]/90 hover:bg-[#0a2e58] border border-sky-500/35 hover:border-sky-400 rounded-xl transition-all shadow-md group"
+                  title="View & Download Curriculum Vitae"
+                >
+                  <FileText className="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform" />
+                  <span>Curriculum Vitae (CV)</span>
+                </button>
+              )}
 
               <a
                 id="hero-btn-whatsapp"
                 href={`https://wa.me/${profile.whatsappNumber.replace(/[^0-9]/g, '')}?text=Hello%20${encodeURIComponent(profile.name)},%20I%20saw%20your%20portfolio%20and%20want%20to%20discuss%20a%20project.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-slate-200 bg-[#061726]/90 hover:bg-[#092238] border border-cyan-500/30 hover:border-emerald-500/60 rounded-xl transition-all group"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-slate-200 bg-[#051930]/90 hover:bg-[#082444] border border-sky-500/25 hover:border-emerald-500/60 rounded-xl transition-all group"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <span>Chat on WhatsApp</span>
+                <span>WhatsApp</span>
               </a>
 
               <button
                 id="hero-btn-customize"
                 onClick={onOpenCustomizer}
-                className="inline-flex items-center justify-center gap-2 px-4 py-3 text-xs font-semibold text-cyan-300/90 hover:text-cyan-200 bg-cyan-950/30 hover:bg-cyan-950/60 border border-cyan-500/30 rounded-xl transition-all"
+                className="inline-flex items-center justify-center gap-2 px-3.5 py-3 text-xs font-semibold text-sky-300/80 hover:text-white bg-[#04162a]/70 hover:bg-[#061e38] border border-sky-500/20 hover:border-sky-400/40 rounded-xl transition-all"
+                title="Settings"
               >
-                <span>Edit Profile & Links</span>
+                <span>Edit Profile</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </button>
             </div>

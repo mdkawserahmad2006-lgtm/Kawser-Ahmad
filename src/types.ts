@@ -65,6 +65,7 @@ export interface ProfileData {
   watermarkUrl: string;
   logoText: string;
   logoSubtext: string;
+  resumeUrl?: string;
   whatsappNumber: string;
   email: string;
   phone: string;

@@ -10,6 +10,7 @@ import { VideoModal } from './components/VideoModal';
 import { ImageModal } from './components/ImageModal';
 import { MetaCaseStudyModal } from './components/MetaCaseStudyModal';
 import { CustomizerModal } from './components/CustomizerModal';
+import { ResumeModal } from './components/ResumeModal';
 import { initialProfileData, defaultProjects } from './data/defaultData';
 import { ProfileData, ProjectItem, ProjectCategory } from './types';
 
@@ -36,10 +37,10 @@ export default function App() {
           }
           updated = true;
         }
-        // Upgrade introductory text to English as requested
-        if (parsed.name && parsed.name.includes('কাওসার আহমেদ')) {
-          parsed.name = 'Kawser Ahmad';
-          parsed.nameBn = 'Kawser Ahmad';
+        // Upgrade to Md Kawser Ahmad and English introductory text as requested
+        if (parsed.name && (parsed.name.includes('কাওসার') || parsed.name === 'Kawser Ahmad')) {
+          parsed.name = 'Md Kawser Ahmad';
+          parsed.nameBn = 'Md Kawser Ahmad';
           parsed.roleTitle = 'Graphic Designer • Video Editor • Meta Marketing Specialist';
           parsed.roleTitleBn = 'Graphic Designer • Video Editor • Meta Marketing Specialist';
           parsed.bio = 'Helping modern brands scale with high-converting visual designs, cinematic retention-based video edits, and data-driven Meta ad campaigns that maximize ROAS.';
@@ -71,6 +72,7 @@ export default function App() {
   const [activeImageProject, setActiveImageProject] = useState<ProjectItem | null>(null);
   const [activeMetaProject, setActiveMetaProject] = useState<ProjectItem | null>(null);
   const [isCustomizerOpen, setIsCustomizerOpen] = useState<boolean>(false);
+  const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
 
   const handleSaveProfile = (newProfile: ProfileData) => {
@@ -110,6 +112,7 @@ export default function App() {
       <Navbar
         profile={profile}
         onOpenCustomizer={() => setIsCustomizerOpen(true)}
+        onOpenResume={() => setIsResumeOpen(true)}
         onSelectCategory={(cat) => setActiveCategory(cat)}
       />
 
@@ -119,6 +122,7 @@ export default function App() {
         <Hero
           profile={profile}
           onOpenCustomizer={() => setIsCustomizerOpen(true)}
+          onOpenResume={() => setIsResumeOpen(true)}
         />
 
         {/* Portfolio Showcase Section: Carousel with playable videos, graphic lightbox, meta case studies */}
@@ -159,6 +163,16 @@ export default function App() {
       <MetaCaseStudyModal
         project={activeMetaProject}
         onClose={() => setActiveMetaProject(null)}
+      />
+
+      <ResumeModal
+        isOpen={isResumeOpen}
+        onClose={() => setIsResumeOpen(false)}
+        profile={profile}
+        onOpenCustomizer={() => {
+          setIsResumeOpen(false);
+          setIsCustomizerOpen(true);
+        }}
       />
 
       <CustomizerModal
