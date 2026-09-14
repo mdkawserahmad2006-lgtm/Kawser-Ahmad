@@ -35,7 +35,9 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer, onOpenRes
                     src={profile.avatarUrl || '/profile.png'}
                     alt={profile.name}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-                    referrerPolicy="no-referrer"
+                    loading="eager"
+                    decoding="async"
+                    fetchPriority="high"
                     onError={(e) => {
                       const target = e.currentTarget;
                       if (target.src !== window.location.origin + '/profile.png') {

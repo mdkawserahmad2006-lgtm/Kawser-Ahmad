@@ -50,12 +50,23 @@ export const Navbar: React.FC<NavbarProps> = ({
           href="#hero"
           className="flex items-center gap-3 group focus:outline-none"
         >
-          {/* Logo Box KT monogram */}
-          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-b from-[#08284c] to-[#031124] border-2 border-sky-400/80 shadow-[0_0_20px_rgba(56,189,248,0.35)] flex items-center justify-center group-hover:shadow-[0_0_25px_rgba(56,189,248,0.6)] group-hover:border-sky-300 transition-all duration-300">
-            <span className="font-['Syne',sans-serif] font-black text-xl sm:text-2xl tracking-tighter flex items-center select-none">
-              <span className="text-white drop-shadow-[0_2px_8px_rgba(255,255,255,0.4)]">K</span>
-              <span className="bg-gradient-to-r from-sky-300 to-cyan-200 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(56,189,248,0.6)]">T</span>
-            </span>
+          {/* Brand Profile Picture (Replacing KT monogram with user's official photo) */}
+          <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl overflow-hidden p-0.5 bg-gradient-to-tr from-sky-400 via-cyan-300 to-blue-600 shadow-[0_0_18px_rgba(56,189,248,0.45)] group-hover:shadow-[0_0_26px_rgba(56,189,248,0.75)] group-hover:scale-105 transition-all duration-300 flex-shrink-0">
+            <img
+              src={profile.avatarUrl || '/profile.png'}
+              alt={profile.name || 'Md Kawser Ahmad'}
+              className="w-full h-full object-cover object-top rounded-[14px] bg-[#020b18]"
+              loading="eager"
+              decoding="async"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src !== window.location.origin + '/profile.png') {
+                  target.src = '/profile.png';
+                }
+              }}
+            />
+            {/* Online Status Dot */}
+            <span className="absolute bottom-1 right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-[#031124]" title="Available for work" />
           </div>
           <div className="flex flex-col">
             <span className="font-['Syne',sans-serif] text-lg sm:text-xl font-black tracking-wider text-white group-hover:text-sky-300 transition-colors">

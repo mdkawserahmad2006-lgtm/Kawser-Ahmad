@@ -41,7 +41,7 @@ export const defaultProjects: ProjectItem[] = [
     categoryLabel: 'Video Editing',
     description: 'Official showroom & creative intro promo reel featuring high-retention motion design, commercial video editing, and dynamic sound design.',
     details: 'Crafted as an official intro and showroom reel with kinetic typography, sound mastering, seamless transitions, and high-energy pacing designed to capture instant client attention.',
-    coverImage: 'https://i.postimg.cc/wMj3ZDyt/Chat-GPT-Image-Aug-3-2026-11-21-40-AM-removebg-preview.png',
+    coverImage: '/profile.png',
     videoUrl: 'https://player.vimeo.com/video/1226511604?badge=0&autopause=0&player_id=0&app_id=58479',
     embedType: 'vimeo',
     client: 'Kawser Theory (Official Promo)',

@@ -30,9 +30,10 @@ export default function App() {
           updated = true;
         }
 
-        // Set watermark image to high-res transparent image provided by user
-        if (!parsed.watermarkUrl || parsed.watermarkUrl === '/profile.png' || parsed.watermarkUrl.includes('unsplash')) {
-          parsed.watermarkUrl = 'https://i.postimg.cc/wMj3ZDyt/Chat-GPT-Image-Aug-3-2026-11-21-40-AM-removebg-preview.png';
+        // Always restore the exact transparent background-removed watermark silhouette image
+        const targetWatermark = 'https://i.postimg.cc/wMj3ZDyt/Chat-GPT-Image-Aug-3-2026-11-21-40-AM-removebg-preview.png';
+        if (parsed.watermarkUrl !== targetWatermark) {
+          parsed.watermarkUrl = targetWatermark;
           updated = true;
         }
 
@@ -189,6 +190,25 @@ export default function App() {
 
       {/* Footer */}
       <Footer profile={profile} />
+
+      {/* Mobile Floating Quick Action Pill */}
+      <aside
+        id="mobile-quick-actions"
+        aria-label="Quick contact"
+        className="fixed bottom-4 right-4 z-30 sm:hidden flex items-center gap-2 select-none"
+      >
+        <a
+          id="btn-mobile-quick-whatsapp"
+          href={`https://wa.me/${(profile.whatsappNumber || '8801953941415').replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hello Md Kawser Ahmad, I visited your portfolio and would like to discuss a project with you.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-emerald-500 text-white font-bold text-xs shadow-[0_4px_20px_rgba(16,185,129,0.55)] border border-emerald-300/40 active:scale-95 transition-transform"
+          aria-label="Direct WhatsApp Chat"
+        >
+          <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+          <span>WhatsApp Chat</span>
+        </a>
+      </aside>
 
       {/* Interactive Modals */}
       <VideoModal

@@ -109,47 +109,48 @@ html {
   color: #ffffff;
 }
 
-/* Portrait & Card Fluid Animations */
+/* Portrait & Card Fluid Animations (Hardware-Accelerated via Transform & Opacity) */
 @keyframes floatPortrait {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-9px);
+    transform: translate3d(0, -8px, 0);
   }
 }
 
 @keyframes borderGlowPulse {
   0%, 100% {
-    opacity: 0.55;
+    opacity: 0.5;
     transform: scale(0.98);
-    filter: blur(14px);
   }
   50% {
-    opacity: 0.95;
+    opacity: 0.9;
     transform: scale(1.02);
-    filter: blur(24px);
   }
 }
 
 @keyframes lightSweep {
   0% {
-    transform: translateX(-150%) skewX(-20deg);
+    transform: translate3d(-150%, 0, 0) skewX(-20deg);
   }
   25%, 100% {
-    transform: translateX(250%) skewX(-20deg);
+    transform: translate3d(250%, 0, 0) skewX(-20deg);
   }
 }
 
 .animate-float-portrait {
   animation: floatPortrait 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 .animate-border-glow {
   animation: borderGlowPulse 4.5s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 .shimmer-light-sweep {
   animation: lightSweep 5.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
 }
 

@@ -17,9 +17,20 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
         
         {/* Brand & Rights */}
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center text-white font-black text-xs font-['Syne',sans-serif]">
-              KT
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl overflow-hidden p-0.5 bg-gradient-to-tr from-sky-400 to-blue-600 flex-shrink-0 shadow-[0_0_12px_rgba(56,189,248,0.35)]">
+              <img
+                src={profile.avatarUrl || '/profile.png'}
+                alt={profile.name}
+                className="w-full h-full object-cover object-top rounded-[9px]"
+                loading="lazy"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src !== window.location.origin + '/profile.png') {
+                    target.src = '/profile.png';
+                  }
+                }}
+              />
             </div>
             <div className="flex items-center gap-1.5">
               <span className="font-bold text-white text-sm tracking-wider">KAWSER THEORY</span>
