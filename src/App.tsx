@@ -11,6 +11,7 @@ import { ImageModal } from './components/ImageModal';
 import { MetaCaseStudyModal } from './components/MetaCaseStudyModal';
 import { CustomizerModal } from './components/CustomizerModal';
 import { ResumeModal } from './components/ResumeModal';
+import { WatermarkBackdrop } from './components/WatermarkBackdrop';
 import { initialProfileData, defaultProjects } from './data/defaultData';
 import { ProfileData, ProjectItem, ProjectCategory } from './types';
 
@@ -22,12 +23,26 @@ export default function App() {
       if (saved) {
         const parsed = JSON.parse(saved);
         let updated = false;
+
         // Ensure avatar points to permanent local /profile.png
         if (!parsed.avatarUrl || parsed.avatarUrl.includes('unsplash') || parsed.avatarUrl.includes('postimg.cc')) {
           parsed.avatarUrl = '/profile.png';
-          parsed.watermarkUrl = '/profile.png';
           updated = true;
         }
+
+        // Set watermark image to high-res transparent image provided by user
+        if (!parsed.watermarkUrl || parsed.watermarkUrl === '/profile.png' || parsed.watermarkUrl.includes('unsplash')) {
+          parsed.watermarkUrl = 'https://i.postimg.cc/wMj3ZDyt/Chat-GPT-Image-Aug-3-2026-11-21-40-AM-removebg-preview.png';
+          updated = true;
+        }
+
+        // Brand logo text KAWSER THEORY
+        if (!parsed.logoText || parsed.logoText.includes('CREATIVE LAB') || parsed.logoSubtext?.includes('LAB')) {
+          parsed.logoText = 'KAWSER';
+          parsed.logoSubtext = 'THEORY';
+          updated = true;
+        }
+
         // Automatically upgrade if placeholder phone number
         if (!parsed.whatsappNumber || parsed.whatsappNumber.includes('1700000000')) {
           parsed.whatsappNumber = '+8801953941415';
@@ -37,6 +52,7 @@ export default function App() {
           }
           updated = true;
         }
+
         // Upgrade to Md Kawser Ahmad and English introductory text as requested
         if (parsed.name && (parsed.name.includes('কাওসার') || parsed.name === 'Kawser Ahmad')) {
           parsed.name = 'Md Kawser Ahmad';
@@ -47,6 +63,7 @@ export default function App() {
           parsed.bioBn = 'Helping modern brands scale with high-converting visual designs, cinematic retention-based video edits, and data-driven Meta ad campaigns that maximize ROAS.';
           updated = true;
         }
+
         if (updated) {
           localStorage.setItem('creative_portfolio_profile', JSON.stringify(parsed));
         }
@@ -61,7 +78,21 @@ export default function App() {
   const [projects, setProjects] = useState<ProjectItem[]>(() => {
     try {
       const saved = localStorage.getItem('creative_portfolio_projects');
-      return saved ? JSON.parse(saved) : defaultProjects;
+      if (saved) {
+        const parsed: ProjectItem[] = JSON.parse(saved);
+        // Ensure official Vimeo intro promo is present at position #1
+        const hasPromo = parsed.some(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604'));
+        if (!hasPromo) {
+          const promoItem = defaultProjects.find(p => p.id === 'vid-promo');
+          if (promoItem) {
+            const merged = [promoItem, ...parsed];
+            localStorage.setItem('creative_portfolio_projects', JSON.stringify(merged));
+            return merged;
+          }
+        }
+        return parsed;
+      }
+      return defaultProjects;
     } catch {
       return defaultProjects;
     }
@@ -107,7 +138,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020912] text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950 font-['Plus_Jakarta_Sans',sans-serif]">
+    <div className="relative min-h-screen bg-[#020912] text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950 font-['Plus_Jakarta_Sans',sans-serif]">
+      {/* 
+        Scroll-Reactive Watermark Silhouette with Neon Glow Aura
+        Expands smoothly as visitor scrolls down from top to bottom
+      */}
+      <WatermarkBackdrop watermarkUrl={profile.watermarkUrl} />
+
       {/* Fixed Navigation with Corner Logo */}
       <Navbar
         profile={profile}
@@ -117,12 +154,16 @@ export default function App() {
       />
 
       {/* Main Content Sections */}
-      <main className="flex-1">
-        {/* Hero Section: Watermark backdrop, Left documents/intro, Right profile card */}
+      <main className="relative z-10 flex-1">
+        {/* Hero Section */}
         <Hero
           profile={profile}
           onOpenCustomizer={() => setIsCustomizerOpen(true)}
           onOpenResume={() => setIsResumeOpen(true)}
+          onPlayPromo={() => {
+            const promoProject = projects.find(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604')) || projects[0];
+            setActiveVideoProject(promoProject);
+          }}
         />
 
         {/* Portfolio Showcase Section: Carousel with playable videos, graphic lightbox, meta case studies */}

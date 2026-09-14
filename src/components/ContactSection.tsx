@@ -45,7 +45,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
   return (
     <section
       id="contact"
-      className="relative py-20 lg:py-28 bg-gradient-to-b from-[#020a14] via-[#041525] to-[#010810] border-t border-cyan-500/15"
+      className="relative py-20 lg:py-28 bg-transparent border-t border-cyan-500/15"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

@@ -9,7 +9,7 @@ export const initialProfileData: ProfileData = {
   bioBn: 'Helping modern brands scale with high-converting visual designs, cinematic retention-based video edits, and data-driven Meta ad campaigns that maximize ROAS.',
   // Real photo stored locally in public folder + fallback
   avatarUrl: '/profile.png',
-  watermarkUrl: '/profile.png',
+  watermarkUrl: 'https://i.postimg.cc/wMj3ZDyt/Chat-GPT-Image-Aug-3-2026-11-21-40-AM-removebg-preview.png',
   logoText: 'KAWSER',
   logoSubtext: 'THEORY',
   resumeUrl: '',
@@ -33,7 +33,28 @@ export const initialProfileData: ProfileData = {
 };
 
 export const defaultProjects: ProjectItem[] = [
-  // Video Editing Projects
+  // Video Editing Projects - Slot 1 (Official Vimeo Promo featured at position #1)
+  {
+    id: 'vid-promo',
+    title: 'Md Kawser Ahmad — Official Showroom & Intro Promo Reel',
+    category: 'video',
+    categoryLabel: 'Video Editing',
+    description: 'Official showroom & creative intro promo reel featuring high-retention motion design, commercial video editing, and dynamic sound design.',
+    details: 'Crafted as an official intro and showroom reel with kinetic typography, sound mastering, seamless transitions, and high-energy pacing designed to capture instant client attention.',
+    coverImage: 'https://i.postimg.cc/wMj3ZDyt/Chat-GPT-Image-Aug-3-2026-11-21-40-AM-removebg-preview.png',
+    videoUrl: 'https://player.vimeo.com/video/1226511604?badge=0&autopause=0&player_id=0&app_id=58479',
+    embedType: 'vimeo',
+    client: 'Kawser Theory (Official Promo)',
+    tags: ['Vimeo Showreel', 'Official Promo', 'Motion Design', 'Premiere Pro'],
+    featured: true,
+    isVertical: true,
+    aspectRatio: '9:16',
+    date: '2026',
+    metrics: {
+      results: 'Showroom Reel',
+      impressions: '1080p Full HD'
+    }
+  },
   {
     id: 'vid-1',
     title: 'Cinematic Commercial Reel & Motion Promo',

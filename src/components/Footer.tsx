@@ -12,18 +12,21 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
   };
 
   return (
-    <footer className="bg-[#010810] border-t border-cyan-500/15 py-12 text-navy-mist text-xs">
+    <footer className="bg-transparent border-t border-cyan-500/15 py-12 text-navy-mist text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         
         {/* Brand & Rights */}
         <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-cyan-400 to-teal-500 flex items-center justify-center text-slate-950 font-black text-xs font-['Syne',sans-serif]">
-              {profile.logoText.slice(0, 2).toUpperCase()}
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center justify-center text-white font-black text-xs font-['Syne',sans-serif]">
+              KT
             </div>
-            <span className="font-bold text-navy-ice text-sm tracking-wider">{profile.logoText}</span>
+            <div className="flex items-center gap-1.5">
+              <span className="font-bold text-white text-sm tracking-wider">KAWSER THEORY</span>
+              <span className="text-[10px] text-sky-400 font-medium">(কাওসার থিওরি)</span>
+            </div>
           </div>
-          <span className="hidden sm:inline text-cyan-900">•</span>
+          <span className="hidden sm:inline text-sky-900">•</span>
           <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
         </div>
 

@@ -14,6 +14,8 @@ export interface ProjectItem {
   tags: string[];
   liveUrl?: string;
   featured?: boolean;
+  isVertical?: boolean;
+  aspectRatio?: string;
   date?: string;
   metrics?: {
     roas?: string;

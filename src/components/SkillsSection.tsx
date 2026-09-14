@@ -6,7 +6,7 @@ export const SkillsSection: React.FC = () => {
   return (
     <section
       id="skills"
-      className="relative py-20 lg:py-28 bg-[#020a14] border-t border-cyan-500/15"
+      className="relative py-20 lg:py-28 bg-transparent border-t border-cyan-500/15"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

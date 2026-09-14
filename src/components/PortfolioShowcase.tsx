@@ -47,7 +47,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   return (
     <section
       id="portfolio"
-      className="relative py-20 lg:py-28 bg-gradient-to-b from-[#020814] via-[#041427] to-[#020914] overflow-hidden"
+      className="relative py-20 lg:py-28 bg-transparent overflow-hidden"
     >
       {/* Background Studio Glows */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-between">
@@ -204,8 +204,8 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
 
                     {/* Top Badges */}
                     <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                      <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-sky-500 text-white shadow">
-                        Video Edit
+                      <span className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${project.id === 'vid-promo' || project.tags.includes('Official Promo') ? 'bg-gradient-to-r from-sky-400 to-blue-600 text-white shadow-[0_0_15px_rgba(56,189,248,0.6)]' : 'bg-sky-500 text-white shadow'}`}>
+                        {project.id === 'vid-promo' || project.tags.includes('Official Promo') ? '★ Official Intro Promo' : 'Video Edit'}
                       </span>
                     </div>
 
