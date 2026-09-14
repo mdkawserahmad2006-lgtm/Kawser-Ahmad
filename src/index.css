@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar matching the dark navy blazer & bright cyan palette */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #020914;
+}
+::-webkit-scrollbar-thumb {
+  background: #08223a;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 210, 255, 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00d2ff;
+}
+
+/* Glass and glow components */
+.navy-glass {
+  background: rgba(3, 14, 27, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+}
+
+.navy-glass-card {
+  background: linear-gradient(145deg, rgba(6, 22, 42, 0.95) 0%, rgba(3, 13, 26, 0.98) 100%);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 210, 255, 0.2);
+  box-shadow: 0 12px 32px -10px rgba(0, 6, 14, 0.95);
+}
+
+.navy-glass-card:hover {
+  border-color: rgba(0, 229, 255, 0.6);
+  box-shadow: 0 16px 36px -8px rgba(0, 210, 255, 0.35);
+}
+
+.navy-glow {
+  box-shadow: 0 0 50px -10px rgba(0, 210, 255, 0.35);
+}
+
+.navy-glow-subtle {
+  box-shadow: 0 0 30px -5px rgba(0, 210, 255, 0.22);
+}
+
+/* Crisp Text Classes matching user images */
+.text-navy-ice {
+  color: #ffffff;
+}
+
+.text-navy-mist {
+  color: #d1e7f5;
+}
+
+.text-navy-steel {
+  color: #7fa6c2;
+}
+
+/* User's Exact Headline Gradient (Photo & Blazer Lighting) */
+.text-gradient-hero-name {
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 32%, #e0f7fa 55%, #38bdf8 80%, #00d2ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-cyan-teal {
+  background: linear-gradient(135deg, #ffffff 0%, #67e8f9 50%, #00d2ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Primary Button Gradient matching Image 2 */
+.btn-cyan-gradient {
+  background: linear-gradient(90deg, #00e5ff 0%, #00b4d8 100%);
+  color: #020914;
+  font-weight: 700;
+  box-shadow: 0 4px 20px -2px rgba(0, 229, 255, 0.45);
+}
+
+.btn-cyan-gradient:hover {
+  background: linear-gradient(90deg, #26ecff 0%, #00c6eb 100%);
+  box-shadow: 0 6px 25px 0 rgba(0, 229, 255, 0.6);
+}

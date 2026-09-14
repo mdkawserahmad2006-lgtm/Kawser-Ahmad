@@ -1,0 +1,8 @@
+{
+  "name": "Creative Specialist Portfolio",
+  "description": "Professional portfolio for Graphic Design, Video Editing, and Meta Marketing Specialist featuring interactive video player, works carousel, and deep teal-cyan theme.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
