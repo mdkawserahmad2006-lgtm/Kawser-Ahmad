@@ -169,15 +169,15 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Responsive Video Slot Container: Horizontal Carousel on Mobile / Grid on Desktop */}
+            {/* Responsive Video Slot Container: Horizontal Carousel on Mobile / Grid on Tablet & Desktop */}
             <div
               ref={videoScrollRef}
-              className="flex overflow-x-auto pb-4 pt-1 gap-4.5 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:gap-6"
+              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:gap-6"
             >
               {videoProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] max-w-[340px] flex-shrink-0 snap-center md:w-auto md:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
+                  className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
                 >
                   {/* Thumbnail / Video Stream Preview */}
                   <div
@@ -323,15 +323,15 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Responsive Graphic Design Slot: Horizontal Carousel on Mobile / Grid on Desktop */}
+            {/* Responsive Graphic Design Slot: Horizontal Carousel on Mobile / Grid on Tablet & Desktop */}
             <div
               ref={graphicsScrollRef}
-              className="flex overflow-x-auto pb-4 pt-1 gap-4.5 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:gap-6"
+              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:gap-6"
             >
               {graphicsProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] max-w-[340px] flex-shrink-0 snap-center md:w-auto md:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
+                  className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
                 >
                   {/* Image Preview */}
                   <div
@@ -471,15 +471,15 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Responsive Meta Marketing Slot: Horizontal Carousel on Mobile / Grid on Desktop */}
+            {/* Responsive Meta Marketing Slot: Horizontal Carousel on Mobile / Grid on Tablet & Desktop */}
             <div
               ref={metaScrollRef}
-              className="flex overflow-x-auto pb-4 pt-1 gap-4.5 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible md:gap-6"
+              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:gap-6"
             >
               {metaProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] max-w-[340px] flex-shrink-0 snap-center md:w-auto md:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
+                  className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
                 >
                   {/* Cover */}
                   <div

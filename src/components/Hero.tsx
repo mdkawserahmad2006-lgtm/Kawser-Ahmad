@@ -182,22 +182,22 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer, onOpenRes
               {profile.bio}
             </p>
 
-            {/* Experience / Impact Stats Overview matching Screenshot 2 */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full py-4 border-y border-cyan-500/20 mb-8">
-              <div>
-                <span className="block text-2xl sm:text-3xl font-black text-[#00e5ff]">{profile.experienceYears}</span>
+            {/* Experience / Impact Stats Overview */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 w-full py-4 border-y border-cyan-500/20 mb-8">
+              <div className="min-w-0">
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-[#00e5ff] whitespace-nowrap">{profile.experienceYears}</span>
                 <span className="text-xs text-navy-steel">Experience</span>
               </div>
-              <div>
-                <span className="block text-2xl sm:text-3xl font-black text-white">{profile.completedProjects}</span>
+              <div className="min-w-0">
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-white whitespace-nowrap">{profile.completedProjects}</span>
                 <span className="text-xs text-navy-steel">Projects Done</span>
               </div>
-              <div>
-                <span className="block text-2xl sm:text-3xl font-black text-sky-400">{profile.avgRoas}</span>
+              <div className="min-w-0">
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-sky-400 whitespace-nowrap">{profile.avgRoas}</span>
                 <span className="text-xs text-navy-steel">Average ROAS</span>
               </div>
-              <div>
-                <span className="block text-2xl sm:text-3xl font-black text-emerald-400">{profile.clientSatisfaction}</span>
+              <div className="min-w-0">
+                <span className="block text-xl sm:text-2xl lg:text-3xl font-black text-emerald-400 whitespace-nowrap">{profile.clientSatisfaction}</span>
                 <span className="text-xs text-navy-steel">Client Rating</span>
               </div>
             </div>

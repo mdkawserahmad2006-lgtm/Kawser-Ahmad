@@ -18,8 +18,8 @@ export const initialProfileData: ProfileData = {
   phone: '+880 1953-941415',
   location: 'Dhaka, Bangladesh (Available Worldwide)',
   availableForHire: true,
-  experienceYears: '4+',
-  completedProjects: '180+',
+  experienceYears: '3 Months',
+  completedProjects: '100+',
   avgRoas: '4.6X',
   clientSatisfaction: '99%',
   socials: {

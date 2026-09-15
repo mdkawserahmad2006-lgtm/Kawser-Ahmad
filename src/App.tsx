@@ -54,6 +54,16 @@ export default function App() {
           updated = true;
         }
 
+        // Update experience to 3 Months and projects to 100+
+        if (parsed.experienceYears === '4+' || !parsed.experienceYears || parsed.experienceYears === '2+') {
+          parsed.experienceYears = '3 Months';
+          updated = true;
+        }
+        if (parsed.completedProjects === '180+' || !parsed.completedProjects) {
+          parsed.completedProjects = '100+';
+          updated = true;
+        }
+
         // Upgrade to Md Kawser Ahmad and English introductory text as requested
         if (parsed.name && (parsed.name.includes('কাওসার') || parsed.name === 'Kawser Ahmad')) {
           parsed.name = 'Md Kawser Ahmad';
