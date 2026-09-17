@@ -14,6 +14,7 @@ import { ResumeModal } from './components/ResumeModal';
 import { WatermarkBackdrop } from './components/WatermarkBackdrop';
 import { initialProfileData, defaultProjects } from './data/defaultData';
 import { ProfileData, ProjectItem, ProjectCategory } from './types';
+import { getOptimizedCover } from './utils/behanceCovers';
 
 export default function App() {
   // Local persistence for profile & projects
@@ -91,17 +92,23 @@ export default function App() {
       const saved = localStorage.getItem('creative_portfolio_projects');
       if (saved) {
         const parsed: ProjectItem[] = JSON.parse(saved);
-        // Ensure official Vimeo intro promo is present at position #1
-        const hasPromo = parsed.some(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604'));
-        if (!hasPromo) {
-          const promoItem = defaultProjects.find(p => p.id === 'vid-promo');
-          if (promoItem) {
-            const merged = [promoItem, ...parsed];
-            localStorage.setItem('creative_portfolio_projects', JSON.stringify(merged));
-            return merged;
-          }
+        // Ensure official Vimeo intro promo and newly added YouTube/Behance projects are loaded
+        const hasNewYt = parsed.some(p => p.id === 'vid-yt-1' || p.videoUrl?.includes('6ynNCYfss0U'));
+        const hasBehance = parsed.some(p => p.id === 'gfx-behance-1' || p.liveUrl?.includes('255212215'));
+        const hasUnsplash = parsed.some(p => p.coverImage?.includes('unsplash.com'));
+        const hasBehanceInMeta = parsed.some(p => p.category === 'meta' && p.coverImage && p.coverImage.includes('behance.net'));
+
+        if (!hasNewYt || !hasBehance || parsed.length < defaultProjects.length || hasUnsplash || hasBehanceInMeta) {
+          localStorage.setItem('creative_portfolio_projects', JSON.stringify(defaultProjects));
+          return defaultProjects;
         }
-        return parsed;
+
+        // Fast optimization check for any lingering placeholder
+        const optimized = parsed.map(p => ({
+          ...p,
+          coverImage: getOptimizedCover(p)
+        }));
+        return optimized;
       }
       return defaultProjects;
     } catch {
@@ -175,6 +182,8 @@ export default function App() {
             const promoProject = projects.find(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604')) || projects[0];
             setActiveVideoProject(promoProject);
           }}
+          projects={projects}
+          onViewImage={(p) => setActiveImageProject(p)}
         />
 
         {/* Portfolio Showcase Section: Carousel with playable videos, graphic lightbox, meta case studies */}

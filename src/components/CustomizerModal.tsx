@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Upload, Image as ImageIcon, Link as LinkIcon, Save, RotateCcw, Plus, Trash2, Check, Video, Palette, TrendingUp, Sparkles } from 'lucide-react';
 import { ProfileData, ProjectItem } from '../types';
+import { getOptimizedCover } from '../utils/behanceCovers';
 
 interface CustomizerModalProps {
   isOpen: boolean;
@@ -72,14 +73,16 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
 
   const handleAddProject = () => {
     if (!newProject.title) return;
+    const initialCover = newProject.coverImage || (newProject.liveUrl ? getOptimizedCover({ liveUrl: newProject.liveUrl, category: newProject.category as any }) : '/profile.png');
     const createdItem: ProjectItem = {
       id: 'proj-' + Date.now(),
       title: newProject.title || 'Untitled Project',
       category: (newProject.category as any) || 'video',
       categoryLabel: newProject.category === 'video' ? 'Video Editing' : newProject.category === 'graphics' ? 'Graphic Design' : 'Meta Marketing',
       description: newProject.description || 'Custom added showcase item.',
-      coverImage: newProject.coverImage || 'https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=900&q=80',
+      coverImage: getOptimizedCover({ coverImage: initialCover, liveUrl: newProject.liveUrl, category: newProject.category as any }),
       videoUrl: newProject.videoUrl || '',
+      liveUrl: newProject.liveUrl || '',
       client: newProject.client || 'Verified Client',
       tags: newProject.tags || ['Creative'],
       metrics: newProject.metrics || { results: 'Success' },
@@ -525,13 +528,18 @@ export const CustomizerModal: React.FC<CustomizerModalProps> = ({
                     className="flex items-center justify-between p-3.5 rounded-xl bg-[#041a2e] border border-cyan-500/20 gap-3"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden bg-black flex-shrink-0">
-                        <img
-                          src={item.coverImage}
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                          referrerPolicy="no-referrer"
-                        />
+                      <div className="w-12 h-12 rounded-lg overflow-hidden bg-[#020b18] border border-sky-500/20 flex-shrink-0 flex items-center justify-center">
+                        {getOptimizedCover(item) ? (
+                          <img
+                            src={getOptimizedCover(item)}
+                            alt={item.title}
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <TrendingUp className="w-5 h-5 text-emerald-400" />
+                        )}
                       </div>
                       <div>
                         <h5 className="text-sm font-bold text-white line-clamp-1">{item.title}</h5>

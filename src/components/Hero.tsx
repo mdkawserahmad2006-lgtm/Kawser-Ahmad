@@ -1,15 +1,19 @@
 import React from 'react';
-import { Palette, Film, TrendingUp, ArrowRight, MessageCircle, Download, CheckCircle, Award, Sparkles, ExternalLink, FileText, Play } from 'lucide-react';
-import { ProfileData } from '../types';
+import { Palette, Film, TrendingUp, ArrowRight, MessageCircle, Download, CheckCircle, Award, Sparkles, ExternalLink, FileText, Play, Eye } from 'lucide-react';
+import { ProfileData, ProjectItem } from '../types';
+import { getOptimizedCover } from '../utils/behanceCovers';
 
 interface HeroProps {
   profile: ProfileData;
   onOpenCustomizer: () => void;
   onOpenResume?: () => void;
   onPlayPromo?: () => void;
+  projects?: ProjectItem[];
+  onViewImage?: (project: ProjectItem) => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer, onOpenResume, onPlayPromo }) => {
+export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer, onOpenResume, onPlayPromo, projects, onViewImage }) => {
+  const featuredGraphics = (projects || []).filter(p => p.category === 'graphics');
   return (
     <section
       id="hero"
@@ -135,45 +139,78 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer, onOpenRes
               <span className="text-[#00d2ee]">Specialized in 3 Core Creative Domains:</span>
             </div>
 
-            {/* Three Specialization Pills */}
+            {/* Three Specialization Pillars with Interactive CTA Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full mb-8">
               {/* Pillar 1: Video Editing */}
-              <div className="navy-glass-card rounded-2xl p-3.5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 group">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500/20 to-cyan-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-105 transition-transform">
+              <div className="navy-glass-card rounded-2xl p-3.5 border border-sky-500/20 hover:border-sky-400/50 transition-all duration-300 group flex flex-col justify-between">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500/20 to-cyan-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 group-hover:scale-105 transition-transform flex-shrink-0">
                     <Film className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors">Video Editing</h2>
-                    <p className="text-[11px] text-navy-mist">Reels, Shorts & Promos</p>
+                    <p className="text-[11px] text-navy-mist truncate">Reels, Shorts & Promos</p>
                   </div>
                 </div>
+                <a
+                  href="#slot-video"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('slot-video')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="w-full py-1.5 px-2.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/30 text-sky-300 hover:text-white text-xs font-semibold flex items-center justify-between transition-colors group/btn cursor-pointer"
+                >
+                  <span>View Video Projects</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-sky-400 group-hover/btn:translate-x-1 transition-transform" />
+                </a>
               </div>
 
               {/* Pillar 2: Graphic Design */}
-              <div className="navy-glass-card rounded-2xl p-3.5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 group">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-teal-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform">
+              <div className="navy-glass-card rounded-2xl p-3.5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 group flex flex-col justify-between">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-teal-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform flex-shrink-0">
                     <Palette className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">Graphic Design</h2>
-                    <p className="text-[11px] text-navy-mist">Logos, Branding & Ads</p>
+                    <p className="text-[11px] text-navy-mist truncate">Behance Works & Logos</p>
                   </div>
                 </div>
+                <a
+                  href="#slot-graphics"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('slot-graphics')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="w-full py-1.5 px-2.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 hover:text-white text-xs font-semibold flex items-center justify-between transition-colors group/btn cursor-pointer"
+                >
+                  <span>View Graphic Works</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover/btn:translate-x-1 transition-transform" />
+                </a>
               </div>
 
               {/* Pillar 3: Meta Marketing */}
-              <div className="navy-glass-card rounded-2xl p-3.5 border border-cyan-500/20 hover:border-cyan-400/50 transition-all duration-300 group">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/30 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform">
+              <div className="navy-glass-card rounded-2xl p-3.5 border border-teal-500/20 hover:border-teal-400/50 transition-all duration-300 group flex flex-col justify-between">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500/20 to-emerald-500/20 border border-teal-500/30 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform flex-shrink-0">
                     <TrendingUp className="w-5 h-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="text-sm font-bold text-white group-hover:text-teal-300 transition-colors">Meta Marketing</h2>
-                    <p className="text-[11px] text-navy-mist">Ad Scaling & High ROAS</p>
+                    <p className="text-[11px] text-navy-mist truncate">Ad Scaling & High ROAS</p>
                   </div>
                 </div>
+                <a
+                  href="#slot-meta"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('slot-meta')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="w-full py-1.5 px-2.5 rounded-xl bg-teal-500/10 hover:bg-teal-500/20 border border-teal-500/30 text-teal-300 hover:text-white text-xs font-semibold flex items-center justify-between transition-colors group/btn cursor-pointer"
+                >
+                  <span>View Meta Campaigns</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-teal-400 group-hover/btn:translate-x-1 transition-transform" />
+                </a>
               </div>
             </div>
 
@@ -260,6 +297,80 @@ export const Hero: React.FC<HeroProps> = ({ profile, onOpenCustomizer, onOpenRes
                 <ExternalLink className="w-3.5 h-3.5" />
               </button>
             </div>
+
+            {/* Top Creative Works Live Preview Strip (Authentic Behance Projects) */}
+            {featuredGraphics && featuredGraphics.length > 0 && (
+              <div className="w-full mt-7 pt-5 border-t border-sky-500/20">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400" />
+                    </span>
+                    <span className="text-xs font-bold text-sky-200 tracking-wider uppercase">
+                      Top Project Works (Live Preview)
+                    </span>
+                  </div>
+                  <a
+                    href="#slot-graphics"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById('slot-graphics')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition-colors group/link cursor-pointer"
+                  >
+                    <span>View All {featuredGraphics.length} Works</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+
+                {/* 6 Real Behance Project Work Thumbnails displayed at the top */}
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-2.5">
+                  {featuredGraphics.slice(0, 6).map((project) => (
+                    <button
+                      key={project.id}
+                      type="button"
+                      onClick={() => {
+                        if (onViewImage) {
+                          onViewImage(project);
+                        } else {
+                          document.getElementById('slot-graphics')?.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                      className="group relative aspect-square rounded-xl overflow-hidden border border-sky-500/30 hover:border-cyan-400 transition-all duration-300 bg-[#020b18] shadow-md hover:scale-105 cursor-pointer text-left focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                      title={`${project.title} - Click for In-App Review`}
+                    >
+                      <img
+                        src={getOptimizedCover(project)}
+                        alt={project.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src !== window.location.origin + '/profile.png') {
+                            target.src = '/profile.png';
+                          }
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 group-hover:opacity-40 transition-opacity" />
+                      
+                      {/* Hover review badge */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-cyan-950/60 backdrop-blur-[1px]">
+                        <Eye className="w-5 h-5 text-cyan-300 drop-shadow" />
+                      </div>
+
+                      <div className="absolute bottom-1 left-1.5 right-1.5 pointer-events-none">
+                        <p className="text-[9px] font-bold text-white truncate drop-shadow-md">
+                          {project.title.replace(' Project', '').replace(' Creative', '')}
+                        </p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
         </div>

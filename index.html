@@ -18,9 +18,20 @@
     <link rel="icon" type="image/png" href="/profile.png" />
     <link rel="apple-touch-icon" href="/profile.png" />
 
+    <!-- Critical Performance Preconnects & DNS Prefetching -->
+    <link rel="preconnect" href="https://mir-s3-cdn-cf.behance.net" crossorigin />
+    <link rel="dns-prefetch" href="https://mir-s3-cdn-cf.behance.net" />
+    <link rel="preconnect" href="https://img.youtube.com" crossorigin />
+    <link rel="dns-prefetch" href="https://img.youtube.com" />
+    <link rel="preconnect" href="https://player.vimeo.com" />
+    <link rel="dns-prefetch" href="https://player.vimeo.com" />
+    <link rel="preconnect" href="https://i.postimg.cc" crossorigin />
+    <link rel="dns-prefetch" href="https://i.postimg.cc" />
+
     <!-- Critical Image Preloads for Instant FCP (First Contentful Paint) -->
     <link rel="preload" as="image" href="/profile.png" fetchpriority="high" />
     <link rel="preload" as="image" href="https://i.postimg.cc/wMj3ZDyt/Chat-GPT-Image-Aug-3-2026-11-21-40-AM-removebg-preview.png" />
+    <link rel="preload" as="image" href="https://mir-s3-cdn-cf.behance.net/projects/max_808_webp/39f532255212215.Y3JvcCw4MDAwLDYyNTgsMCwxMDEw.jpg" fetchpriority="high" />
 
     <!-- OpenGraph Metadata for Facebook, WhatsApp & LinkedIn Sharing -->
     <meta property="og:type" content="website" />

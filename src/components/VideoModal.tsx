@@ -28,16 +28,20 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose }) => {
   const isYouTube = project.videoUrl?.includes('youtube.com') || project.videoUrl?.includes('youtu.be');
   const isVimeo = project.videoUrl?.includes('vimeo.com');
 
-  const isVertical = project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('1226511604');
+  const isVertical = project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('/shorts/') || project.videoUrl?.includes('1226511604');
 
   const getYouTubeEmbedUrl = (url: string) => {
     if (url.includes('embed/')) return url;
+    if (url.includes('/shorts/')) {
+      const id = url.split('/shorts/')[1]?.split('?')[0]?.split('&')[0];
+      return `https://www.youtube.com/embed/${id}?autoplay=1`;
+    }
     if (url.includes('watch?v=')) {
       const id = url.split('watch?v=')[1]?.split('&')[0];
       return `https://www.youtube.com/embed/${id}?autoplay=1`;
     }
     if (url.includes('youtu.be/')) {
-      const id = url.split('youtu.be/')[1]?.split('?')[0];
+      const id = url.split('youtu.be/')[1]?.split('?')[0]?.split('&')[0];
       return `https://www.youtube.com/embed/${id}?autoplay=1`;
     }
     return url;

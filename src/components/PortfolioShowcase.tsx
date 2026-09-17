@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { Play, Eye, TrendingUp, Sparkles, Film, Palette, BarChart3, PlusCircle, ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, Eye, TrendingUp, Sparkles, Film, Palette, BarChart3, PlusCircle, ArrowUpRight, ChevronLeft, ChevronRight, Target } from 'lucide-react';
 import { ProjectItem, ProjectCategory } from '../types';
+import { getOptimizedCover } from '../utils/behanceCovers';
 
 interface PortfolioShowcaseProps {
   projects: ProjectItem[];
@@ -27,7 +28,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
 
   const scrollSlot = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
     if (ref.current) {
-      const scrollOffset = direction === 'left' ? -320 : 320;
+      const scrollOffset = direction === 'left' ? -380 : 380;
       ref.current.scrollBy({ left: scrollOffset, behavior: 'smooth' });
     }
   };
@@ -169,15 +170,16 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Responsive Video Slot Container: Horizontal Carousel on Mobile / Grid on Tablet & Desktop */}
+            {/* Responsive Side-by-Side Video Slot Carousel across PC, Tablet & Mobile */}
             <div
               ref={videoScrollRef}
-              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:gap-6"
+              className="flex overflow-x-auto pb-6 pt-2 gap-5 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+              style={{ scrollbarWidth: 'thin' }}
             >
               {videoProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
+                  className="w-[84vw] sm:w-[350px] lg:w-[380px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300 hover:border-sky-400/50 hover:shadow-lg hover:shadow-sky-500/10"
                 >
                   {/* Thumbnail / Video Stream Preview */}
                   <div
@@ -190,6 +192,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                       decoding="async"
+                      referrerPolicy="no-referrer"
                       onError={(e) => {
                         const target = e.currentTarget;
                         if (target.src !== window.location.origin + '/profile.png') {
@@ -211,8 +214,18 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
 
                     {/* Top Badges */}
                     <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                      <span className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${project.id === 'vid-promo' || project.tags.includes('Official Promo') ? 'bg-gradient-to-r from-sky-400 to-blue-600 text-white shadow-[0_0_15px_rgba(56,189,248,0.6)]' : 'bg-sky-500 text-white shadow'}`}>
-                        {project.id === 'vid-promo' || project.tags.includes('Official Promo') ? '★ Official Intro Promo' : 'Video Edit'}
+                      <span className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${
+                        project.id === 'vid-promo' || project.tags.includes('Official Promo')
+                          ? 'bg-gradient-to-r from-sky-400 to-blue-600 text-white shadow-[0_0_15px_rgba(56,189,248,0.6)]'
+                          : project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('/shorts/')
+                          ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow'
+                          : 'bg-sky-500 text-white shadow'
+                      }`}>
+                        {project.id === 'vid-promo' || project.tags.includes('Official Promo')
+                          ? '★ Official Intro Promo'
+                          : project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('/shorts/')
+                          ? 'Shorts / Reel'
+                          : 'Video Edit'}
                       </span>
                     </div>
 
@@ -323,15 +336,16 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Responsive Graphic Design Slot: Horizontal Carousel on Mobile / Grid on Tablet & Desktop */}
+            {/* Responsive Side-by-Side Graphic Design Carousel across PC, Tablet & Mobile */}
             <div
               ref={graphicsScrollRef}
-              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:gap-6"
+              className="flex overflow-x-auto pb-6 pt-2 gap-5 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+              style={{ scrollbarWidth: 'thin' }}
             >
               {graphicsProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
+                  className="w-[84vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-cyan-500/25 flex flex-col group transition-all duration-300 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/10"
                 >
                   {/* Image Preview */}
                   <div
@@ -339,11 +353,12 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     onClick={() => onViewImage(project)}
                   >
                     <img
-                      src={project.coverImage}
+                      src={getOptimizedCover(project)}
                       alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
                       decoding="async"
+                      referrerPolicy="no-referrer"
                       onError={(e) => {
                         const target = e.currentTarget;
                         if (target.src !== window.location.origin + '/profile.png') {
@@ -354,15 +369,19 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/20 to-transparent opacity-90" />
 
                     {/* View overlay icon */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="w-12 h-12 rounded-full bg-sky-500/80 backdrop-blur-sm flex items-center justify-center text-white shadow-lg">
-                        <Eye className="w-6 h-6" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-950/60 backdrop-blur-[2px] gap-2">
+                      <div className="w-12 h-12 rounded-full bg-cyan-500/90 backdrop-blur-sm flex items-center justify-center text-slate-950 shadow-lg group-hover:scale-110 transition-transform">
+                        <Eye className="w-6 h-6 stroke-[2.5]" />
                       </div>
+                      <span className="text-[11px] font-bold text-white bg-slate-900/90 px-2.5 py-0.5 rounded-full border border-cyan-400/40">
+                        {project.liveUrl?.includes('behance.net') ? 'Review Behance Project' : 'View High-Res Artwork'}
+                      </span>
                     </div>
 
                     <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                      <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-blue-500 text-white shadow">
-                        Graphic Design
+                      <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow flex items-center gap-1">
+                        <Palette className="w-3 h-3" />
+                        {project.liveUrl?.includes('behance.net') ? 'Behance Review' : 'Graphic Design'}
                       </span>
                     </div>
 
@@ -371,7 +390,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         Client: {project.client || 'Agency'}
                       </span>
                       {project.metrics?.results && (
-                        <span className="text-[11px] font-bold text-sky-300 bg-sky-950/90 border border-sky-500/40 px-2 py-0.5 rounded">
+                        <span className="text-[11px] font-bold text-cyan-300 bg-cyan-950/90 border border-cyan-500/40 px-2 py-0.5 rounded">
                           {project.metrics.results}
                         </span>
                       )}
@@ -381,7 +400,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   {/* Card Content */}
                   <div className="p-5 flex-1 flex flex-col justify-between">
                     <div>
-                      <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-2 line-clamp-1">
+                      <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition-colors mb-2 line-clamp-1">
                         {project.title}
                       </h4>
                       <p className="text-xs text-navy-mist line-clamp-2 leading-relaxed mb-4">
@@ -392,7 +411,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         {project.tags.slice(0, 3).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/25"
+                            className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-cyan-300 border border-cyan-500/25"
                           >
                             {tag}
                           </span>
@@ -400,15 +419,36 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       </div>
                     </div>
 
-                    {/* View Design Button */}
-                    <button
-                      onClick={() => onViewImage(project)}
-                      className="w-full py-2.5 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-sky-500/30 text-white text-xs font-bold flex items-center justify-center gap-2 transition-all group-hover:border-sky-400/60"
-                    >
-                      <Eye className="w-3.5 h-3.5 text-sky-400" />
-                      <span>View High-Res Artwork</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-navy-steel group-hover:text-sky-300" />
-                    </button>
+                    {/* Action Buttons: Open Project In-App & Direct Behance Link */}
+                    <div className="grid grid-cols-2 gap-2 mt-auto">
+                      <button
+                        onClick={() => onViewImage(project)}
+                        className="py-2.5 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-cyan-500/30 hover:border-cyan-400 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm"
+                        title="Review Project In-App"
+                      >
+                        <Eye className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>Review Project</span>
+                      </button>
+                      {project.liveUrl ? (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-md shadow-blue-950/40"
+                          title="Open directly on Behance.net in a new tab"
+                        >
+                          <span>Behance</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => onViewImage(project)}
+                          className="py-2.5 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-cyan-500/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+                        >
+                          <span>Details</span>
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -471,63 +511,97 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Responsive Meta Marketing Slot: Horizontal Carousel on Mobile / Grid on Tablet & Desktop */}
+            {/* Responsive Side-by-Side Meta Marketing Carousel across PC, Tablet & Mobile */}
             <div
               ref={metaScrollRef}
-              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:overflow-visible sm:gap-6"
+              className="flex overflow-x-auto pb-6 pt-2 gap-5 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+              style={{ scrollbarWidth: 'thin' }}
             >
               {metaProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] max-w-[320px] flex-shrink-0 snap-center sm:w-auto sm:max-w-none navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300"
+                  className="w-[84vw] sm:w-[340px] lg:w-[370px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-emerald-500/25 flex flex-col group transition-all duration-300 hover:border-emerald-400/50 hover:shadow-lg hover:shadow-emerald-500/10"
                 >
-                  {/* Cover */}
+                  {/* Cover or Dedicated Meta Marketing Dashboard Visual */}
                   <div
                     className="relative aspect-video bg-[#010814] overflow-hidden cursor-pointer"
                     onClick={() => onViewMetaCase(project)}
                   >
-                    <img
-                      src={project.coverImage}
-                      alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      decoding="async"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        if (target.src !== window.location.origin + '/profile.png') {
-                          target.src = '/profile.png';
-                        }
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/30 to-transparent opacity-90" />
+                    {project.coverImage ? (
+                      <>
+                        <img
+                          src={project.coverImage}
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          decoding="async"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/30 to-transparent opacity-90" />
+                      </>
+                    ) : (
+                      /* Clean, Dedicated Meta Marketing Campaign Slot (No Graphic Poster) */
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#061e38] via-[#020c1a] to-[#010610] p-4 flex flex-col justify-between select-none">
+                        {/* Subtle Grid & Gradient Glow */}
+                        <div className="absolute inset-0 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none" />
+                        <div className="absolute top-0 right-0 w-36 h-36 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
 
-                    {/* Top ROAS Pill */}
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                      <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-emerald-500 text-white shadow">
-                        Meta Marketing
-                      </span>
-                    </div>
+                        {/* Top Bar inside Meta Slot */}
+                        <div className="relative z-10 flex items-center justify-between">
+                          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-sky-500/15 border border-sky-400/30 backdrop-blur-sm">
+                            <span className="relative flex h-2 w-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+                            </span>
+                            <span className="text-[10px] font-extrabold text-sky-200 uppercase tracking-wider flex items-center gap-1">
+                              <Target className="w-3 h-3 text-sky-400" />
+                              Meta Ads Manager
+                            </span>
+                          </div>
 
-                    {/* Big ROAS badge overlay */}
-                    {project.metrics?.roas && (
-                      <div className="absolute top-3 right-3">
-                        <span className="px-2.5 py-1 rounded-lg text-xs font-black bg-gradient-to-r from-emerald-400 to-sky-400 text-slate-950 shadow-md">
-                          {project.metrics.roas}
-                        </span>
+                          {project.metrics?.roas && (
+                            <span className="px-2.5 py-1 rounded-lg text-xs font-black bg-gradient-to-r from-emerald-400 to-sky-400 text-slate-950 shadow-md">
+                              {project.metrics.roas}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Center Campaign Telemetry / Sparkline */}
+                        <div className="relative z-10 my-auto py-1">
+                          <div className="flex items-center justify-between text-xs text-sky-300/80 mb-1.5">
+                            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 flex items-center gap-1">
+                              <TrendingUp className="w-3 h-3 text-emerald-400" />
+                              Campaign Performance
+                            </span>
+                            <span className="text-[10px] font-mono text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
+                              CAPI Active
+                            </span>
+                          </div>
+
+                          {/* Metric visualizer bars */}
+                          <div className="h-9 w-full flex items-end gap-1.5 px-2 py-1 rounded-lg bg-[#010813]/80 border border-sky-500/20">
+                            <div className="flex-1 bg-sky-500/20 rounded-t h-[35%] group-hover:bg-sky-400/30 transition-all" />
+                            <div className="flex-1 bg-sky-500/30 rounded-t h-[50%] group-hover:bg-sky-400/40 transition-all" />
+                            <div className="flex-1 bg-sky-500/40 rounded-t h-[65%] group-hover:bg-sky-400/50 transition-all" />
+                            <div className="flex-1 bg-sky-500/55 rounded-t h-[80%] group-hover:bg-sky-400/60 transition-all" />
+                            <div className="flex-1 bg-emerald-500/70 rounded-t h-[92%] group-hover:bg-emerald-400/80 transition-all" />
+                            <div className="flex-1 bg-emerald-400 rounded-t h-full shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
+                          </div>
+                        </div>
+
+                        {/* Bottom Metric Summary */}
+                        <div className="relative z-10 flex items-center justify-between text-xs text-white">
+                          <span className="text-[11px] font-semibold bg-black/75 px-2 py-0.5 rounded border border-sky-500/20 text-slate-300">
+                            Client: {project.client || 'Verified Client'}
+                          </span>
+                          {project.metrics?.spend && (
+                            <span className="text-[11px] font-bold text-sky-300 bg-[#041930] border border-sky-500/30 px-2 py-0.5 rounded">
+                              {project.metrics.spend}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     )}
-
-                    {/* Metric summary */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
-                      <span className="text-[11px] font-semibold bg-black/75 px-2.5 py-1 rounded backdrop-blur-sm">
-                        Client: {project.client || 'Brand'}
-                      </span>
-                      {project.metrics?.spend && (
-                        <span className="text-[11px] font-bold text-sky-300 bg-[#041930] border border-sky-500/30 px-2 py-0.5 rounded">
-                          {project.metrics.spend}
-                        </span>
-                      )}
-                    </div>
                   </div>
 
                   {/* Content */}

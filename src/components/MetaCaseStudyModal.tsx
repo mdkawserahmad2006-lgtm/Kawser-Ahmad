@@ -93,14 +93,55 @@ export const MetaCaseStudyModal: React.FC<MetaCaseStudyModalProps> = ({ project,
 
         {/* Content & Strategy Details */}
         <div className="p-5 overflow-y-auto space-y-5 bg-[#031322]">
-          <div className="rounded-2xl overflow-hidden border border-cyan-500/20 max-h-56">
-            <img
-              src={project.coverImage}
-              alt={project.title}
-              className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
-            />
-          </div>
+          {project.coverImage ? (
+            <div className="rounded-2xl overflow-hidden border border-cyan-500/20 max-h-56">
+              <img
+                src={project.coverImage}
+                alt={project.title}
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          ) : (
+            /* Dedicated Meta Marketing Strategy & Funnel Blueprint (No Graphic Poster) */
+            <div className="rounded-2xl p-4 sm:p-5 bg-gradient-to-br from-[#071d3a] via-[#031024] to-[#010612] border border-cyan-500/30">
+              <div className="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-sky-500/20">
+                <div className="flex items-center gap-2">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400" />
+                  </span>
+                  <span className="text-xs font-bold text-sky-200 uppercase tracking-wider">
+                    Meta Ads Manager Campaign Blueprint
+                  </span>
+                </div>
+                <span className="text-[11px] font-mono text-emerald-400 bg-emerald-950/70 px-2.5 py-0.5 rounded border border-emerald-500/30">
+                  CAPI 100% Match Rate
+                </span>
+              </div>
+
+              {/* Multi-tier Funnel Flow Visual */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-2">
+                <div className="p-3 rounded-xl bg-[#020b18]/80 border border-sky-500/20">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Phase 1: TOF (Top-of-Funnel)</div>
+                  <div className="text-xs font-semibold text-white">Advantage+ & Broad Targeting</div>
+                  <div className="text-[10px] text-sky-300 mt-1">Hook retention & mass testing</div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-[#020b18]/80 border border-sky-500/20">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Phase 2: MOF (Mid-Funnel)</div>
+                  <div className="text-xs font-semibold text-white">Custom Audience Retargeting</div>
+                  <div className="text-[10px] text-emerald-400 mt-1">High-intent nurture & leads</div>
+                </div>
+
+                <div className="p-3 rounded-xl bg-[#020b18]/80 border border-sky-500/20">
+                  <div className="text-[10px] uppercase font-bold text-slate-400 mb-1">Phase 3: BOF (Conversions)</div>
+                  <div className="text-xs font-semibold text-white">Direct Purchase & Scale</div>
+                  <div className="text-[10px] text-cyan-300 mt-1">Max ROAS & dynamic catalog</div>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div>
             <h4 className="text-sm font-bold text-white mb-2">Campaign Strategy & Architecture</h4>
