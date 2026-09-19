@@ -39,57 +39,57 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   const metaProjects = projects.filter(p => p.category === 'meta');
 
   const slotTabs = [
-    { id: 'all' as ProjectCategory, label: 'All 3 Dedicated Slots', icon: Sparkles, count: projects.length },
-    { id: 'video' as ProjectCategory, label: 'Video Editing Slot', icon: Film, count: videoProjects.length },
-    { id: 'graphics' as ProjectCategory, label: 'Graphic Design Slot', icon: Palette, count: graphicsProjects.length },
-    { id: 'meta' as ProjectCategory, label: 'Meta Marketing Slot', icon: TrendingUp, count: metaProjects.length },
+    { id: 'all' as ProjectCategory, label: 'All Works', icon: Sparkles, count: projects.length },
+    { id: 'video' as ProjectCategory, label: 'Video Editing', icon: Film, count: videoProjects.length },
+    { id: 'graphics' as ProjectCategory, label: 'Graphic Design', icon: Palette, count: graphicsProjects.length },
+    { id: 'meta' as ProjectCategory, label: 'Meta Marketing', icon: TrendingUp, count: metaProjects.length },
   ];
 
   return (
     <section
       id="portfolio"
-      className="relative py-20 lg:py-28 bg-transparent overflow-hidden"
+      className="relative py-16 lg:py-24 bg-transparent overflow-hidden"
     >
       {/* Background Studio Glows */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-between">
-        <div className="w-[600px] h-[600px] bg-sky-950/20 rounded-full blur-[140px] -translate-x-1/2" />
-        <div className="w-[600px] h-[600px] bg-blue-950/20 rounded-full blur-[140px] translate-x-1/2" />
+        <div className="w-[500px] h-[500px] bg-sky-950/20 rounded-full blur-[140px] -translate-x-1/2" />
+        <div className="w-[500px] h-[500px] bg-blue-950/20 rounded-full blur-[140px] translate-x-1/2" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#072448] border border-sky-500/30 text-sky-300 text-xs font-semibold mb-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#072448] border border-sky-500/30 text-sky-300 text-xs font-semibold mb-2">
               <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-              <span>Independent Category Showcases</span>
+              <span>Portfolio Works</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-              <span className="text-white">Creative Works & </span>
-              <span className="text-gradient-cyan-teal">Dedicated Slots</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+              <span className="text-white">Featured </span>
+              <span className="text-gradient-cyan-teal">Projects</span>
             </h2>
-            <p className="text-navy-mist text-sm sm:text-base mt-2 max-w-2xl">
-              Organized into three dedicated domains—high-retention video edits, graphic design brand assets, and high-ROAS Meta ad campaigns.
+            <p className="text-navy-mist text-xs sm:text-sm mt-1 max-w-xl">
+              Video Editing, Graphic Design, and Meta Ads.
             </p>
           </div>
 
           {/* Quick Action Button */}
-          <div className="flex items-center gap-3 self-start md:self-end">
+          <div className="flex items-center gap-3">
             <button
               id="btn-add-project-link"
               onClick={onOpenCustomizer}
-              className="px-4 py-2.5 rounded-xl bg-[#051c33] hover:bg-[#092d52] border border-sky-500/30 hover:border-sky-400/60 text-sky-300 text-xs font-bold flex items-center gap-2 transition-all shadow-sm group"
+              className="px-3.5 py-2 rounded-xl bg-[#051c33] hover:bg-[#092d52] border border-sky-500/30 hover:border-sky-400/60 text-sky-300 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer"
               title="Add or edit video & project links"
             >
-              <PlusCircle className="w-4 h-4 text-sky-400 group-hover:rotate-90 transition-transform duration-300" />
-              <span>Add / Link Works</span>
+              <PlusCircle className="w-3.5 h-3.5 text-sky-400" />
+              <span>Link Works</span>
             </button>
           </div>
         </div>
 
         {/* Category Slot Switcher Tabs */}
-        <div className="flex items-center gap-2.5 overflow-x-auto pb-4 mb-14 scrollbar-none border-b border-sky-500/15">
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-10 scrollbar-none border-b border-sky-500/15">
           {slotTabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeCategory === tab.id;
@@ -97,15 +97,15 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               <button
                 key={tab.id}
                 onClick={() => onCategoryChange(tab.id)}
-                className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 ${
+                className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
                   isActive
                     ? 'btn-cyan-gradient text-white shadow-md shadow-sky-500/30'
-                    : 'bg-[#041930]/90 hover:bg-[#072648] text-navy-mist hover:text-white border border-sky-500/20 hover:border-sky-400/40'
+                    : 'bg-[#041930] hover:bg-[#072648] text-navy-mist hover:text-white border border-sky-500/20 hover:border-sky-400/40'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-sky-400'}`} />
+                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-sky-400'}`} />
                 <span>{tab.label}</span>
-                <span className={`text-[10px] px-2 py-0.5 rounded-full font-extrabold ${
+                <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
                   isActive ? 'bg-black/25 text-white' : 'bg-[#08294c] text-sky-300'
                 }`}>
                   {tab.count}
@@ -119,69 +119,49 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* SLOT 1: VIDEO EDITING DEDICATED SHOWCASE                                  */}
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'video') && (
-          <div id="slot-video" className="mb-20 animate-in fade-in duration-300">
+          <div id="slot-video" className="mb-14 animate-in fade-in duration-300">
             {/* Slot Header with Carousel Controls */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-sky-500/20 gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500/20 to-blue-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400">
-                  <Film className="w-5 h-5" />
+            <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-400">
+                  <Film className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300 bg-[#06203c] px-2 py-0.5 rounded border border-sky-500/30">
-                      Slot 01
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Video Editing & Motion Showcase</h3>
-                  </div>
-                  <p className="text-xs sm:text-sm text-navy-mist mt-0.5">
-                    High-retention commercial promos, viral reels/shorts, dynamic sound design, and color grading.
-                  </p>
+                  <h3 className="text-base sm:text-lg font-bold text-white">Video Editing & Motion</h3>
+                  <p className="text-[11px] text-navy-mist">Promos, commercial reels, and motion design.</p>
                 </div>
               </div>
 
-              {/* Mobile Swipe Hint & Navigation Buttons */}
-              <div className="flex items-center justify-between sm:justify-end gap-3">
-                <span className="text-[11px] text-sky-400/90 font-medium md:hidden flex items-center gap-1 bg-[#051c33] px-2.5 py-1 rounded-lg border border-sky-500/20">
-                  Swipe horizontally ↔
-                </span>
-
-                <div className="flex items-center gap-1.5">
-                  <button
-                    onClick={() => scrollSlot(videoScrollRef, 'left')}
-                    className="p-2 rounded-xl bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white hover:bg-[#0a2e58] transition-colors"
-                    aria-label="Scroll videos left"
-                    title="Previous Video"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => scrollSlot(videoScrollRef, 'right')}
-                    className="p-2 rounded-xl bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white hover:bg-[#0a2e58] transition-colors"
-                    aria-label="Scroll videos right"
-                    title="Next Video"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <span className="hidden sm:inline-block text-xs font-semibold text-sky-300 bg-[#041930] px-3 py-1.5 rounded-lg border border-sky-500/25">
-                  {videoProjects.length} Videos
-                </span>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => scrollSlot(videoScrollRef, 'left')}
+                  className="p-1.5 rounded-lg bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => scrollSlot(videoScrollRef, 'right')}
+                  className="p-1.5 rounded-lg bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
 
-            {/* Responsive Side-by-Side Video Slot Carousel across PC, Tablet & Mobile */}
+            {/* Video Slot Carousel */}
             <div
               ref={videoScrollRef}
-              className="flex overflow-x-auto pb-6 pt-2 gap-5 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
               style={{ scrollbarWidth: 'thin' }}
             >
               {videoProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] sm:w-[350px] lg:w-[380px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300 hover:border-sky-400/50 hover:shadow-lg hover:shadow-sky-500/10"
+                  className="w-[80vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all hover:border-sky-400/50"
                 >
-                  {/* Thumbnail / Video Stream Preview */}
+                  {/* Video Thumbnail */}
                   <div
                     className="relative aspect-video bg-[#010814] overflow-hidden cursor-pointer"
                     onClick={() => onPlayVideo(project)}
@@ -189,7 +169,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     <img
                       src={project.coverImage}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                       decoding="async"
                       referrerPolicy="no-referrer"
@@ -200,64 +180,46 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         }
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/30 to-transparent opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/20 to-transparent opacity-85" />
 
                     {/* Play Button Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="relative">
-                        <div className="absolute -inset-2 bg-sky-400/40 rounded-full blur-md group-hover:scale-125 transition-transform duration-300" />
-                        <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full btn-cyan-gradient flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-                          <Play className="w-6 h-6 fill-white ml-0.5 text-white" />
-                        </div>
+                      <div className="w-11 h-11 rounded-full btn-cyan-gradient flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <Play className="w-5 h-5 fill-white ml-0.5 text-white" />
                       </div>
                     </div>
 
-                    {/* Top Badges */}
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                      <span className={`px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider ${
-                        project.id === 'vid-promo' || project.tags.includes('Official Promo')
-                          ? 'bg-gradient-to-r from-sky-400 to-blue-600 text-white shadow-[0_0_15px_rgba(56,189,248,0.6)]'
-                          : project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('/shorts/')
-                          ? 'bg-gradient-to-r from-pink-500 to-rose-600 text-white shadow'
-                          : 'bg-sky-500 text-white shadow'
-                      }`}>
-                        {project.id === 'vid-promo' || project.tags.includes('Official Promo')
-                          ? '★ Official Intro Promo'
-                          : project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('/shorts/')
-                          ? 'Shorts / Reel'
-                          : 'Video Edit'}
+                    {/* Badge */}
+                    <div className="absolute top-2.5 left-2.5">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-sky-500 text-white shadow">
+                        {project.id === 'vid-promo' ? 'Promo Reel' : 'Video Reel'}
                       </span>
                     </div>
 
-                    {/* Bottom Indicator */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
-                      <span className="text-[11px] font-semibold bg-black/75 px-2.5 py-1 rounded backdrop-blur-sm">
-                        Client: {project.client || 'Commercial'}
-                      </span>
-                      {project.metrics?.results && (
-                        <span className="text-[11px] font-bold text-emerald-300 bg-emerald-950/90 border border-emerald-500/40 px-2 py-0.5 rounded">
+                    {project.metrics?.results && (
+                      <div className="absolute bottom-2.5 right-2.5">
+                        <span className="text-[10px] font-bold text-emerald-300 bg-black/80 px-2 py-0.5 rounded">
                           {project.metrics.results}
                         </span>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-2 line-clamp-1">
+                      <h4 className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors mb-1 truncate">
                         {project.title}
                       </h4>
-                      <p className="text-xs text-navy-mist line-clamp-2 leading-relaxed mb-4">
+                      <p className="text-xs text-navy-mist line-clamp-1 mb-3">
                         {project.description}
                       </p>
 
-                      {/* Tool Tags */}
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {project.tags.slice(0, 3).map((tag, idx) => (
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {project.tags.slice(0, 2).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/25"
+                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/20"
                           >
                             {tag}
                           </span>
@@ -268,11 +230,10 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     {/* Direct Watch Button */}
                     <button
                       onClick={() => onPlayVideo(project)}
-                      className="w-full py-2.5 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-sky-500/30 text-white text-xs font-bold flex items-center justify-center gap-2 transition-all group-hover:border-sky-400/60"
+                      className="w-full py-2 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-sky-500/30 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <Play className="w-3.5 h-3.5 fill-sky-400 text-sky-400" />
-                      <span>Watch Video Reel</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-navy-steel group-hover:text-sky-300" />
+                      <Play className="w-3 h-3 fill-sky-400 text-sky-400" />
+                      <span>Watch Reel</span>
                     </button>
                   </div>
                 </div>
@@ -285,67 +246,47 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* SLOT 2: GRAPHIC DESIGN DEDICATED SHOWCASE                                */}
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'graphics') && (
-          <div id="slot-graphics" className="mb-20 animate-in fade-in duration-300">
+          <div id="slot-graphics" className="mb-14 animate-in fade-in duration-300">
             {/* Slot Header with Carousel Controls */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-sky-500/20 gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500/20 to-indigo-600/20 border border-sky-400/40 flex items-center justify-center text-sky-400">
-                  <Palette className="w-5 h-5" />
+            <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
+                  <Palette className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300 bg-[#06203c] px-2 py-0.5 rounded border border-sky-500/30">
-                      Slot 02
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Graphic Design & Branding Showcase</h3>
-                  </div>
-                  <p className="text-xs sm:text-sm text-navy-mist mt-0.5">
-                    Brand identity systems, high-CTR social media ad creatives, logos, packaging, and commercial visual layouts.
-                  </p>
+                  <h3 className="text-base sm:text-lg font-bold text-white">Graphic Design & Behance</h3>
+                  <p className="text-[11px] text-navy-mist">Social posts, branding, and commercial layouts.</p>
                 </div>
               </div>
 
-              {/* Mobile Swipe Hint & Navigation Buttons */}
-              <div className="flex items-center justify-between sm:justify-end gap-3">
-                <span className="text-[11px] text-sky-400/90 font-medium md:hidden flex items-center gap-1 bg-[#051c33] px-2.5 py-1 rounded-lg border border-sky-500/20">
-                  Swipe horizontally ↔
-                </span>
-
-                <div className="flex items-center gap-1.5">
-                  <button
-                    onClick={() => scrollSlot(graphicsScrollRef, 'left')}
-                    className="p-2 rounded-xl bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white hover:bg-[#0a2e58] transition-colors"
-                    aria-label="Scroll graphics left"
-                    title="Previous Graphic"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => scrollSlot(graphicsScrollRef, 'right')}
-                    className="p-2 rounded-xl bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white hover:bg-[#0a2e58] transition-colors"
-                    aria-label="Scroll graphics right"
-                    title="Next Graphic"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <span className="hidden sm:inline-block text-xs font-semibold text-sky-300 bg-[#041930] px-3 py-1.5 rounded-lg border border-sky-500/25">
-                  {graphicsProjects.length} Designs
-                </span>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => scrollSlot(graphicsScrollRef, 'left')}
+                  className="p-1.5 rounded-lg bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => scrollSlot(graphicsScrollRef, 'right')}
+                  className="p-1.5 rounded-lg bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
 
-            {/* Responsive Side-by-Side Graphic Design Carousel across PC, Tablet & Mobile */}
+            {/* Graphic Design Carousel */}
             <div
               ref={graphicsScrollRef}
-              className="flex overflow-x-auto pb-6 pt-2 gap-5 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
               style={{ scrollbarWidth: 'thin' }}
             >
               {graphicsProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-cyan-500/25 flex flex-col group transition-all duration-300 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/10"
+                  className="w-[80vw] sm:w-[300px] lg:w-[330px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-cyan-500/25 flex flex-col group transition-all hover:border-cyan-400/50"
                 >
                   {/* Image Preview */}
                   <div
@@ -355,7 +296,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     <img
                       src={getOptimizedCover(project)}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       loading="lazy"
                       decoding="async"
                       referrerPolicy="no-referrer"
@@ -366,52 +307,44 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         }
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/20 to-transparent opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/20 to-transparent opacity-85" />
 
-                    {/* View overlay icon */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-slate-950/60 backdrop-blur-[2px] gap-2">
-                      <div className="w-12 h-12 rounded-full bg-cyan-500/90 backdrop-blur-sm flex items-center justify-center text-slate-950 shadow-lg group-hover:scale-110 transition-transform">
-                        <Eye className="w-6 h-6 stroke-[2.5]" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-slate-950/60">
+                      <div className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center text-slate-950 shadow-lg">
+                        <Eye className="w-5 h-5" />
                       </div>
-                      <span className="text-[11px] font-bold text-white bg-slate-900/90 px-2.5 py-0.5 rounded-full border border-cyan-400/40">
-                        {project.liveUrl?.includes('behance.net') ? 'Review Behance Project' : 'View High-Res Artwork'}
+                    </div>
+
+                    <div className="absolute top-2.5 left-2.5">
+                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-600 text-white shadow">
+                        Behance
                       </span>
                     </div>
 
-                    <div className="absolute top-3 left-3 flex items-center gap-1.5">
-                      <span className="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow flex items-center gap-1">
-                        <Palette className="w-3 h-3" />
-                        {project.liveUrl?.includes('behance.net') ? 'Behance Review' : 'Graphic Design'}
-                      </span>
-                    </div>
-
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-white">
-                      <span className="text-[11px] font-semibold bg-black/75 px-2.5 py-1 rounded backdrop-blur-sm">
-                        Client: {project.client || 'Agency'}
-                      </span>
-                      {project.metrics?.results && (
-                        <span className="text-[11px] font-bold text-cyan-300 bg-cyan-950/90 border border-cyan-500/40 px-2 py-0.5 rounded">
+                    {project.metrics?.results && (
+                      <div className="absolute bottom-2.5 right-2.5">
+                        <span className="text-[10px] font-bold text-cyan-300 bg-black/80 px-2 py-0.5 rounded">
                           {project.metrics.results}
                         </span>
-                      )}
-                    </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-cyan-300 transition-colors mb-2 line-clamp-1">
+                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors mb-1 truncate">
                         {project.title}
                       </h4>
-                      <p className="text-xs text-navy-mist line-clamp-2 leading-relaxed mb-4">
+                      <p className="text-xs text-navy-mist line-clamp-1 mb-3">
                         {project.description}
                       </p>
 
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {project.tags.slice(0, 3).map((tag, idx) => (
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {project.tags.slice(0, 2).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-cyan-300 border border-cyan-500/25"
+                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-cyan-300 border border-cyan-500/20"
                           >
                             {tag}
                           </span>
@@ -419,33 +352,31 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       </div>
                     </div>
 
-                    {/* Action Buttons: Open Project In-App & Direct Behance Link */}
+                    {/* Action Buttons */}
                     <div className="grid grid-cols-2 gap-2 mt-auto">
                       <button
                         onClick={() => onViewImage(project)}
-                        className="py-2.5 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-cyan-500/30 hover:border-cyan-400 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm"
-                        title="Review Project In-App"
+                        className="py-2 px-2.5 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-cyan-500/30 text-white text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer"
                       >
-                        <Eye className="w-3.5 h-3.5 text-cyan-400" />
-                        <span>Review Project</span>
+                        <Eye className="w-3 h-3 text-cyan-400" />
+                        <span>Review</span>
                       </button>
                       {project.liveUrl ? (
                         <a
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-md shadow-blue-950/40"
-                          title="Open directly on Behance.net in a new tab"
+                          className="py-2 px-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-semibold flex items-center justify-center gap-1 transition-all"
                         >
                           <span>Behance</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
+                          <ArrowUpRight className="w-3 h-3" />
                         </a>
                       ) : (
                         <button
                           onClick={() => onViewImage(project)}
-                          className="py-2.5 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-cyan-500/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all"
+                          className="py-2 px-2.5 rounded-xl bg-[#051c35] text-white text-xs font-semibold"
                         >
-                          <span>Details</span>
+                          Details
                         </button>
                       )}
                     </div>
@@ -462,181 +393,99 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {(activeCategory === 'all' || activeCategory === 'meta') && (
           <div id="slot-meta" className="animate-in fade-in duration-300">
             {/* Slot Header with Carousel Controls */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 mb-6 border-b border-sky-500/20 gap-3">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500/20 to-emerald-500/20 border border-sky-400/40 flex items-center justify-center text-sky-400">
-                  <TrendingUp className="w-5 h-5" />
+            <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-teal-500/15 border border-teal-400/30 flex items-center justify-center text-teal-400">
+                  <TrendingUp className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-sky-300 bg-[#06203c] px-2 py-0.5 rounded border border-sky-500/30">
-                      Slot 03
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Meta Marketing & ROAS Scaling Showcase</h3>
-                  </div>
-                  <p className="text-xs sm:text-sm text-navy-mist mt-0.5">
-                    Data-driven Facebook & Instagram ad architectures, Conversions API (CAPI) loss-less tracking, and profitable scaling.
-                  </p>
+                  <h3 className="text-base sm:text-lg font-bold text-white">Meta Marketing & Ads</h3>
+                  <p className="text-[11px] text-navy-mist">Campaign architecture, CAPI tracking, and scaling.</p>
                 </div>
               </div>
 
-              {/* Mobile Swipe Hint & Navigation Buttons */}
-              <div className="flex items-center justify-between sm:justify-end gap-3">
-                <span className="text-[11px] text-sky-400/90 font-medium md:hidden flex items-center gap-1 bg-[#051c33] px-2.5 py-1 rounded-lg border border-sky-500/20">
-                  Swipe horizontally ↔
-                </span>
-
-                <div className="flex items-center gap-1.5">
-                  <button
-                    onClick={() => scrollSlot(metaScrollRef, 'left')}
-                    className="p-2 rounded-xl bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white hover:bg-[#0a2e58] transition-colors"
-                    aria-label="Scroll meta campaigns left"
-                    title="Previous Campaign"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => scrollSlot(metaScrollRef, 'right')}
-                    className="p-2 rounded-xl bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white hover:bg-[#0a2e58] transition-colors"
-                    aria-label="Scroll meta campaigns right"
-                    title="Next Campaign"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-
-                <span className="hidden sm:inline-block text-xs font-semibold text-sky-300 bg-[#041930] px-3 py-1.5 rounded-lg border border-sky-500/25">
-                  {metaProjects.length} Case Studies
-                </span>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => scrollSlot(metaScrollRef, 'left')}
+                  className="p-1.5 rounded-lg bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => scrollSlot(metaScrollRef, 'right')}
+                  className="p-1.5 rounded-lg bg-[#06203d] border border-sky-500/30 text-sky-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
 
-            {/* Responsive Side-by-Side Meta Marketing Carousel across PC, Tablet & Mobile */}
+            {/* Meta Marketing Carousel */}
             <div
               ref={metaScrollRef}
-              className="flex overflow-x-auto pb-6 pt-2 gap-5 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
+              className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
               style={{ scrollbarWidth: 'thin' }}
             >
               {metaProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[84vw] sm:w-[340px] lg:w-[370px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-emerald-500/25 flex flex-col group transition-all duration-300 hover:border-emerald-400/50 hover:shadow-lg hover:shadow-emerald-500/10"
+                  className="w-[80vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-emerald-500/25 flex flex-col group transition-all hover:border-emerald-400/50"
                 >
-                  {/* Cover or Dedicated Meta Marketing Dashboard Visual */}
+                  {/* Visual Dashboard Card */}
                   <div
                     className="relative aspect-video bg-[#010814] overflow-hidden cursor-pointer"
                     onClick={() => onViewMetaCase(project)}
                   >
-                    {project.coverImage ? (
-                      <>
-                        <img
-                          src={project.coverImage}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          loading="lazy"
-                          decoding="async"
-                          referrerPolicy="no-referrer"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/30 to-transparent opacity-90" />
-                      </>
-                    ) : (
-                      /* Clean, Dedicated Meta Marketing Campaign Slot (No Graphic Poster) */
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#061e38] via-[#020c1a] to-[#010610] p-4 flex flex-col justify-between select-none">
-                        {/* Subtle Grid & Gradient Glow */}
-                        <div className="absolute inset-0 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:16px_16px] opacity-15 pointer-events-none" />
-                        <div className="absolute top-0 right-0 w-36 h-36 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#061e38] via-[#020c1a] to-[#010610] p-3.5 flex flex-col justify-between select-none">
+                      <div className="relative z-10 flex items-center justify-between">
+                        <span className="text-[10px] font-bold text-sky-200 uppercase tracking-wider flex items-center gap-1 bg-sky-500/15 border border-sky-400/30 px-2 py-0.5 rounded">
+                          <Target className="w-3 h-3 text-sky-400" />
+                          Meta Ads
+                        </span>
 
-                        {/* Top Bar inside Meta Slot */}
-                        <div className="relative z-10 flex items-center justify-between">
-                          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-sky-500/15 border border-sky-400/30 backdrop-blur-sm">
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-                            </span>
-                            <span className="text-[10px] font-extrabold text-sky-200 uppercase tracking-wider flex items-center gap-1">
-                              <Target className="w-3 h-3 text-sky-400" />
-                              Meta Ads Manager
-                            </span>
-                          </div>
-
-                          {project.metrics?.roas && (
-                            <span className="px-2.5 py-1 rounded-lg text-xs font-black bg-gradient-to-r from-emerald-400 to-sky-400 text-slate-950 shadow-md">
-                              {project.metrics.roas}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Center Campaign Telemetry / Sparkline */}
-                        <div className="relative z-10 my-auto py-1">
-                          <div className="flex items-center justify-between text-xs text-sky-300/80 mb-1.5">
-                            <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400 flex items-center gap-1">
-                              <TrendingUp className="w-3 h-3 text-emerald-400" />
-                              Campaign Performance
-                            </span>
-                            <span className="text-[10px] font-mono text-emerald-400 font-semibold bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">
-                              CAPI Active
-                            </span>
-                          </div>
-
-                          {/* Metric visualizer bars */}
-                          <div className="h-9 w-full flex items-end gap-1.5 px-2 py-1 rounded-lg bg-[#010813]/80 border border-sky-500/20">
-                            <div className="flex-1 bg-sky-500/20 rounded-t h-[35%] group-hover:bg-sky-400/30 transition-all" />
-                            <div className="flex-1 bg-sky-500/30 rounded-t h-[50%] group-hover:bg-sky-400/40 transition-all" />
-                            <div className="flex-1 bg-sky-500/40 rounded-t h-[65%] group-hover:bg-sky-400/50 transition-all" />
-                            <div className="flex-1 bg-sky-500/55 rounded-t h-[80%] group-hover:bg-sky-400/60 transition-all" />
-                            <div className="flex-1 bg-emerald-500/70 rounded-t h-[92%] group-hover:bg-emerald-400/80 transition-all" />
-                            <div className="flex-1 bg-emerald-400 rounded-t h-full shadow-[0_0_10px_rgba(52,211,153,0.5)]" />
-                          </div>
-                        </div>
-
-                        {/* Bottom Metric Summary */}
-                        <div className="relative z-10 flex items-center justify-between text-xs text-white">
-                          <span className="text-[11px] font-semibold bg-black/75 px-2 py-0.5 rounded border border-sky-500/20 text-slate-300">
-                            Client: {project.client || 'Verified Client'}
+                        {project.metrics?.roas && (
+                          <span className="px-2 py-0.5 rounded text-xs font-black bg-gradient-to-r from-emerald-400 to-sky-400 text-slate-950">
+                            {project.metrics.roas}
                           </span>
-                          {project.metrics?.spend && (
-                            <span className="text-[11px] font-bold text-sky-300 bg-[#041930] border border-sky-500/30 px-2 py-0.5 rounded">
-                              {project.metrics.spend}
-                            </span>
-                          )}
-                        </div>
+                        )}
                       </div>
-                    )}
+
+                      {/* Sparkline Bar Visualization */}
+                      <div className="h-8 w-full flex items-end gap-1.5 px-2 py-1 rounded bg-[#010813]/80 border border-sky-500/20">
+                        <div className="flex-1 bg-sky-500/20 rounded-t h-[35%]" />
+                        <div className="flex-1 bg-sky-500/30 rounded-t h-[50%]" />
+                        <div className="flex-1 bg-sky-500/40 rounded-t h-[65%]" />
+                        <div className="flex-1 bg-sky-500/55 rounded-t h-[80%]" />
+                        <div className="flex-1 bg-emerald-500/70 rounded-t h-[92%]" />
+                        <div className="flex-1 bg-emerald-400 rounded-t h-full" />
+                      </div>
+
+                      <div className="flex items-center justify-between text-[11px] text-slate-300">
+                        <span>CAPI Loss-less Active</span>
+                        {project.metrics?.spend && (
+                          <span className="font-bold text-sky-300">{project.metrics.spend}</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-5 flex-1 flex flex-col justify-between">
+                  {/* Card Content */}
+                  <div className="p-4 flex-1 flex flex-col justify-between">
                     <div>
-                      <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-2 line-clamp-1">
+                      <h4 className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors mb-1 truncate">
                         {project.title}
                       </h4>
-                      <p className="text-xs text-navy-mist line-clamp-2 leading-relaxed mb-4">
+                      <p className="text-xs text-navy-mist line-clamp-1 mb-3">
                         {project.description}
                       </p>
 
-                      {/* Stat Metrics Pill */}
-                      {project.metrics && (
-                        <div className="grid grid-cols-2 gap-2 mb-4 p-2.5 rounded-xl bg-[#03152a] border border-sky-500/20 text-xs">
-                          {project.metrics.results && (
-                            <div>
-                              <span className="text-[10px] text-navy-steel block">Key Metric</span>
-                              <span className="font-bold text-emerald-400 text-xs">{project.metrics.results}</span>
-                            </div>
-                          )}
-                          {project.metrics.impressions && (
-                            <div>
-                              <span className="text-[10px] text-navy-steel block">Total Reach</span>
-                              <span className="font-bold text-white text-xs">{project.metrics.impressions}</span>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {project.tags.slice(0, 3).map((tag, idx) => (
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {project.tags.slice(0, 2).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/25"
+                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/20"
                           >
                             {tag}
                           </span>
@@ -647,11 +496,10 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     {/* Case Study Button */}
                     <button
                       onClick={() => onViewMetaCase(project)}
-                      className="w-full py-2.5 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-sky-500/30 text-white text-xs font-bold flex items-center justify-center gap-2 transition-all group-hover:border-sky-400/60"
+                      className="w-full py-2 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-sky-500/30 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                     >
-                      <BarChart3 className="w-3.5 h-3.5 text-sky-400" />
-                      <span>View Ad Strategy & Metrics</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-navy-steel group-hover:text-sky-300" />
+                      <BarChart3 className="w-3 h-3 text-sky-400" />
+                      <span>View Strategy & Metrics</span>
                     </button>
                   </div>
                 </div>

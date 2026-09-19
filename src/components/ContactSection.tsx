@@ -50,17 +50,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-3">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2">
             <MessageCircle className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Get In Touch • Available Worldwide</span>
+            <span>Get In Touch</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            <span className="text-navy-ice">Let's Discuss Your </span>
-            <span className="text-gradient-cyan-teal">Next Creative Project</span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            <span className="text-navy-ice">Let's </span>
+            <span className="text-gradient-cyan-teal">Connect</span>
           </h2>
-          <p className="text-navy-mist text-sm sm:text-base mt-2">
-            Whether you need high-converting graphic designs, viral video edits, or profitable Meta ad scaling—I'm ready to collaborate.
+          <p className="text-navy-mist text-xs sm:text-sm mt-1">
+            Available for remote contracts and freelance projects worldwide.
           </p>
         </div>
 

@@ -28,30 +28,35 @@ export interface ProjectItem {
 
 export interface SkillItem {
   name: string;
-  level: number; // 0 - 100
+  level?: number; // optional, percentages deprecated
   experience?: string;
   tag?: string;
+  capabilities?: string[];
 }
 
 export interface SkillCategoryGroup {
   id: string;
   title: string;
-  titleBn: string;
+  titleBn?: string;
   icon: string;
-  description: string;
+  description?: string;
   badge: string;
-  skills: SkillItem[];
-  tools: string[];
+  software?: string;
+  capabilities: string[];
+  skills?: SkillItem[];
+  tools?: string[];
 }
 
 export interface EducationItem {
   id: string;
   title: string;
-  titleBn: string;
+  titleBn?: string;
   institution: string;
   year: string;
+  status?: string;
   type: 'certification' | 'degree' | 'course';
-  description: string;
+  description?: string;
+  learnings?: string[];
   badge?: string;
   verified?: boolean;
 }

@@ -12,6 +12,8 @@ import { MetaCaseStudyModal } from './components/MetaCaseStudyModal';
 import { CustomizerModal } from './components/CustomizerModal';
 import { ResumeModal } from './components/ResumeModal';
 import { WatermarkBackdrop } from './components/WatermarkBackdrop';
+import { ReelsFeedModal } from './components/ReelsFeedModal';
+import { InteractiveAmbientLighting } from './components/InteractiveAmbientLighting';
 import { initialProfileData, defaultProjects } from './data/defaultData';
 import { ProfileData, ProjectItem, ProjectCategory } from './types';
 import { getOptimizedCover } from './utils/behanceCovers';
@@ -120,9 +122,14 @@ export default function App() {
   const [activeVideoProject, setActiveVideoProject] = useState<ProjectItem | null>(null);
   const [activeImageProject, setActiveImageProject] = useState<ProjectItem | null>(null);
   const [activeMetaProject, setActiveMetaProject] = useState<ProjectItem | null>(null);
+  const [reelsProject, setReelsProject] = useState<ProjectItem | null>(null);
   const [isCustomizerOpen, setIsCustomizerOpen] = useState<boolean>(false);
   const [isResumeOpen, setIsResumeOpen] = useState<boolean>(false);
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
+
+  const handleOpenProject = (project: ProjectItem) => {
+    setReelsProject(project);
+  };
 
   const handleSaveProfile = (newProfile: ProfileData) => {
     setProfile(newProfile);
@@ -158,6 +165,13 @@ export default function App() {
   return (
     <div className="relative min-h-screen bg-[#020912] text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950 font-['Plus_Jakarta_Sans',sans-serif]">
       {/* 
+        Interactive Ambient Lighting:
+        - Cursor spotlight with smooth trailing light ("আলো দৌড়াবে") behind cards
+        - Touch ripple and click light bursts on phone & desktop ("সেখানে আলো জ্বলবে")
+      */}
+      <InteractiveAmbientLighting />
+
+      {/* 
         Scroll-Reactive Watermark Silhouette with Neon Glow Aura
         Expands smoothly as visitor scrolls down from top to bottom
       */}
@@ -180,10 +194,11 @@ export default function App() {
           onOpenResume={() => setIsResumeOpen(true)}
           onPlayPromo={() => {
             const promoProject = projects.find(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604')) || projects[0];
-            setActiveVideoProject(promoProject);
+            handleOpenProject(promoProject);
           }}
+          onPlayVideo={(p) => handleOpenProject(p)}
           projects={projects}
-          onViewImage={(p) => setActiveImageProject(p)}
+          onViewImage={(p) => handleOpenProject(p)}
         />
 
         {/* Portfolio Showcase Section: Carousel with playable videos, graphic lightbox, meta case studies */}
@@ -191,9 +206,9 @@ export default function App() {
           projects={projects}
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
-          onPlayVideo={(p) => setActiveVideoProject(p)}
-          onViewImage={(p) => setActiveImageProject(p)}
-          onViewMetaCase={(p) => setActiveMetaProject(p)}
+          onPlayVideo={(p) => handleOpenProject(p)}
+          onViewImage={(p) => handleOpenProject(p)}
+          onViewMetaCase={(p) => handleOpenProject(p)}
           onOpenCustomizer={() => setIsCustomizerOpen(true)}
         />
 
@@ -229,7 +244,16 @@ export default function App() {
         </a>
       </aside>
 
-      {/* Interactive Modals */}
+      {/* Reels-Style Swipe and Scroll Viewer Modal (TikTok / Reels style on Mobile and PC) */}
+      <ReelsFeedModal
+        isOpen={Boolean(reelsProject)}
+        onClose={() => setReelsProject(null)}
+        initialProject={reelsProject}
+        projects={projects}
+        profile={profile}
+      />
+
+      {/* Standard Modals Fallback */}
       <VideoModal
         project={activeVideoProject}
         onClose={() => setActiveVideoProject(null)}
