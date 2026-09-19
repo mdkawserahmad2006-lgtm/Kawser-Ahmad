@@ -340,6 +340,18 @@ export const Hero: React.FC<HeroProps> = ({
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
                       
+                      {/* Logo on LEFT, Name on SIDE */}
+                      <div className="absolute top-1.5 left-1.5 flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-black/75 backdrop-blur-sm border border-white/20">
+                        <img
+                          src="/profile.png"
+                          alt="Md Kawser Ahmad"
+                          className="w-3 h-3 rounded-full object-cover"
+                        />
+                        <span className="text-[8px] font-bold text-white leading-none">
+                          Kawser Theory
+                        </span>
+                      </div>
+
                       {/* Play Button Overlay */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-8 h-8 rounded-full bg-sky-500/90 text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">

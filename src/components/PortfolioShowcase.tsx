@@ -120,14 +120,19 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'video') && (
           <div id="slot-video" className="mb-14 animate-in fade-in duration-300">
-            {/* Slot Header with Carousel Controls */}
+            {/* Slot Header with Carousel Controls: Logo on LEFT, Name on SIDE */}
             <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-400">
-                  <Film className="w-4 h-4" />
-                </div>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/profile.png"
+                  alt="Md Kawser Ahmad"
+                  className="w-10 h-10 rounded-full border border-sky-400/60 object-cover shadow-sm flex-shrink-0"
+                />
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">Video Editing & Motion</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                    <span>Md Kawser Ahmad</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-300 font-semibold">Video Reels</span>
+                  </h3>
                   <p className="text-[11px] text-navy-mist">Promos, commercial reels, and motion design.</p>
                 </div>
               </div>
@@ -189,10 +194,15 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       </div>
                     </div>
 
-                    {/* Badge */}
-                    <div className="absolute top-2.5 left-2.5">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-sky-500 text-white shadow">
-                        {project.id === 'vid-promo' ? 'Promo Reel' : 'Video Reel'}
+                    {/* Badge: Logo on LEFT, Name on SIDE */}
+                    <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/20 shadow">
+                      <img
+                        src="/profile.png"
+                        alt="Md Kawser Ahmad"
+                        className="w-3.5 h-3.5 rounded-full object-cover border border-sky-400/60"
+                      />
+                      <span className="text-[10px] font-bold text-white tracking-wide">
+                        Kawser Theory • {project.id === 'vid-promo' ? 'Promo Reel' : 'Reel'}
                       </span>
                     </div>
 
@@ -247,14 +257,19 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'graphics') && (
           <div id="slot-graphics" className="mb-14 animate-in fade-in duration-300">
-            {/* Slot Header with Carousel Controls */}
+            {/* Slot Header with Carousel Controls: Logo on LEFT, Name on SIDE */}
             <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-cyan-500/15 border border-cyan-400/30 flex items-center justify-center text-cyan-400">
-                  <Palette className="w-4 h-4" />
-                </div>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/profile.png"
+                  alt="Md Kawser Ahmad"
+                  className="w-10 h-10 rounded-full border border-cyan-400/60 object-cover shadow-sm flex-shrink-0"
+                />
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">Graphic Design & Behance</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                    <span>Md Kawser Ahmad</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-semibold">Graphic Works</span>
+                  </h3>
                   <p className="text-[11px] text-navy-mist">Social posts, branding, and commercial layouts.</p>
                 </div>
               </div>
@@ -392,14 +407,19 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'meta') && (
           <div id="slot-meta" className="animate-in fade-in duration-300">
-            {/* Slot Header with Carousel Controls */}
+            {/* Slot Header with Carousel Controls: Logo on LEFT, Name on SIDE */}
             <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-teal-500/15 border border-teal-400/30 flex items-center justify-center text-teal-400">
-                  <TrendingUp className="w-4 h-4" />
-                </div>
+              <div className="flex items-center gap-3">
+                <img
+                  src="/profile.png"
+                  alt="Md Kawser Ahmad"
+                  className="w-10 h-10 rounded-full border border-emerald-400/60 object-cover shadow-sm flex-shrink-0"
+                />
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white">Meta Marketing & Ads</h3>
+                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                    <span>Md Kawser Ahmad</span>
+                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-semibold">Meta Campaigns</span>
+                  </h3>
                   <p className="text-[11px] text-navy-mist">Campaign architecture, CAPI tracking, and scaling.</p>
                 </div>
               </div>
