@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { MessageCircle, Mail, Phone, MapPin, Send, CheckCircle, Sparkles, Copy, Check } from 'lucide-react';
 import { ProfileData } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ContactSectionProps {
   profile: ProfileData;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -53,14 +55,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2">
             <MessageCircle className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Get In Touch</span>
+            <span>{t.contactBadge}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-            <span className="text-navy-ice">Let's </span>
-            <span className="text-gradient-cyan-teal">Connect</span>
+            <span className="text-white">{t.contactTitle}</span>
           </h2>
           <p className="text-navy-mist text-xs sm:text-sm mt-1">
-            Available for remote contracts and freelance projects worldwide.
+            {t.contactSubtitle}
           </p>
         </div>
 
@@ -167,24 +168,24 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">Your Name *</label>
+                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">{t.contactNameLabel} *</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. John Doe"
+                        placeholder={t.contactNamePlaceholder}
                         className="w-full px-4 py-3 rounded-xl bg-[#03111e] border border-cyan-500/20 text-navy-ice text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">Email Address *</label>
+                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">{t.contactEmailLabel} *</label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="example@mail.com"
+                        placeholder={t.contactEmailPlaceholder}
                         className="w-full px-4 py-3 rounded-xl bg-[#03111e] border border-cyan-500/20 text-navy-ice text-sm focus:outline-none focus:border-cyan-400 transition-colors"
                       />
                     </div>
@@ -192,7 +193,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">Requested Service *</label>
+                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">{t.contactServiceLabel} *</label>
                       <select
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
@@ -206,7 +207,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">Estimated Budget *</label>
+                      <label className="block text-xs font-semibold text-navy-mist mb-1.5">{t.contactBudgetLabel} *</label>
                       <select
                         value={formData.budget}
                         onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
@@ -221,13 +222,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-navy-mist mb-1.5">Project Brief or Message *</label>
+                    <label className="block text-xs font-semibold text-navy-mist mb-1.5">{t.contactMessageLabel} *</label>
                     <textarea
                       required
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Share your goals, project timeline, reference links or deliverable details..."
+                      placeholder={t.contactMessagePlaceholder}
                       className="w-full px-4 py-3 rounded-xl bg-[#03111e] border border-cyan-500/20 text-navy-ice text-sm focus:outline-none focus:border-cyan-400 transition-colors resize-none"
                     />
                   </div>
@@ -237,7 +238,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
                     className="w-full py-3.5 px-6 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
                   >
                     <Send className="w-4 h-4" />
-                    <span>Send Message & Chat on WhatsApp</span>
+                    <span>{t.contactSubmitBtn}</span>
                   </button>
                 </form>
               )}

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, Menu, X, Settings2, Send, FileText } from 'lucide-react';
+import { Sparkles, Menu, X, Settings2, Send, FileText, Globe } from 'lucide-react';
 import { ProfileData } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 interface NavbarProps {
   profile: ProfileData;
@@ -17,6 +19,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t, isRtl } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,11 +30,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { label: 'Home', href: '#hero' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Education', href: '#education' },
-    { label: 'Contact', href: '#contact' },
+    { label: t.navHome, href: '#hero' },
+    { label: t.navPortfolio, href: '#portfolio' },
+    { label: t.navSkills, href: '#skills' },
+    { label: t.navEducation, href: '#education' },
+    { label: t.navContact, href: '#contact' },
   ];
 
   return (
@@ -95,24 +98,15 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="px-3.5 py-1.5 text-sm font-semibold text-sky-300 hover:text-white hover:bg-[#072545] rounded-lg transition-colors flex items-center gap-1.5"
             >
               <FileText className="w-3.5 h-3.5 text-sky-400" />
-              <span>Resume / CV</span>
+              <span>{t.navResume}</span>
             </button>
           )}
         </nav>
 
-        {/* Action Buttons */}
+        {/* Action Buttons & Language Switcher */}
         <div className="hidden sm:flex items-center gap-2.5">
-          {/* Resume/CV Button */}
-          {onOpenResume && (
-            <button
-              onClick={onOpenResume}
-              className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-sky-200 hover:text-white bg-[#06203d]/80 hover:bg-[#0a2e58] border border-sky-500/30 hover:border-sky-400 rounded-xl transition-all shadow-sm"
-              title="View & Download Curriculum Vitae"
-            >
-              <FileText className="w-3.5 h-3.5 text-sky-400" />
-              <span>View CV</span>
-            </button>
-          )}
+          {/* 3-Language Switcher (EN | বাংলা | العربية) */}
+          <LanguageSwitcher />
 
           {/* Quick customizer button */}
           <button
@@ -122,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="Edit Profile, Photo & Portfolio Links"
           >
             <Settings2 className="w-3.5 h-3.5 text-sky-400 group-hover:rotate-45 transition-transform duration-300" />
-            <span>Settings</span>
+            <span>{t.navSettings}</span>
           </button>
 
           {/* Hire Me / Contact Button */}
@@ -132,12 +126,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="relative inline-flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl btn-cyan-gradient transition-all active:scale-95"
           >
             <Send className="w-3.5 h-3.5" />
-            <span>Hire Me</span>
+            <span>{t.navHireMe}</span>
           </a>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex sm:hidden items-center gap-2">
+        {/* Mobile menu button and quick switcher */}
+        <div className="flex sm:hidden items-center gap-1.5">
+          {/* Mobile Language Switcher */}
+          <LanguageSwitcher className="scale-90 origin-right mr-1" />
+
           {onOpenResume && (
             <button
               onClick={onOpenResume}
@@ -146,7 +143,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               title="View CV"
             >
               <FileText className="w-4 h-4" />
-              <span className="text-[11px] font-bold">CV</span>
             </button>
           )}
           <button
@@ -174,6 +170,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           id="mobile-drawer-menu"
           className="sm:hidden px-4 pt-3 pb-6 bg-[#031024]/98 border-b border-sky-500/30 backdrop-blur-xl mt-2 space-y-2 animate-in fade-in duration-200"
         >
+          <div className="pb-2 border-b border-sky-500/20 flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-400">Language / ভাষা / اللغة:</span>
+            <LanguageSwitcher />
+          </div>
+
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -193,7 +194,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="w-full text-left px-3 py-2 text-sm font-medium text-sky-300 hover:text-white hover:bg-[#072545] rounded-lg transition-colors flex items-center gap-2"
             >
               <FileText className="w-4 h-4 text-sky-400" />
-              <span>Curriculum Vitae (CV)</span>
+              <span>{t.navResume}</span>
             </button>
           )}
           <div className="pt-3 flex flex-col gap-2">
@@ -205,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold text-slate-200 bg-[#061e38] border border-sky-500/30 rounded-xl"
             >
               <Settings2 className="w-3.5 h-3.5 text-sky-400" />
-              <span>Edit Profile & Links</span>
+              <span>{t.navSettings}</span>
             </button>
             <a
               href="#contact"
@@ -213,7 +214,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center justify-center gap-2 px-3 py-2 text-xs font-bold rounded-xl btn-cyan-gradient"
             >
               <Send className="w-3.5 h-3.5" />
-              <span>Hire Me</span>
+              <span>{t.navHireMe}</span>
             </a>
           </div>
         </div>

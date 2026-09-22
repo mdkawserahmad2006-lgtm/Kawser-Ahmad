@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { ProjectItem, ProjectCategory, ProfileData } from '../types';
 import { getOptimizedCover } from '../utils/behanceCovers';
+import { useLanguage } from '../context/LanguageContext';
 
 interface ReelsFeedModalProps {
   isOpen: boolean;
@@ -33,6 +34,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
   projects,
   profile,
 }) => {
+  const { t } = useLanguage();
   const [filterCategory, setFilterCategory] = useState<ProjectCategory>('all');
   const [likedProjects, setLikedProjects] = useState<Record<string, boolean>>({});
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
@@ -209,7 +211,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
                   : 'bg-black/60 text-white/80 hover:text-white border border-white/20'
               }`}
             >
-              All
+              {t.reelsCategoryAll}
             </button>
             <button
               onClick={() => {
@@ -223,7 +225,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
               }`}
             >
               <Film className="w-3 h-3" />
-              <span>Reels</span>
+              <span>{t.reelsCategoryVideos}</span>
             </button>
             <button
               onClick={() => {
@@ -237,7 +239,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
               }`}
             >
               <Palette className="w-3 h-3" />
-              <span>Graphics</span>
+              <span>{t.reelsCategoryGraphics}</span>
             </button>
             <button
               onClick={() => {
@@ -251,7 +253,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
               }`}
             >
               <TrendingUp className="w-3 h-3" />
-              <span>Meta</span>
+              <span>{t.reelsCategoryMeta}</span>
             </button>
           </div>
 
@@ -491,7 +493,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
                     <div className="w-11 h-11 rounded-full bg-emerald-500 hover:bg-emerald-400 text-slate-950 flex items-center justify-center shadow-lg transition-transform active:scale-75">
                       <MessageCircle className="w-5 h-5 fill-slate-950" />
                     </div>
-                    <span className="text-[10px] font-bold text-white drop-shadow">Chat</span>
+                    <span className="text-[10px] font-bold text-white drop-shadow">{t.reelsChat}</span>
                   </button>
 
                   {/* Behance or External Link */}
@@ -506,7 +508,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
                       <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white flex items-center justify-center shadow-lg transition-transform active:scale-75">
                         <ExternalLink className="w-5 h-5" />
                       </div>
-                      <span className="text-[10px] font-bold text-white drop-shadow">Link</span>
+                      <span className="text-[10px] font-bold text-white drop-shadow">{t.reelsLink}</span>
                     </a>
                   )}
 
@@ -521,7 +523,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
                         {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-sky-400" />}
                       </div>
                       <span className="text-[10px] font-bold text-white drop-shadow">
-                        {isMuted ? 'Mute' : 'Sound'}
+                        {isMuted ? t.reelsMute : t.reelsSound}
                       </span>
                     </button>
                   )}
@@ -536,7 +538,7 @@ export const ReelsFeedModal: React.FC<ReelsFeedModalProps> = ({
                       {copied ? <Check className="w-5 h-5 text-emerald-400" /> : <Share2 className="w-5 h-5" />}
                     </div>
                     <span className="text-[10px] font-bold text-white drop-shadow">
-                      {copied ? 'Copied' : 'Share'}
+                      {copied ? t.contactCopied : t.reelsShare}
                     </span>
                   </button>
 

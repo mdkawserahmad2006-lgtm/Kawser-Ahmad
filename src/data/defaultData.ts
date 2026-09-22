@@ -18,7 +18,7 @@ export const initialProfileData: ProfileData = {
   phone: '+8801953941415',
   location: 'House-364, Satarkul Road, Uttar Badda, Dhaka-12',
   availableForHire: true,
-  experienceYears: '3+ Months',
+  experienceYears: '4 Months',
   completedProjects: '100+',
   avgRoas: '4.6X',
   clientSatisfaction: '100%',

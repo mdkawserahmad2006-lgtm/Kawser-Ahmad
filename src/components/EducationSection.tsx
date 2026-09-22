@@ -1,8 +1,11 @@
 import React from 'react';
 import { GraduationCap, Award, CheckCircle2, BookOpen } from 'lucide-react';
 import { educationList } from '../data/defaultData';
+import { useLanguage } from '../context/LanguageContext';
 
 export const EducationSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section
       id="education"
@@ -14,13 +17,13 @@ export const EducationSection: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#072548] border border-sky-500/30 text-sky-300 text-xs font-semibold mb-2.5">
             <GraduationCap className="w-3.5 h-3.5 text-sky-400" />
-            <span>Academic Background & Professional Training</span>
+            <span>{t.educationBadge}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-            Education & Training
+            {t.educationTitle}
           </h2>
           <p className="text-navy-mist text-xs sm:text-sm mt-1.5">
-            Academic degrees and verified skill development certifications.
+            {t.educationSubtitle}
           </p>
         </div>
 

@@ -1,12 +1,15 @@
 import React from 'react';
 import { ArrowUp, Heart, Sparkles, Send } from 'lucide-react';
 import { ProfileData } from '../types';
+import { useLanguage } from '../context/LanguageContext';
 
 interface FooterProps {
   profile: ProfileData;
 }
 
 export const Footer: React.FC<FooterProps> = ({ profile }) => {
+  const { t } = useLanguage();
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -38,26 +41,26 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
             </div>
           </div>
           <span className="hidden sm:inline text-sky-900">•</span>
-          <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {profile.name}. {t.allRightsReserved}</p>
         </div>
 
         {/* Center Specialties */}
         <div className="flex items-center gap-3 text-[11px] text-cyan-400/90 font-medium">
-          <span>Graphic Design</span>
+          <span>{t.pillarGraphicsTitle}</span>
           <span>•</span>
-          <span>Video Editing</span>
+          <span>{t.pillarVideoTitle}</span>
           <span>•</span>
-          <span>Meta Marketing</span>
+          <span>{t.pillarMetaTitle}</span>
         </div>
 
         {/* Back to Top */}
         <button
           onClick={scrollToTop}
-          className="p-2.5 rounded-xl bg-[#031320] hover:bg-[#072136] border border-cyan-500/20 hover:border-cyan-400/50 text-navy-mist hover:text-cyan-300 transition-all flex items-center gap-1.5 shadow-sm"
+          className="p-2.5 rounded-xl bg-[#031320] hover:bg-[#072136] border border-cyan-500/20 hover:border-cyan-400/50 text-navy-mist hover:text-cyan-300 transition-all flex items-center gap-1.5 shadow-sm cursor-pointer"
           aria-label="Back to top"
         >
           <ArrowUp className="w-4 h-4" />
-          <span className="text-[11px] font-medium">Back to top</span>
+          <span className="text-[11px] font-medium">{t.backToTop}</span>
         </button>
 
       </div>

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Play, Eye, TrendingUp, Sparkles, Film, Palette, BarChart3, PlusCircle, ArrowUpRight, ChevronLeft, ChevronRight, Target } from 'lucide-react';
 import { ProjectItem, ProjectCategory } from '../types';
 import { getOptimizedCover } from '../utils/behanceCovers';
+import { useLanguage } from '../context/LanguageContext';
 
 interface PortfolioShowcaseProps {
   projects: ProjectItem[];
@@ -22,6 +23,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   activeCategory,
   onCategoryChange
 }) => {
+  const { t, isRtl } = useLanguage();
   const videoScrollRef = useRef<HTMLDivElement>(null);
   const graphicsScrollRef = useRef<HTMLDivElement>(null);
   const metaScrollRef = useRef<HTMLDivElement>(null);
@@ -39,10 +41,10 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   const metaProjects = projects.filter(p => p.category === 'meta');
 
   const slotTabs = [
-    { id: 'all' as ProjectCategory, label: 'All Works', icon: Sparkles, count: projects.length },
-    { id: 'video' as ProjectCategory, label: 'Video Editing', icon: Film, count: videoProjects.length },
-    { id: 'graphics' as ProjectCategory, label: 'Graphic Design', icon: Palette, count: graphicsProjects.length },
-    { id: 'meta' as ProjectCategory, label: 'Meta Marketing', icon: TrendingUp, count: metaProjects.length },
+    { id: 'all' as ProjectCategory, label: t.filterAll, icon: Sparkles, count: projects.length },
+    { id: 'video' as ProjectCategory, label: t.filterVideos, icon: Film, count: videoProjects.length },
+    { id: 'graphics' as ProjectCategory, label: t.filterGraphics, icon: Palette, count: graphicsProjects.length },
+    { id: 'meta' as ProjectCategory, label: t.filterMeta, icon: TrendingUp, count: metaProjects.length },
   ];
 
   return (
@@ -63,14 +65,14 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#072448] border border-sky-500/30 text-sky-300 text-xs font-semibold mb-2">
               <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-              <span>Portfolio Works</span>
+              <span>{t.portfolioWorks}</span>
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-              <span className="text-white">Featured </span>
-              <span className="text-gradient-cyan-teal">Projects</span>
+              <span className="text-white">{t.featured} </span>
+              <span className="text-gradient-cyan-teal">{t.projects}</span>
             </h2>
             <p className="text-navy-mist text-xs sm:text-sm mt-1 max-w-xl">
-              Video Editing, Graphic Design, and Meta Ads.
+              {t.portfolioSubtitle}
             </p>
           </div>
 
@@ -83,7 +85,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               title="Add or edit video & project links"
             >
               <PlusCircle className="w-3.5 h-3.5 text-sky-400" />
-              <span>Link Works</span>
+              <span>{t.linkWorks}</span>
             </button>
           </div>
         </div>

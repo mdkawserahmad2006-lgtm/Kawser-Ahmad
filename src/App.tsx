@@ -17,6 +17,7 @@ import { InteractiveAmbientLighting } from './components/InteractiveAmbientLight
 import { initialProfileData, defaultProjects } from './data/defaultData';
 import { ProfileData, ProjectItem, ProjectCategory } from './types';
 import { getOptimizedCover } from './utils/behanceCovers';
+import { LanguageProvider } from './context/LanguageContext';
 
 export default function App() {
   // Local persistence for profile & projects
@@ -57,9 +58,9 @@ export default function App() {
           updated = true;
         }
 
-        // Update experience to 3 Months and projects to 100+
-        if (parsed.experienceYears === '4+' || !parsed.experienceYears || parsed.experienceYears === '2+') {
-          parsed.experienceYears = '3 Months';
+        // Update experience to 4 Months and projects to 100+
+        if (parsed.experienceYears !== '4 Months' && (parsed.experienceYears?.includes('Month') || parsed.experienceYears === '4+' || !parsed.experienceYears || parsed.experienceYears === '2+' || parsed.experienceYears === '3 Months')) {
+          parsed.experienceYears = '4 Months';
           updated = true;
         }
         if (parsed.completedProjects === '180+' || !parsed.completedProjects) {
@@ -163,131 +164,133 @@ export default function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#020912] text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950 font-['Plus_Jakarta_Sans',sans-serif]">
-      {/* 
-        Interactive Ambient Lighting:
-        - Cursor spotlight with smooth trailing light ("আলো দৌড়াবে") behind cards
-        - Touch ripple and click light bursts on phone & desktop ("সেখানে আলো জ্বলবে")
-      */}
-      <InteractiveAmbientLighting />
+    <LanguageProvider>
+      <div className="relative min-h-screen bg-[#020912] text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950 font-['Plus_Jakarta_Sans',sans-serif]">
+        {/* 
+          Interactive Ambient Lighting:
+          - Cursor spotlight with smooth trailing light ("আলো দৌড়াবে") behind cards
+          - Touch ripple and click light bursts on phone & desktop ("সেখানে আলো জ্বলবে")
+        */}
+        <InteractiveAmbientLighting />
 
-      {/* 
-        Scroll-Reactive Watermark Silhouette with Neon Glow Aura
-        Expands smoothly as visitor scrolls down from top to bottom
-      */}
-      <WatermarkBackdrop watermarkUrl={profile.watermarkUrl} />
+        {/* 
+          Scroll-Reactive Watermark Silhouette with Neon Glow Aura
+          Expands smoothly as visitor scrolls down from top to bottom
+        */}
+        <WatermarkBackdrop watermarkUrl={profile.watermarkUrl} />
 
-      {/* Fixed Navigation with Corner Logo */}
-      <Navbar
-        profile={profile}
-        onOpenCustomizer={() => setIsCustomizerOpen(true)}
-        onOpenResume={() => setIsResumeOpen(true)}
-        onSelectCategory={(cat) => setActiveCategory(cat)}
-      />
-
-      {/* Main Content Sections */}
-      <main className="relative z-10 flex-1">
-        {/* Hero Section */}
-        <Hero
+        {/* Fixed Navigation with Corner Logo */}
+        <Navbar
           profile={profile}
           onOpenCustomizer={() => setIsCustomizerOpen(true)}
           onOpenResume={() => setIsResumeOpen(true)}
-          onPlayPromo={() => {
-            const promoProject = projects.find(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604')) || projects[0];
-            handleOpenProject(promoProject);
-          }}
-          onPlayVideo={(p) => handleOpenProject(p)}
-          projects={projects}
-          onViewImage={(p) => handleOpenProject(p)}
+          onSelectCategory={(cat) => setActiveCategory(cat)}
         />
 
-        {/* Portfolio Showcase Section: Carousel with playable videos, graphic lightbox, meta case studies */}
-        <PortfolioShowcase
-          projects={projects}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-          onPlayVideo={(p) => handleOpenProject(p)}
-          onViewImage={(p) => handleOpenProject(p)}
-          onViewMetaCase={(p) => handleOpenProject(p)}
-          onOpenCustomizer={() => setIsCustomizerOpen(true)}
-        />
+        {/* Main Content Sections */}
+        <main className="relative z-10 flex-1">
+          {/* Hero Section */}
+          <Hero
+            profile={profile}
+            onOpenCustomizer={() => setIsCustomizerOpen(true)}
+            onOpenResume={() => setIsResumeOpen(true)}
+            onPlayPromo={() => {
+              const promoProject = projects.find(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604')) || projects[0];
+              handleOpenProject(promoProject);
+            }}
+            onPlayVideo={(p) => handleOpenProject(p)}
+            projects={projects}
+            onViewImage={(p) => handleOpenProject(p)}
+          />
 
-        {/* Skills Section: Graphic Design, Video Editing, Meta Marketing */}
-        <SkillsSection />
+          {/* Portfolio Showcase Section: Carousel with playable videos, graphic lightbox, meta case studies */}
+          <PortfolioShowcase
+            projects={projects}
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+            onPlayVideo={(p) => handleOpenProject(p)}
+            onViewImage={(p) => handleOpenProject(p)}
+            onViewMetaCase={(p) => handleOpenProject(p)}
+            onOpenCustomizer={() => setIsCustomizerOpen(true)}
+          />
 
-        {/* Education & Certifications Section */}
-        <EducationSection />
+          {/* Skills Section: Graphic Design, Video Editing, Meta Marketing */}
+          <SkillsSection />
 
-        {/* Contact Section: WhatsApp chat, email, project inquiry form */}
-        <ContactSection profile={profile} />
-      </main>
+          {/* Education & Certifications Section */}
+          <EducationSection />
 
-      {/* Footer */}
-      <Footer profile={profile} />
+          {/* Contact Section: WhatsApp chat, email, project inquiry form */}
+          <ContactSection profile={profile} />
+        </main>
 
-      {/* Mobile Floating Quick Action Pill */}
-      <aside
-        id="mobile-quick-actions"
-        aria-label="Quick contact"
-        className="fixed bottom-4 right-4 z-30 sm:hidden flex items-center gap-2 select-none"
-      >
-        <a
-          id="btn-mobile-quick-whatsapp"
-          href={`https://wa.me/${(profile.whatsappNumber || '8801953941415').replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hello Md Kawser Ahmad, I visited your portfolio and would like to discuss a project with you.')}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-emerald-500 text-white font-bold text-xs shadow-[0_4px_20px_rgba(16,185,129,0.55)] border border-emerald-300/40 active:scale-95 transition-transform"
-          aria-label="Direct WhatsApp Chat"
+        {/* Footer */}
+        <Footer profile={profile} />
+
+        {/* Mobile Floating Quick Action Pill */}
+        <aside
+          id="mobile-quick-actions"
+          aria-label="Quick contact"
+          className="fixed bottom-4 right-4 z-30 sm:hidden flex items-center gap-2 select-none"
         >
-          <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-          <span>WhatsApp Chat</span>
-        </a>
-      </aside>
+          <a
+            id="btn-mobile-quick-whatsapp"
+            href={`https://wa.me/${(profile.whatsappNumber || '8801953941415').replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hello Md Kawser Ahmad, I visited your portfolio and would like to discuss a project with you.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-emerald-500 text-white font-bold text-xs shadow-[0_4px_20px_rgba(16,185,129,0.55)] border border-emerald-300/40 active:scale-95 transition-transform"
+            aria-label="Direct WhatsApp Chat"
+          >
+            <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+            <span>WhatsApp Chat</span>
+          </a>
+        </aside>
 
-      {/* Reels-Style Swipe and Scroll Viewer Modal (TikTok / Reels style on Mobile and PC) */}
-      <ReelsFeedModal
-        isOpen={Boolean(reelsProject)}
-        onClose={() => setReelsProject(null)}
-        initialProject={reelsProject}
-        projects={projects}
-        profile={profile}
-      />
+        {/* Reels-Style Swipe and Scroll Viewer Modal (TikTok / Reels style on Mobile and PC) */}
+        <ReelsFeedModal
+          isOpen={Boolean(reelsProject)}
+          onClose={() => setReelsProject(null)}
+          initialProject={reelsProject}
+          projects={projects}
+          profile={profile}
+        />
 
-      {/* Standard Modals Fallback */}
-      <VideoModal
-        project={activeVideoProject}
-        onClose={() => setActiveVideoProject(null)}
-      />
+        {/* Standard Modals Fallback */}
+        <VideoModal
+          project={activeVideoProject}
+          onClose={() => setActiveVideoProject(null)}
+        />
 
-      <ImageModal
-        project={activeImageProject}
-        onClose={() => setActiveImageProject(null)}
-      />
+        <ImageModal
+          project={activeImageProject}
+          onClose={() => setActiveImageProject(null)}
+        />
 
-      <MetaCaseStudyModal
-        project={activeMetaProject}
-        onClose={() => setActiveMetaProject(null)}
-      />
+        <MetaCaseStudyModal
+          project={activeMetaProject}
+          onClose={() => setActiveMetaProject(null)}
+        />
 
-      <ResumeModal
-        isOpen={isResumeOpen}
-        onClose={() => setIsResumeOpen(false)}
-        profile={profile}
-        onOpenCustomizer={() => {
-          setIsResumeOpen(false);
-          setIsCustomizerOpen(true);
-        }}
-      />
+        <ResumeModal
+          isOpen={isResumeOpen}
+          onClose={() => setIsResumeOpen(false)}
+          profile={profile}
+          onOpenCustomizer={() => {
+            setIsResumeOpen(false);
+            setIsCustomizerOpen(true);
+          }}
+        />
 
-      <CustomizerModal
-        isOpen={isCustomizerOpen}
-        onClose={() => setIsCustomizerOpen(false)}
-        profile={profile}
-        onSaveProfile={handleSaveProfile}
-        projects={projects}
-        onSaveProjects={handleSaveProjects}
-        onResetDefaults={handleResetDefaults}
-      />
-    </div>
+        <CustomizerModal
+          isOpen={isCustomizerOpen}
+          onClose={() => setIsCustomizerOpen(false)}
+          profile={profile}
+          onSaveProfile={handleSaveProfile}
+          projects={projects}
+          onSaveProjects={handleSaveProjects}
+          onResetDefaults={handleResetDefaults}
+        />
+      </div>
+    </LanguageProvider>
   );
 }

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Palette, Film, TrendingUp, Sparkles, PenTool, Globe, CheckCircle2, Cpu } from 'lucide-react';
 import { skillCategories } from '../data/defaultData';
+import { useLanguage } from '../context/LanguageContext';
 
 export const SkillsSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section
       id="skills"
@@ -14,13 +17,13 @@ export const SkillsSection: React.FC = () => {
         <div className="text-center max-w-2xl mx-auto mb-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2.5">
             <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Hard Skills & Technical Capabilities</span>
+            <span>{t.skillsBadge}</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
-            Specialized Skills
+            {t.skillsTitle}
           </h2>
           <p className="text-navy-mist text-xs sm:text-sm mt-1.5">
-            Core creative software and marketing expertise verified through active client projects.
+            {t.skillsSubtitle}
           </p>
         </div>
 
