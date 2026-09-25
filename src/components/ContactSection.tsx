@@ -10,6 +10,7 @@ interface ContactSectionProps {
 export const ContactSection: React.FC<ContactSectionProps> = ({ profile }) => {
   const { t } = useLanguage();
   const targetEmail = profile.email || 'mdkawserahmad2006@gmail.com';
+  const [hoveredContact, setHoveredContact] = useState<'email' | 'whatsapp' | null>(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -113,13 +114,67 @@ Sent via Kawser Theory Portfolio`;
           <div className="lg:col-span-5 space-y-6">
             
             {/* Email Card (Connected to mdkawserahmad2006@gmail.com) */}
-            <div className="relative group overflow-hidden navy-glass-card rounded-2xl p-6 border border-sky-500/30 hover:border-cyan-300 hover:shadow-[0_12px_40px_rgba(56,189,248,0.35)] hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300">
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#00e5ff]" />
-              <div className="pointer-events-none absolute inset-0 -translate-x-[160%] group-hover:translate-x-[260%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-cyan-300/15 to-transparent skew-x-12 z-20" />
+            <div
+              onMouseEnter={() => setHoveredContact('email')}
+              onMouseLeave={() => setHoveredContact(null)}
+              onTouchStart={() => setHoveredContact('email')}
+              className="relative group navy-glass-card rounded-2xl p-6 border border-sky-500/30 hover:border-cyan-300 hover:shadow-[0_16px_50px_rgba(56,189,248,0.4)] hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 cursor-pointer"
+            >
+              {/* Internal overflow-clipped laser light sweep */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#00e5ff]" />
+                <div className="pointer-events-none absolute inset-0 -translate-x-[160%] group-hover:translate-x-[260%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-cyan-300/15 to-transparent skew-x-12 z-20" />
+              </div>
+
               <div className="flex items-center gap-4 mb-4 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-400/30 flex items-center justify-center shadow-[0_0_15px_rgba(56,189,248,0.3)] group-hover:scale-110 transition-transform">
-                  <Mail className="w-6 h-6" />
+                {/* 
+                  USER REQUESTED: MAIL APP LAUNCHER & INTERACTIVE VISUAL NOTIFICATION
+                  "মেইল এবং হোয়াটসঅ্যাপের মধ্যে যখন কার্সর নিয়ে যাওয়া হবে, তখন এই অ্যাপগুলো মেইল উপরে গিয়ে সেকশন দেখাবে যে আপনি মেইল পাঠান, এরকম একটা কিছু একটা ভিজ্যুয়াল নড়াচড়া করবে সে।"
+                */}
+                <div className="relative flex-shrink-0">
+                  {/* Vertical Energy Laser Trail beneath floating mail */}
+                  <div
+                    className={`pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 w-[2px] bg-gradient-to-t from-cyan-400/80 via-sky-300 to-transparent transition-all duration-500 ease-out z-25 ${
+                      hoveredContact === 'email' ? 'h-14 sm:h-16 opacity-100 -translate-y-8' : 'h-0 opacity-0'
+                    }`}
+                  />
+
+                  {/* Floating Pill Banner when Mail Flies Above Card */}
+                  <div
+                    className={`pointer-events-none absolute -top-20 sm:-top-22 left-1/2 -translate-x-1/2 whitespace-nowrap transition-all duration-400 ease-out z-40 flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/95 border border-sky-400/80 shadow-[0_0_25px_rgba(56,189,248,0.8)] text-[10px] font-extrabold text-white ${
+                      hoveredContact === 'email'
+                        ? 'opacity-100 scale-100 -translate-y-1'
+                        : 'opacity-0 scale-75 translate-y-3 pointer-events-none'
+                    }`}
+                  >
+                    <Send className="w-3 h-3 text-cyan-300 animate-bounce" />
+                    <span>সরাসরি মেইল পাঠান • Send Mail Now</span>
+                  </div>
+
+                  {/* The Flying Mail Box */}
+                  <div
+                    className={`relative z-30 w-12 h-12 rounded-xl border-2 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] bg-[#001c3d] border-sky-400 ${
+                      hoveredContact === 'email'
+                        ? '-translate-y-12 sm:-translate-y-14 scale-125 sm:scale-130 shadow-[0_0_35px_rgba(56,189,248,0.85)] ring-2 ring-white/60'
+                        : 'translate-y-0 scale-100 shadow-md'
+                    }`}
+                    title="Send Email Directly"
+                  >
+                    <Mail
+                      className={`w-6 h-6 transition-all duration-300 ${
+                        hoveredContact === 'email'
+                          ? 'text-cyan-200 animate-pulse stroke-[2.5] drop-shadow-[0_0_8px_#00e5ff]'
+                          : 'text-sky-400'
+                      }`}
+                    />
+                  </div>
+
+                  {/* Base Holographic Landing Pad */}
+                  <div className="absolute inset-0 rounded-xl border border-sky-500/25 bg-[#020d1c]/80 pointer-events-none z-10 flex items-center justify-center">
+                    <span className="text-[9px] font-bold text-sky-500/40 uppercase">MAIL</span>
+                  </div>
                 </div>
+
                 <div>
                   <div className="flex items-center gap-2">
                     <h3 className="text-base font-bold text-white group-hover:text-cyan-200 transition-colors">Official Direct Email</h3>
@@ -169,13 +224,66 @@ Sent via Kawser Theory Portfolio`;
             </div>
 
             {/* WhatsApp Quick Card */}
-            <div className="relative group overflow-hidden navy-glass-card rounded-2xl p-6 border border-emerald-500/30 hover:border-emerald-300 hover:shadow-[0_12px_40px_rgba(16,185,129,0.35)] hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300">
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#10b981]" />
-              <div className="pointer-events-none absolute inset-0 -translate-x-[160%] group-hover:translate-x-[260%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-emerald-300/15 to-transparent skew-x-12 z-20" />
+            <div
+              onMouseEnter={() => setHoveredContact('whatsapp')}
+              onMouseLeave={() => setHoveredContact(null)}
+              onTouchStart={() => setHoveredContact('whatsapp')}
+              className="relative group navy-glass-card rounded-2xl p-6 border border-emerald-500/30 hover:border-emerald-300 hover:shadow-[0_16px_50px_rgba(16,185,129,0.4)] hover:scale-[1.02] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 cursor-pointer"
+            >
+              {/* Internal overflow-clipped laser light sweep */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#10b981]" />
+                <div className="pointer-events-none absolute inset-0 -translate-x-[160%] group-hover:translate-x-[260%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-emerald-300/15 to-transparent skew-x-12 z-20" />
+              </div>
+
               <div className="flex items-center gap-4 mb-4 relative z-10">
-                <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 flex items-center justify-center shadow-[0_0_15px_rgba(16,185,129,0.3)] group-hover:scale-110 transition-transform">
-                  <MessageCircle className="w-6 h-6" />
+                {/* 
+                  USER REQUESTED: WHATSAPP APP LAUNCHER & NOTIFICATION MOVEMENT
+                */}
+                <div className="relative flex-shrink-0">
+                  {/* Vertical Emerald Energy Laser Trail beneath floating WhatsApp */}
+                  <div
+                    className={`pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 w-[2px] bg-gradient-to-t from-emerald-400/80 via-teal-300 to-transparent transition-all duration-500 ease-out z-25 ${
+                      hoveredContact === 'whatsapp' ? 'h-14 sm:h-16 opacity-100 -translate-y-8' : 'h-0 opacity-0'
+                    }`}
+                  />
+
+                  {/* Floating Pill Banner when WhatsApp Flies Above Card */}
+                  <div
+                    className={`pointer-events-none absolute -top-20 sm:-top-22 left-1/2 -translate-x-1/2 whitespace-nowrap transition-all duration-400 ease-out z-40 flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/95 border border-emerald-400/80 shadow-[0_0_25px_rgba(16,185,129,0.8)] text-[10px] font-extrabold text-white ${
+                      hoveredContact === 'whatsapp'
+                        ? 'opacity-100 scale-100 -translate-y-1'
+                        : 'opacity-0 scale-75 translate-y-3 pointer-events-none'
+                    }`}
+                  >
+                    <MessageCircle className="w-3 h-3 text-emerald-300 animate-ping" />
+                    <span>হোয়াটসঅ্যাপে নক দিন • Instant Chat Ready</span>
+                  </div>
+
+                  {/* The Flying WhatsApp Box */}
+                  <div
+                    className={`relative z-30 w-12 h-12 rounded-xl border-2 flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] bg-[#012616] border-emerald-400 ${
+                      hoveredContact === 'whatsapp'
+                        ? '-translate-y-12 sm:-translate-y-14 scale-125 sm:scale-130 shadow-[0_0_35px_rgba(16,185,129,0.85)] ring-2 ring-white/60'
+                        : 'translate-y-0 scale-100 shadow-md'
+                    }`}
+                    title="Start WhatsApp Chat"
+                  >
+                    <MessageCircle
+                      className={`w-6 h-6 transition-all duration-300 ${
+                        hoveredContact === 'whatsapp'
+                          ? 'text-emerald-100 animate-bounce stroke-[2.5] drop-shadow-[0_0_8px_#10b981]'
+                          : 'text-emerald-400'
+                      }`}
+                    />
+                  </div>
+
+                  {/* Base Holographic Landing Pad */}
+                  <div className="absolute inset-0 rounded-xl border border-emerald-500/25 bg-[#020d1c]/80 pointer-events-none z-10 flex items-center justify-center">
+                    <span className="text-[9px] font-bold text-emerald-500/40 uppercase">CHAT</span>
+                  </div>
                 </div>
+
                 <div>
                   <h3 className="text-base font-bold text-white group-hover:text-emerald-200 transition-colors">Direct WhatsApp</h3>
                   <p className="text-xs text-navy-mist">Fastest response for urgent projects & quotes</p>
