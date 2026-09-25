@@ -129,7 +129,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({
                 </span>
                 <div className="flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />
-                  <span className="truncate">mdkawserahmad.connect@gmail.com</span>
+                  <a
+                    href={`mailto:${profile.email || 'mdkawserahmad2006@gmail.com'}`}
+                    className="truncate hover:text-cyan-300 hover:underline"
+                  >
+                    {profile.email || 'mdkawserahmad2006@gmail.com'}
+                  </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0" />

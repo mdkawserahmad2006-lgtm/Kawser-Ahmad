@@ -154,3 +154,29 @@ html {
   will-change: transform;
 }
 
+@keyframes softFloatCard {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float-subtle {
+  animation: softFloatCard 5s ease-in-out infinite;
+}
+
+@keyframes laserScan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+.animate-laser-scan {
+  animation: laserScan 3s linear infinite;
+}
+

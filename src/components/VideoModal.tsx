@@ -28,7 +28,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ project, onClose }) => {
   const isYouTube = project.videoUrl?.includes('youtube.com') || project.videoUrl?.includes('youtu.be');
   const isVimeo = project.videoUrl?.includes('vimeo.com');
 
-  const isVertical = project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('/shorts/') || project.videoUrl?.includes('1226511604');
+  const isVertical = project.isVertical || project.aspectRatio === '9:16' || project.videoUrl?.includes('1226511604');
 
   const getYouTubeEmbedUrl = (url: string) => {
     if (url.includes('embed/')) return url;

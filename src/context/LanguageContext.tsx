@@ -34,6 +34,7 @@ export interface Translations {
   ctaWatchPromo: string;
   ctaViewWorks: string;
   ctaWhatsApp: string;
+  ctaEmail: string;
   ctaResume: string;
   
   // Hero Video & Graphics Preview Strip
@@ -86,6 +87,9 @@ export interface Translations {
   contactMessageLabel: string;
   contactMessagePlaceholder: string;
   contactSubmitBtn: string;
+  contactSendEmailBtn: string;
+  contactSendGmailBtn: string;
+  contactSendWhatsAppBtn: string;
   contactWhatsAppDirectBtn: string;
   contactEmailCopyBtn: string;
   contactCopied: string;
@@ -129,17 +133,18 @@ export const translations: Record<Language, Translations> = {
     pillarMetaTitle: 'Meta Marketing',
     pillarMetaSub: 'CAPI & ROAS',
     statExperience: 'Experience',
-    statExperienceValue: '4 Months',
+    statExperienceValue: '1 Year',
     statProjects: 'Projects',
     statRoas: 'ROAS',
     statSatisfaction: 'Satisfaction',
 
-    ctaWatchPromo: 'Watch Promo Reel',
+    ctaWatchPromo: 'Watch Promo Video',
     ctaViewWorks: 'Explore All Works',
     ctaWhatsApp: 'Direct WhatsApp Chat',
+    ctaEmail: 'Email / Hire Me',
     ctaResume: 'Curriculum Vitae',
 
-    topPreviewVideos: 'Video Reels',
+    topPreviewVideos: 'Featured Promo Video',
     topPreviewGraphics: 'Graphic Works',
     seeAll: 'See All',
     reelsPlayHint: 'Click to open in Reels view',
@@ -184,6 +189,9 @@ export const translations: Record<Language, Translations> = {
     contactMessageLabel: 'Project Details & Goals',
     contactMessagePlaceholder: 'Tell me about your project scope, deadlines, and requirements...',
     contactSubmitBtn: 'Send Project Inquiry',
+    contactSendEmailBtn: 'Send Message via Email',
+    contactSendGmailBtn: 'Open in Gmail Web',
+    contactSendWhatsAppBtn: 'Send via WhatsApp',
     contactWhatsAppDirectBtn: 'Start WhatsApp Chat Now',
     contactEmailCopyBtn: 'Copy Email',
     contactCopied: 'Copied!',
@@ -224,17 +232,18 @@ export const translations: Record<Language, Translations> = {
     pillarMetaTitle: 'মেটা মার্কেটিং',
     pillarMetaSub: 'সিএপিআই ও আরওএএস বৃদ্ধি',
     statExperience: 'অভিজ্ঞতা',
-    statExperienceValue: '৪ মাস',
+    statExperienceValue: '১ বছর',
     statProjects: 'প্রজেক্ট সম্পন্ন',
     statRoas: 'গড় আরওএএস',
     statSatisfaction: 'ক্লায়েন্ট সন্তুষ্টি',
 
-    ctaWatchPromo: 'প্রোমো রিল দেখুন',
+    ctaWatchPromo: 'প্রোমো ভিডিও দেখুন',
     ctaViewWorks: 'সব প্রজেক্ট এক্সপ্লোর করুন',
     ctaWhatsApp: 'সরাসরি হোয়াটসঅ্যাপ চ্যাট',
+    ctaEmail: 'সরাসরি ইমেইল করুন',
     ctaResume: 'জীবনবৃত্তান্ত (সিভি)',
 
-    topPreviewVideos: 'ভিডিও রিলস',
+    topPreviewVideos: 'ফিচার্ড প্রোমো ভিডিও',
     topPreviewGraphics: 'গ্রাফিক্স ডিজাইন',
     seeAll: 'সবগুলো দেখুন',
     reelsPlayHint: 'ক্লিক করে রিলস ফিডে দেখুন',
@@ -279,6 +288,9 @@ export const translations: Record<Language, Translations> = {
     contactMessageLabel: 'প্রজেক্টের বিবরণ ও লক্ষ্য',
     contactMessagePlaceholder: 'আপনার প্রজেক্টের বিস্তার, ডেলিভারির সময় এবং প্রয়োজনীয়তা সম্পর্কে লিখুন...',
     contactSubmitBtn: 'প্রজেক্ট ইনকোয়ারি পাঠান',
+    contactSendEmailBtn: 'ইমেইলের মাধ্যমে মেসেজ পাঠান',
+    contactSendGmailBtn: 'জি-মেইলে সরাসরি খুলুন',
+    contactSendWhatsAppBtn: 'হোয়াটসঅ্যাপে পাঠান',
     contactWhatsAppDirectBtn: 'হোয়াটসঅ্যাপে সরাসরি কথা বলুন',
     contactEmailCopyBtn: 'ইমেইল কপি করুন',
     contactCopied: 'কপি হয়েছে!',
@@ -319,7 +331,7 @@ export const translations: Record<Language, Translations> = {
     pillarMetaTitle: 'إعلانات ميتا',
     pillarMetaSub: 'زيادة العائد CAPI & ROAS',
     statExperience: 'سنوات خبرة',
-    statExperienceValue: '٤ أشهر',
+    statExperienceValue: 'سنة واحدة',
     statProjects: 'مشروع منجز',
     statRoas: 'متوسط ROAS',
     statSatisfaction: 'رضا العملاء',
@@ -327,9 +339,10 @@ export const translations: Record<Language, Translations> = {
     ctaWatchPromo: 'مشاهدة فيديو العرض',
     ctaViewWorks: 'تصفح جميع الأعمال',
     ctaWhatsApp: 'محادثة مباشرة عبر واتساب',
+    ctaEmail: 'مراسلتي عبر البريد',
     ctaResume: 'السيرة الذاتية الكاملة',
 
-    topPreviewVideos: 'فيديوهات الريلز',
+    topPreviewVideos: 'فيديو العرض المميز',
     topPreviewGraphics: 'التصاميم الجرافيكية',
     seeAll: 'عرض الكل',
     reelsPlayHint: 'انقر للمشاهدة بنمط الريلز',
@@ -374,6 +387,9 @@ export const translations: Record<Language, Translations> = {
     contactMessageLabel: 'تفاصيل المشروع وأهدافه',
     contactMessagePlaceholder: 'اكتب تفاصيل المشروع والموعد النهائي والمتطلبات...',
     contactSubmitBtn: 'إرسال تفاصيل المشروع',
+    contactSendEmailBtn: 'إرسال الرسالة عبر البريد الإلكتروني',
+    contactSendGmailBtn: 'فتح في Gmail مباشرة',
+    contactSendWhatsAppBtn: 'إرسال عبر واتساب',
     contactWhatsAppDirectBtn: 'محادثة فورية عبر واتساب',
     contactEmailCopyBtn: 'نسخ البريد الإلكتروني',
     contactCopied: 'تم النسخ بنجاح!',

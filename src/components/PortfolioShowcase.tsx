@@ -50,7 +50,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   return (
     <section
       id="portfolio"
-      className="relative py-16 lg:py-24 bg-transparent overflow-hidden"
+      className="relative pt-4 pb-16 lg:pt-6 lg:pb-24 bg-transparent overflow-hidden"
     >
       {/* Background Studio Glows */}
       <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-between">
@@ -166,8 +166,14 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               {videoProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[80vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all hover:border-sky-400/50"
+                  className="relative w-[82vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-sky-500/25 flex flex-col group transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.03] active:scale-[0.98] hover:border-cyan-300 hover:shadow-[0_14px_45px_rgba(56,189,248,0.35)] cursor-pointer"
                 >
+                  {/* Glowing Laser Top Border on Hover / Touch */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#00e5ff] z-30" />
+
+                  {/* Diagonal Laser Light Sweep across the entire card */}
+                  <div className="pointer-events-none absolute inset-0 -translate-x-[160%] group-hover:translate-x-[260%] group-active:translate-x-[260%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent skew-x-12 z-20" />
+
                   {/* Video Thumbnail */}
                   <div
                     className="relative aspect-video bg-[#010814] overflow-hidden cursor-pointer"
@@ -176,7 +182,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     <img
                       src={project.coverImage}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
                       loading="lazy"
                       decoding="async"
                       referrerPolicy="no-referrer"
@@ -189,9 +195,9 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/20 to-transparent opacity-85" />
 
-                    {/* Play Button Overlay */}
+                    {/* Play Button Overlay with Radiating Neon Halo */}
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-11 h-11 rounded-full btn-cyan-gradient flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <div className="w-12 h-12 rounded-full btn-cyan-gradient flex items-center justify-center shadow-lg group-hover:scale-120 group-hover:shadow-[0_0_30px_rgba(56,189,248,0.85)] transition-all duration-300">
                         <Play className="w-5 h-5 fill-white ml-0.5 text-white" />
                       </div>
                     </div>
@@ -204,13 +210,19 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         className="w-3.5 h-3.5 rounded-full object-cover border border-sky-400/60"
                       />
                       <span className="text-[10px] font-bold text-white tracking-wide">
-                        Kawser Theory • {project.id === 'vid-promo' ? 'Promo Reel' : 'Reel'}
+                        Kawser Theory • {project.id === 'vid-yt-lead-short' ? 'Featured Promo' : project.id === 'vid-promo' ? 'Promo Reel' : 'Reel'}
                       </span>
                     </div>
 
+                    {project.isVertical && (
+                      <div className="absolute top-2.5 right-2.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-500/30 border border-sky-400/50 text-[9px] font-bold text-sky-200 backdrop-blur-sm">
+                        <span>Short</span>
+                      </div>
+                    )}
+
                     {project.metrics?.results && (
                       <div className="absolute bottom-2.5 right-2.5">
-                        <span className="text-[10px] font-bold text-emerald-300 bg-black/80 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-bold text-emerald-300 bg-black/80 px-2 py-0.5 rounded shadow">
                           {project.metrics.results}
                         </span>
                       </div>
@@ -218,9 +230,9 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-4 flex-1 flex flex-col justify-between">
+                  <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
                     <div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors mb-1 truncate">
+                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors mb-1 truncate">
                         {project.title}
                       </h4>
                       <p className="text-xs text-navy-mist line-clamp-1 mb-3">
@@ -231,7 +243,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         {project.tags.slice(0, 2).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/20"
+                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/20 group-hover:border-cyan-400/40 transition-colors"
                           >
                             {tag}
                           </span>
@@ -242,10 +254,10 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     {/* Direct Watch Button */}
                     <button
                       onClick={() => onPlayVideo(project)}
-                      className="w-full py-2 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-sky-500/30 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                      className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#051c35] via-[#07284d] to-[#051c35] hover:from-sky-500 hover:to-cyan-400 hover:text-slate-950 border border-sky-500/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-sm cursor-pointer group/btn"
                     >
-                      <Play className="w-3 h-3 fill-sky-400 text-sky-400" />
-                      <span>Watch Reel</span>
+                      <Play className="w-3.5 h-3.5 fill-current text-sky-400 group-hover/btn:text-slate-950 transition-colors" />
+                      <span>Watch Full Video</span>
                     </button>
                   </div>
                 </div>
@@ -303,8 +315,14 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               {graphicsProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[80vw] sm:w-[300px] lg:w-[330px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-cyan-500/25 flex flex-col group transition-all hover:border-cyan-400/50"
+                  className="relative w-[82vw] sm:w-[300px] lg:w-[330px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-cyan-500/25 flex flex-col group transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.03] active:scale-[0.98] hover:border-cyan-300 hover:shadow-[0_14px_45px_rgba(6,182,212,0.35)] cursor-pointer"
                 >
+                  {/* Glowing Laser Top Border on Hover / Touch */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#00e5ff] z-30" />
+
+                  {/* Diagonal Laser Light Sweep across the entire card */}
+                  <div className="pointer-events-none absolute inset-0 -translate-x-[160%] group-hover:translate-x-[260%] group-active:translate-x-[260%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent skew-x-12 z-20" />
+
                   {/* Image Preview */}
                   <div
                     className="relative aspect-video bg-[#010814] overflow-hidden cursor-pointer"
@@ -313,7 +331,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     <img
                       src={getOptimizedCover(project)}
                       alt={project.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
                       loading="lazy"
                       decoding="async"
                       referrerPolicy="no-referrer"
@@ -326,21 +344,21 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#020b18] via-black/20 to-transparent opacity-85" />
 
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-slate-950/60">
-                      <div className="w-10 h-10 rounded-full bg-cyan-500 flex items-center justify-center text-slate-950 shadow-lg">
-                        <Eye className="w-5 h-5" />
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 bg-slate-950/60 backdrop-blur-xs">
+                      <div className="w-11 h-11 rounded-full bg-cyan-400 text-slate-950 flex items-center justify-center shadow-[0_0_25px_rgba(6,182,212,0.8)] group-hover:scale-115 transition-transform">
+                        <Eye className="w-5 h-5 stroke-[2.5]" />
                       </div>
                     </div>
 
                     <div className="absolute top-2.5 left-2.5">
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-cyan-600 text-white shadow">
+                      <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md border border-cyan-400/40">
                         Behance
                       </span>
                     </div>
 
                     {project.metrics?.results && (
                       <div className="absolute bottom-2.5 right-2.5">
-                        <span className="text-[10px] font-bold text-cyan-300 bg-black/80 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-bold text-cyan-300 bg-black/80 px-2 py-0.5 rounded shadow">
                           {project.metrics.results}
                         </span>
                       </div>
@@ -348,7 +366,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-4 flex-1 flex flex-col justify-between">
+                  <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
                     <div>
                       <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors mb-1 truncate">
                         {project.title}
@@ -361,7 +379,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         {project.tags.slice(0, 2).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-cyan-300 border border-cyan-500/20"
+                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-cyan-300 border border-cyan-500/20 group-hover:border-cyan-400/40 transition-colors"
                           >
                             {tag}
                           </span>
@@ -373,9 +391,9 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     <div className="grid grid-cols-2 gap-2 mt-auto">
                       <button
                         onClick={() => onViewImage(project)}
-                        className="py-2 px-2.5 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-cyan-500/30 text-white text-xs font-semibold flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                        className="py-2.5 px-2.5 rounded-xl bg-[#051c35] hover:bg-cyan-500 hover:text-slate-950 border border-cyan-500/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-300 cursor-pointer group/rev"
                       >
-                        <Eye className="w-3 h-3 text-cyan-400" />
+                        <Eye className="w-3.5 h-3.5 text-cyan-400 group-hover/rev:text-slate-950 transition-colors" />
                         <span>Review</span>
                       </button>
                       {project.liveUrl ? (
@@ -383,15 +401,15 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                           href={project.liveUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="py-2 px-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-xs font-semibold flex items-center justify-center gap-1 transition-all"
+                          className="py-2.5 px-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-sm"
                         >
                           <span>Behance</span>
-                          <ArrowUpRight className="w-3 h-3" />
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </a>
                       ) : (
                         <button
                           onClick={() => onViewImage(project)}
-                          className="py-2 px-2.5 rounded-xl bg-[#051c35] text-white text-xs font-semibold"
+                          className="py-2.5 px-2.5 rounded-xl bg-[#051c35] text-white text-xs font-semibold"
                         >
                           Details
                         </button>
@@ -453,39 +471,48 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               {metaProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="w-[80vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-emerald-500/25 flex flex-col group transition-all hover:border-emerald-400/50"
+                  className="relative w-[82vw] sm:w-[320px] lg:w-[350px] flex-shrink-0 snap-start navy-glass-card rounded-2xl overflow-hidden border border-emerald-500/25 flex flex-col group transition-all duration-300 ease-out hover:-translate-y-2 hover:scale-[1.03] active:scale-[0.98] hover:border-emerald-300 hover:shadow-[0_14px_45px_rgba(16,185,129,0.35)] cursor-pointer"
                 >
+                  {/* Glowing Laser Top Border on Hover / Touch */}
+                  <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 shadow-[0_0_12px_#10b981] z-30" />
+
+                  {/* Diagonal Laser Light Sweep across the entire card */}
+                  <div className="pointer-events-none absolute inset-0 -translate-x-[160%] group-hover:translate-x-[260%] group-active:translate-x-[260%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-emerald-300/20 to-transparent skew-x-12 z-20" />
+
                   {/* Visual Dashboard Card */}
                   <div
                     className="relative aspect-video bg-[#010814] overflow-hidden cursor-pointer"
                     onClick={() => onViewMetaCase(project)}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#061e38] via-[#020c1a] to-[#010610] p-3.5 flex flex-col justify-between select-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#061e38] via-[#020c1a] to-[#010610] p-4 flex flex-col justify-between select-none group-hover:bg-[#082442] transition-colors duration-300">
                       <div className="relative z-10 flex items-center justify-between">
-                        <span className="text-[10px] font-bold text-sky-200 uppercase tracking-wider flex items-center gap-1 bg-sky-500/15 border border-sky-400/30 px-2 py-0.5 rounded">
+                        <span className="text-[10px] font-bold text-sky-200 uppercase tracking-wider flex items-center gap-1.5 bg-sky-500/15 border border-sky-400/30 px-2.5 py-1 rounded-full">
                           <Target className="w-3 h-3 text-sky-400" />
-                          Meta Ads
+                          <span>Meta Ads Campaign</span>
                         </span>
 
                         {project.metrics?.roas && (
-                          <span className="px-2 py-0.5 rounded text-xs font-black bg-gradient-to-r from-emerald-400 to-sky-400 text-slate-950">
+                          <span className="px-2.5 py-1 rounded-full text-xs font-black bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 text-slate-950 shadow-md group-hover:scale-110 transition-transform">
                             {project.metrics.roas}
                           </span>
                         )}
                       </div>
 
-                      {/* Sparkline Bar Visualization */}
-                      <div className="h-8 w-full flex items-end gap-1.5 px-2 py-1 rounded bg-[#010813]/80 border border-sky-500/20">
-                        <div className="flex-1 bg-sky-500/20 rounded-t h-[35%]" />
-                        <div className="flex-1 bg-sky-500/30 rounded-t h-[50%]" />
-                        <div className="flex-1 bg-sky-500/40 rounded-t h-[65%]" />
-                        <div className="flex-1 bg-sky-500/55 rounded-t h-[80%]" />
-                        <div className="flex-1 bg-emerald-500/70 rounded-t h-[92%]" />
-                        <div className="flex-1 bg-emerald-400 rounded-t h-full" />
+                      {/* Sparkline Bar Visualization with Glow on Card Hover */}
+                      <div className="h-9 w-full flex items-end gap-1.5 px-2.5 py-1 rounded-xl bg-[#010813]/90 border border-emerald-500/20 group-hover:border-emerald-400/40 transition-colors">
+                        <div className="flex-1 bg-sky-500/20 rounded-t h-[35%] group-hover:bg-sky-400/30 transition-all" />
+                        <div className="flex-1 bg-sky-500/30 rounded-t h-[50%] group-hover:bg-sky-400/40 transition-all" />
+                        <div className="flex-1 bg-sky-500/40 rounded-t h-[65%] group-hover:bg-sky-400/50 transition-all" />
+                        <div className="flex-1 bg-sky-500/55 rounded-t h-[80%] group-hover:bg-sky-400/70 transition-all" />
+                        <div className="flex-1 bg-emerald-500/70 rounded-t h-[92%] group-hover:bg-emerald-400/80 transition-all" />
+                        <div className="flex-1 bg-emerald-400 rounded-t h-full group-hover:shadow-[0_0_12px_#34d399] transition-all" />
                       </div>
 
                       <div className="flex items-center justify-between text-[11px] text-slate-300">
-                        <span>CAPI Loss-less Active</span>
+                        <span className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span>CAPI Loss-less Active</span>
+                        </span>
                         {project.metrics?.spend && (
                           <span className="font-bold text-sky-300">{project.metrics.spend}</span>
                         )}
@@ -494,9 +521,9 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-4 flex-1 flex flex-col justify-between">
+                  <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
                     <div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-sky-300 transition-colors mb-1 truncate">
+                      <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors mb-1 truncate">
                         {project.title}
                       </h4>
                       <p className="text-xs text-navy-mist line-clamp-1 mb-3">
@@ -507,7 +534,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         {project.tags.slice(0, 2).map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/20"
+                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-emerald-300 border border-emerald-500/20 group-hover:border-emerald-400/40 transition-colors"
                           >
                             {tag}
                           </span>
@@ -518,9 +545,9 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                     {/* Case Study Button */}
                     <button
                       onClick={() => onViewMetaCase(project)}
-                      className="w-full py-2 px-3 rounded-xl bg-[#051c35] hover:bg-[#0a2e58] border border-sky-500/30 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                      className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#051c35] via-[#062947] to-[#051c35] hover:from-emerald-500 hover:to-teal-400 hover:text-slate-950 border border-emerald-500/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-sm cursor-pointer group/btn"
                     >
-                      <BarChart3 className="w-3 h-3 text-sky-400" />
+                      <BarChart3 className="w-3.5 h-3.5 text-emerald-400 group-hover/btn:text-slate-950 transition-colors" />
                       <span>View Strategy & Metrics</span>
                     </button>
                   </div>

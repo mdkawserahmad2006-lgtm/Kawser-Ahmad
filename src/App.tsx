@@ -58,9 +58,15 @@ export default function App() {
           updated = true;
         }
 
-        // Update experience to 4 Months and projects to 100+
-        if (parsed.experienceYears !== '4 Months' && (parsed.experienceYears?.includes('Month') || parsed.experienceYears === '4+' || !parsed.experienceYears || parsed.experienceYears === '2+' || parsed.experienceYears === '3 Months')) {
-          parsed.experienceYears = '4 Months';
+        // Ensure official user email is always connected
+        if (parsed.email !== 'mdkawserahmad2006@gmail.com') {
+          parsed.email = 'mdkawserahmad2006@gmail.com';
+          updated = true;
+        }
+
+        // Update experience to 1 Year and projects to 100+
+        if (parsed.experienceYears !== '1 Year') {
+          parsed.experienceYears = '1 Year';
           updated = true;
         }
         if (parsed.completedProjects === '180+' || !parsed.completedProjects) {
@@ -95,13 +101,16 @@ export default function App() {
       const saved = localStorage.getItem('creative_portfolio_projects');
       if (saved) {
         const parsed: ProjectItem[] = JSON.parse(saved);
-        // Ensure official Vimeo intro promo and newly added YouTube/Behance projects are loaded
+        // Ensure official lead YouTube short, Vimeo intro promo, and Behance projects are loaded
+        const hasLeadShort = parsed.some(p => p.id === 'vid-yt-lead-short' || p.videoUrl?.includes('MZv-zuYyojk'));
+        const isLeadFirst = parsed[0]?.videoUrl?.includes('MZv-zuYyojk') || parsed[0]?.id === 'vid-yt-lead-short';
+        const isPromoWidescreen = parsed[0]?.id === 'vid-yt-lead-short' && parsed[0]?.isVertical === false;
         const hasNewYt = parsed.some(p => p.id === 'vid-yt-1' || p.videoUrl?.includes('6ynNCYfss0U'));
         const hasBehance = parsed.some(p => p.id === 'gfx-behance-1' || p.liveUrl?.includes('255212215'));
         const hasUnsplash = parsed.some(p => p.coverImage?.includes('unsplash.com'));
         const hasBehanceInMeta = parsed.some(p => p.category === 'meta' && p.coverImage && p.coverImage.includes('behance.net'));
 
-        if (!hasNewYt || !hasBehance || parsed.length < defaultProjects.length || hasUnsplash || hasBehanceInMeta) {
+        if (!hasLeadShort || !isLeadFirst || !isPromoWidescreen || !hasNewYt || !hasBehance || parsed.length < defaultProjects.length || hasUnsplash || hasBehanceInMeta) {
           localStorage.setItem('creative_portfolio_projects', JSON.stringify(defaultProjects));
           return defaultProjects;
         }
@@ -129,7 +138,15 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>('all');
 
   const handleOpenProject = (project: ProjectItem) => {
-    setReelsProject(project);
+    if (project.category === 'video') {
+      setActiveVideoProject(project);
+    } else if (project.category === 'graphics') {
+      setActiveImageProject(project);
+    } else if (project.category === 'meta') {
+      setActiveMetaProject(project);
+    } else {
+      setReelsProject(project);
+    }
   };
 
   const handleSaveProfile = (newProfile: ProfileData) => {
@@ -195,7 +212,7 @@ export default function App() {
             onOpenCustomizer={() => setIsCustomizerOpen(true)}
             onOpenResume={() => setIsResumeOpen(true)}
             onPlayPromo={() => {
-              const promoProject = projects.find(p => p.id === 'vid-promo' || p.videoUrl?.includes('1226511604')) || projects[0];
+              const promoProject = projects.find(p => p.id === 'vid-yt-lead-short' || p.videoUrl?.includes('MZv-zuYyojk')) || projects[0];
               handleOpenProject(promoProject);
             }}
             onPlayVideo={(p) => handleOpenProject(p)}

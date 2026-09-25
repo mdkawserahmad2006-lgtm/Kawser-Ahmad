@@ -14,11 +14,11 @@ export const initialProfileData: ProfileData = {
   logoSubtext: 'AHMED',
   resumeUrl: '',
   whatsappNumber: '+8801953941415',
-  email: 'mdkawserahmad.connect@gmail.com',
+  email: 'mdkawserahmad2006@gmail.com',
   phone: '+8801953941415',
   location: 'House-364, Satarkul Road, Uttar Badda, Dhaka-12',
   availableForHire: true,
-  experienceYears: '4 Months',
+  experienceYears: '1 Year',
   completedProjects: '100+',
   avgRoas: '4.6X',
   clientSatisfaction: '100%',
@@ -33,7 +33,29 @@ export const initialProfileData: ProfileData = {
 };
 
 export const defaultProjects: ProjectItem[] = [
-  // Video Editing Projects - Slot 1 (Official Vimeo Promo featured at position #1)
+  // Video Editing Projects - Slot 1: User's Premier Featured Promo Video (Position #1)
+  {
+    id: 'vid-yt-lead-short',
+    title: 'Featured Promo Video Reel',
+    category: 'video',
+    categoryLabel: 'Video Editing',
+    description: 'Cinematic promotional reel with kinetic typography, high-impact sound design, and dynamic transitions.',
+    details: 'Crafted as an official premier promo video featuring kinetic typography, custom sound design, beat synchronization, and commercial-grade visual hooks.',
+    coverImage: 'https://img.youtube.com/vi/MZv-zuYyojk/hqdefault.jpg',
+    videoUrl: 'https://youtu.be/MZv-zuYyojk',
+    embedType: 'youtube',
+    client: 'Official Promo Feature',
+    tags: ['Promo Video', 'Kinetic Typography', 'Sound Design', 'Premiere Pro'],
+    featured: true,
+    isVertical: false,
+    aspectRatio: '16:9',
+    date: '2026',
+    metrics: {
+      results: 'Official Promo',
+      impressions: '1080p Full HD'
+    }
+  },
+  // Official Vimeo Promo (Slot 2)
   {
     id: 'vid-promo',
     title: 'Showroom Intro Promo Reel',
