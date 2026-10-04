@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Play, Eye, TrendingUp, Sparkles, Film, Palette, BarChart3, PlusCircle, ArrowUpRight, ChevronLeft, ChevronRight, Target } from 'lucide-react';
 import { ProjectItem, ProjectCategory } from '../types';
 import { getOptimizedCover } from '../utils/behanceCovers';
@@ -28,9 +28,21 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   const graphicsScrollRef = useRef<HTMLDivElement>(null);
   const metaScrollRef = useRef<HTMLDivElement>(null);
 
+  // Auto-Slide control refs for user hover/touch pausing
+  const isVideoHovered = useRef(false);
+  const isVideoTouching = useRef(false);
+  const isGraphicsHovered = useRef(false);
+  const isGraphicsTouching = useRef(false);
+  const pauseVideoUntil = useRef(0);
+  const pauseGraphicsUntil = useRef(0);
+
   const scrollSlot = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
     if (ref.current) {
-      const scrollOffset = direction === 'left' ? -380 : 380;
+      if (ref === videoScrollRef) pauseVideoUntil.current = Date.now() + 4000;
+      if (ref === graphicsScrollRef) pauseGraphicsUntil.current = Date.now() + 4000;
+      const firstChild = ref.current.querySelector(':scope > div') as HTMLElement | null;
+      const step = firstChild ? firstChild.offsetWidth + 16 : 350;
+      const scrollOffset = direction === 'left' ? -step : step;
       ref.current.scrollBy({ left: scrollOffset, behavior: 'smooth' });
     }
   };
@@ -39,6 +51,50 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
   const videoProjects = projects.filter(p => p.category === 'video');
   const graphicsProjects = projects.filter(p => p.category === 'graphics');
   const metaProjects = projects.filter(p => p.category === 'meta');
+
+  // USER REQUESTED: 2-3 Second Auto-Sliding for Video Slot (Works seamlessly on PC & Phone)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (document.hidden) return;
+      if (isVideoHovered.current || isVideoTouching.current || Date.now() < pauseVideoUntil.current) return;
+      const el = videoScrollRef.current;
+      if (!el) return;
+
+      const firstChild = el.querySelector(':scope > div') as HTMLElement | null;
+      const step = firstChild ? firstChild.offsetWidth + 16 : 340;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+
+      if (el.scrollLeft >= maxScroll - 25) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, [videoProjects.length, activeCategory]);
+
+  // USER REQUESTED: 2-3 Second Auto-Sliding for Graphics Slot (Works seamlessly on PC & Phone)
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (document.hidden) return;
+      if (isGraphicsHovered.current || isGraphicsTouching.current || Date.now() < pauseGraphicsUntil.current) return;
+      const el = graphicsScrollRef.current;
+      if (!el) return;
+
+      const firstChild = el.querySelector(':scope > div') as HTMLElement | null;
+      const step = firstChild ? firstChild.offsetWidth + 16 : 320;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+
+      if (el.scrollLeft >= maxScroll - 25) {
+        el.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        el.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, 2500);
+
+    return () => clearInterval(timer);
+  }, [graphicsProjects.length, activeCategory]);
 
   const slotTabs = [
     { id: 'all' as ProjectCategory, label: t.filterAll, icon: Sparkles, count: projects.length },
@@ -134,6 +190,10 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                     <span>Md Kawser Ahmad</span>
                     <span className="text-[11px] px-2 py-0.5 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-300 font-semibold">Video Reels</span>
+                    <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-cyan-300/80 bg-sky-950/60 px-2 py-0.5 rounded-full border border-sky-500/20 font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                      <span>Auto-Slide</span>
+                    </span>
                   </h3>
                   <p className="text-[11px] text-navy-mist">Promos, commercial reels, and motion design.</p>
                 </div>
@@ -157,9 +217,13 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Video Slot Carousel */}
+            {/* Video Slot Carousel with Auto-Slide & Touch-Pause */}
             <div
               ref={videoScrollRef}
+              onMouseEnter={() => { isVideoHovered.current = true; }}
+              onMouseLeave={() => { isVideoHovered.current = false; }}
+              onTouchStart={() => { isVideoTouching.current = true; }}
+              onTouchEnd={() => { setTimeout(() => { isVideoTouching.current = false; }, 2500); }}
               className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
               style={{ scrollbarWidth: 'thin' }}
             >
@@ -283,6 +347,10 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                     <span>Md Kawser Ahmad</span>
                     <span className="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-semibold">Graphic Works</span>
+                    <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-cyan-300/80 bg-sky-950/60 px-2 py-0.5 rounded-full border border-sky-500/20 font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                      <span>Auto-Slide</span>
+                    </span>
                   </h3>
                   <p className="text-[11px] text-navy-mist">Social posts, branding, and commercial layouts.</p>
                 </div>
@@ -306,9 +374,13 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
               </div>
             </div>
 
-            {/* Graphic Design Carousel */}
+            {/* Graphic Design Carousel with Auto-Slide & Touch-Pause */}
             <div
               ref={graphicsScrollRef}
+              onMouseEnter={() => { isGraphicsHovered.current = true; }}
+              onMouseLeave={() => { isGraphicsHovered.current = false; }}
+              onTouchStart={() => { isGraphicsTouching.current = true; }}
+              onTouchEnd={() => { setTimeout(() => { isGraphicsTouching.current = false; }, 2500); }}
               className="flex overflow-x-auto pb-4 pt-1 gap-4 snap-x snap-mandatory scroll-smooth -mx-4 px-4 sm:mx-0 sm:px-0"
               style={{ scrollbarWidth: 'thin' }}
             >

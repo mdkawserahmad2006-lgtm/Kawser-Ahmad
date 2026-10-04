@@ -23,6 +23,10 @@
     <link rel="dns-prefetch" href="https://mir-s3-cdn-cf.behance.net" />
     <link rel="preconnect" href="https://img.youtube.com" crossorigin />
     <link rel="dns-prefetch" href="https://img.youtube.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" crossorigin />
+    <link rel="dns-prefetch" href="https://i.ytimg.com" />
+    <link rel="preconnect" href="https://www.youtube.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.youtube.com" />
     <link rel="preconnect" href="https://player.vimeo.com" />
     <link rel="dns-prefetch" href="https://player.vimeo.com" />
     <link rel="preconnect" href="https://i.postimg.cc" crossorigin />
@@ -35,16 +39,16 @@
 
     <!-- OpenGraph Metadata for Facebook, WhatsApp & LinkedIn Sharing -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Md Kawser Ahmad Portfolio" />
-    <meta property="og:description" content="Official portfolio of Md Kawser Ahmad (Kawser Theory) featuring showreel intro promo, video editing, graphic design, and Meta marketing campaigns." />
+    <meta property="og:title" content="Md Kawser Ahmad | Video Editor & Graphic Designer" />
+    <meta property="og:description" content="Official portfolio of Md Kawser Ahmad (Kawser Theory). Video Editor, Motion Graphic Designer & Meta Ads Specialist delivering high-retention cinematic edits." />
     <meta property="og:image" content="/profile.png" />
     <meta property="og:site_name" content="Kawser Theory Portfolio" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Md Kawser Ahmad Portfolio" />
-    <meta name="twitter:description" content="Official portfolio of Md Kawser Ahmad (Kawser Theory) featuring showreel intro promo, video editing, graphic design, and Meta marketing campaigns." />
+    <meta name="twitter:title" content="Md Kawser Ahmad | Video Editor & Graphic Designer" />
+    <meta name="twitter:description" content="Official portfolio of Md Kawser Ahmad (Kawser Theory). Video Editor, Motion Graphic Designer & Meta Ads Specialist delivering high-retention cinematic edits." />
     <meta name="twitter:image" content="/profile.png" />
 
     <!-- Fast Google Fonts Preconnect -->
@@ -56,21 +60,51 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Md Kawser Ahmad",
-      "alternateName": ["Kawser Theory", "কাওসার আহমেদ"],
-      "jobTitle": "Graphic Designer, Video Editor & Meta Marketing Specialist",
-      "image": "/profile.png",
-      "description": "Official portfolio of Md Kawser Ahmad (Kawser Theory) featuring showroom intro promo reel, cinematic video editing, graphic design, and Meta marketing campaigns.",
-      "knowsAbout": [
-        "Graphic Design",
-        "Video Editing",
-        "Meta Ads",
-        "Motion Graphics",
-        "Adobe Premiere Pro",
-        "Adobe Photoshop",
-        "Adobe Illustrator",
-        "Digital Marketing"
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://kawser-theory.vercel.app/#person",
+          "name": "Md Kawser Ahmad",
+          "alternateName": ["Kawser Theory", "কাওসার আহমেদ"],
+          "jobTitle": "Graphic Designer, Video Editor & Meta Marketing Specialist",
+          "image": "/profile.png",
+          "description": "Professional video editor and graphic designer specializing in high-retention video reels, commercial branding, and Meta marketing campaigns.",
+          "knowsAbout": [
+            "Graphic Design",
+            "Video Editing",
+            "Meta Ads",
+            "Motion Graphics",
+            "Adobe Premiere Pro",
+            "Adobe After Effects",
+            "Adobe Photoshop",
+            "Adobe Illustrator",
+            "Digital Marketing"
+          ]
+        },
+        {
+          "@type": "VideoObject",
+          "name": "Featured Promo Video Reel",
+          "description": "Cinematic promotional reel with kinetic typography, high-impact sound design, and dynamic transitions.",
+          "thumbnailUrl": "https://img.youtube.com/vi/MZv-zuYyojk/hqdefault.jpg",
+          "uploadDate": "2026-01-01",
+          "embedUrl": "https://www.youtube.com/embed/MZv-zuYyojk"
+        },
+        {
+          "@type": "VideoObject",
+          "name": "Dynamic Brand Commercial Reel",
+          "description": "Commercial promotional production featuring rapid cuts, dynamic typography, and high-impact pacing.",
+          "thumbnailUrl": "https://img.youtube.com/vi/FzU1aOqEVd0/hqdefault.jpg",
+          "uploadDate": "2026-02-01",
+          "embedUrl": "https://www.youtube.com/embed/FzU1aOqEVd0"
+        },
+        {
+          "@type": "VideoObject",
+          "name": "Cinematic Visual Narrative",
+          "description": "Engaging visual storytelling cut with atmospheric color grading, kinetic titles, and rhythm mastery.",
+          "thumbnailUrl": "https://img.youtube.com/vi/KWBKsa-lcho/hqdefault.jpg",
+          "uploadDate": "2026-03-01",
+          "embedUrl": "https://www.youtube.com/embed/KWBKsa-lcho"
+        }
       ]
     }
     </script>

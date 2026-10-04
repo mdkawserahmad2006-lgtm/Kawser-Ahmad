@@ -77,6 +77,50 @@ export const defaultProjects: ProjectItem[] = [
       impressions: '1080p HD'
     }
   },
+  // User Added YouTube Video 1: https://youtu.be/FzU1aOqEVd0 (Slot 3)
+  {
+    id: 'vid-yt-fzu1a',
+    title: 'Dynamic Brand Commercial Reel',
+    category: 'video',
+    categoryLabel: 'Video Editing',
+    description: 'Commercial promotional production featuring rapid cuts, dynamic typography, and high-impact pacing.',
+    details: 'Crafted with Premiere Pro and After Effects, featuring stylized transitions, audio-reactive sound design, and modern brand pacing.',
+    coverImage: 'https://img.youtube.com/vi/FzU1aOqEVd0/hqdefault.jpg',
+    videoUrl: 'https://youtu.be/FzU1aOqEVd0',
+    embedType: 'youtube',
+    client: 'Official YouTube Feature',
+    tags: ['YouTube Video', 'Brand Promo', 'Premiere Pro', 'Commercial'],
+    featured: true,
+    isVertical: false,
+    aspectRatio: '16:9',
+    date: '2026',
+    metrics: {
+      results: 'Commercial Edit',
+      impressions: '1080p Full HD'
+    }
+  },
+  // User Added YouTube Video 2: https://youtu.be/KWBKsa-lcho (Slot 4)
+  {
+    id: 'vid-yt-kwbks',
+    title: 'Cinematic Visual Narrative',
+    category: 'video',
+    categoryLabel: 'Video Editing',
+    description: 'Engaging visual storytelling cut with atmospheric color grading, kinetic titles, and rhythm mastery.',
+    details: 'Narrative storytelling edit engineered for maximum audience retention with custom motion graphics, sound mastering, and cinematic color correction.',
+    coverImage: 'https://img.youtube.com/vi/KWBKsa-lcho/hqdefault.jpg',
+    videoUrl: 'https://youtu.be/KWBKsa-lcho',
+    embedType: 'youtube',
+    client: 'Official YouTube Feature',
+    tags: ['YouTube Video', 'Visual Story', 'Cinematic', 'Motion Graphics'],
+    featured: true,
+    isVertical: false,
+    aspectRatio: '16:9',
+    date: '2026',
+    metrics: {
+      results: 'Narrative Reel',
+      impressions: '1080p Full HD'
+    }
+  },
   {
     id: 'vid-yt-1',
     title: 'Commercial Brand Reel',
