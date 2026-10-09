@@ -14,6 +14,7 @@ import { ResumeModal } from './components/ResumeModal';
 import { WatermarkBackdrop } from './components/WatermarkBackdrop';
 import { ReelsFeedModal } from './components/ReelsFeedModal';
 import { InteractiveAmbientLighting } from './components/InteractiveAmbientLighting';
+import { StickmanParkourCrew } from './components/StickmanParkourCrew';
 import { initialProfileData, defaultProjects } from './data/defaultData';
 import { ProfileData, ProjectItem, ProjectCategory } from './types';
 import { getOptimizedCover } from './utils/behanceCovers';
@@ -245,6 +246,9 @@ export default function App() {
 
         {/* Footer */}
         <Footer profile={profile} />
+
+        {/* 3 Interactive Puppets / Stickmen Parkour Crew (undercoveritfirm style) */}
+        <StickmanParkourCrew />
 
         {/* Mobile Floating Quick Action Pill */}
         <aside
