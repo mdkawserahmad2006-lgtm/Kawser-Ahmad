@@ -35,22 +35,10 @@ export const Footer: React.FC<FooterProps> = ({ profile }) => {
                 }}
               />
             </div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-bold text-white text-sm tracking-wider">KAWSER THEORY</span>
-              <span className="text-[10px] text-sky-400 font-medium">(কাওসার থিওরি)</span>
-            </div>
+            <span className="font-bold text-white text-sm tracking-wider">KAWSER THEORY</span>
           </div>
           <span className="hidden sm:inline text-sky-900">•</span>
           <p>© {new Date().getFullYear()} {profile.name}. {t.allRightsReserved}</p>
-        </div>
-
-        {/* Center Specialties */}
-        <div className="flex items-center gap-3 text-[11px] text-cyan-400/90 font-medium">
-          <span>{t.pillarGraphicsTitle}</span>
-          <span>•</span>
-          <span>{t.pillarVideoTitle}</span>
-          <span>•</span>
-          <span>{t.pillarMetaTitle}</span>
         </div>
 
         {/* Back to Top */}

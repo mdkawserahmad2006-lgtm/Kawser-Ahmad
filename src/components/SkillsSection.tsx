@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Palette, Film, TrendingUp, Sparkles, PenTool, Globe, CheckCircle2, Cpu } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { skillCategories } from '../data/defaultData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -81,17 +81,10 @@ export const SkillsSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Minimal Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2.5">
-            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{t.skillsBadge}</span>
-          </div>
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             {t.skillsTitle}
           </h2>
-          <p className="text-navy-mist text-xs sm:text-sm mt-1.5">
-            {t.skillsSubtitle}
-          </p>
         </div>
 
         {/* 6 Hard Skills Grid (Adobe Premiere Pro, After Effects, Photoshop, Illustrator, Meta, Digital) */}
@@ -160,14 +153,8 @@ export const SkillsSection: React.FC = () => {
 
                 <div className="relative z-10">
                   {/* Top Header Row with Evolving Adobe App Launcher */}
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3.5">
+                  <div className="flex items-center gap-3.5 mb-4">
                       
-                      {/* 
-                        USER REQUESTED ADOBE APP LAUNCHER:
-                        "যেগুলো আমার অ্যাডোবির অ্যাপগুলো আছে, এগুলোতে যাতে কার্সার যখন কেউ শো করবে, তখন এটা যাতে এখানে একটা অ্যাডোবির অ্যাপ শো করে... 
-                        যাতে করে অ্যাপগুলো যেটাতে কার্সার যাবে, সেটা থেকে অ্যাপটা বের হয়ে অন্য জায়গায় চলে যাবে এবং যখন কার্সার সরিয়ে নিবে, তখন আবার সেই জায়গায় অ্যাপটা আবার পুনরায় চলে আসবে।"
-                      */}
                       <div className="relative flex-shrink-0">
                         {/* Vertical Energy Laser Trail beneath floating app */}
                         <div
@@ -185,7 +172,7 @@ export const SkillsSection: React.FC = () => {
                           }`}
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
-                          <span>{app.fullName} Active</span>
+                          <span>{app.fullName}</span>
                         </div>
 
                         {/* The Official Adobe App Box that launches out and flies above the card */}
@@ -217,23 +204,11 @@ export const SkillsSection: React.FC = () => {
                           {group.badge}
                         </span>
                       </div>
-                    </div>
-
-                    {/* Live Activity Pulse Indicator */}
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#020d1c] border border-sky-500/30 shadow-sm">
-                      <span className="relative flex h-2 w-2">
-                        <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${pulseDotColor} opacity-75`} />
-                        <span className={`relative inline-flex rounded-full h-2 w-2 ${pulseDotColor}`} />
-                      </span>
-                      <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-300">
-                        {isHovered ? 'Launched' : 'Ready'}
-                      </span>
-                    </div>
                   </div>
 
-                  {/* Capabilities List (Animated & Interactive) */}
-                  <div className="space-y-2 mb-4 pt-2.5 border-t border-sky-500/15">
-                    {group.capabilities.map((cap, capIdx) => (
+                  {/* Concise Capabilities List */}
+                  <div className="space-y-2 pt-3 border-t border-sky-500/15">
+                    {group.capabilities.slice(0, 3).map((cap, capIdx) => (
                       <div key={capIdx} className="flex items-start gap-2.5 text-xs group/item">
                         <CheckCircle2 className={`w-3.5 h-3.5 ${accentColor} flex-shrink-0 mt-0.5 group-hover:scale-115 transition-transform duration-200`} />
                         <span className="text-slate-200 text-xs leading-snug group-hover:text-white transition-colors">
@@ -243,20 +218,6 @@ export const SkillsSection: React.FC = () => {
                     ))}
                   </div>
                 </div>
-
-                {/* Compact Tools Row with Interactive Pills */}
-                {group.tools && group.tools.length > 0 && (
-                  <div className="relative z-10 pt-3 border-t border-sky-500/15 flex flex-wrap gap-1.5">
-                    {group.tools.map((tool, toolIdx) => (
-                      <span
-                        key={toolIdx}
-                        className="px-2.5 py-0.5 text-[10px] font-medium rounded-md bg-[#031426] text-sky-300 border border-sky-500/25 hover:border-cyan-400 hover:text-white hover:scale-105 transition-all cursor-default shadow-sm"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             );
           })}

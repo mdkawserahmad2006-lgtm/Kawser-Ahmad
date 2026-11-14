@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GraduationCap, Award, CheckCircle2, BookOpen, Book, Sparkles } from 'lucide-react';
+import { Award, CheckCircle2, BookOpen, Book, Sparkles } from 'lucide-react';
 import { educationList } from '../data/defaultData';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -15,17 +15,10 @@ export const EducationSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Minimal Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#072548] border border-sky-500/30 text-sky-300 text-xs font-semibold mb-2.5">
-            <GraduationCap className="w-3.5 h-3.5 text-sky-400" />
-            <span>{t.educationBadge}</span>
-          </div>
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             {t.educationTitle}
           </h2>
-          <p className="text-navy-mist text-xs sm:text-sm mt-1.5">
-            {t.educationSubtitle}
-          </p>
         </div>
 
         {/* Education 3-Card Grid */}
@@ -51,14 +44,8 @@ export const EducationSection: React.FC = () => {
                 </div>
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <div className="flex items-center gap-3.5">
+                  <div className="flex items-center gap-3.5 mb-4">
                       
-                      {/* 
-                        USER REQUESTED: BOOK / CERTIFICATE LAUNCHER & OPENING ANIMATION
-                        "আমার এডুকেশনের ওইখানে তুমি যে বুকগুলা দেখাইছো আইকন হিসেবে, এগুলাও সেম ওই অ্যাপগুলোর মতো এখানে আসবে। 
-                        যখন কেউ এটাতে আসবে তখন সেটা উপরে গিয়ে খুলে যাবে। বুকটা এখান থেকে উপরে গিয়ে খুলে যাবে এবং কার্সার সরিয়ে নিলে আবার তার ঠিক জায়গায় চলে আসবে।"
-                      */}
                       <div className="relative flex-shrink-0">
                         {/* Vertical Energy Laser Trail beneath floating book */}
                         <div
@@ -76,7 +63,7 @@ export const EducationSection: React.FC = () => {
                           }`}
                         >
                           <Sparkles className="w-3 h-3 text-cyan-300 animate-spin" />
-                          <span>{isCertification ? 'Certification Unlocked' : 'Study Curriculum Opened'}</span>
+                          <span>{isCertification ? 'Certified' : 'Opened'}</span>
                         </div>
 
                         {/* The Flying Book / Award Box that launches out and opens up */}
@@ -126,18 +113,6 @@ export const EducationSection: React.FC = () => {
                         </h3>
                         <p className="text-xs text-sky-400 font-medium mt-0.5">{item.institution}</p>
                       </div>
-                    </div>
-
-                    {/* Status indicator */}
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#020d1c] border border-sky-500/30 shadow-sm flex-shrink-0">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-400" />
-                      </span>
-                      <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-300">
-                        {isHovered ? 'Opened' : 'Verified'}
-                      </span>
-                    </div>
                   </div>
 
                   <div className="mb-3">
@@ -146,14 +121,8 @@ export const EducationSection: React.FC = () => {
                     </span>
                   </div>
 
-                  {item.description && (
-                    <p className="text-xs text-navy-mist leading-relaxed mb-3.5">
-                      {item.description}
-                    </p>
-                  )}
-
                   {item.learnings && (
-                    <div className="space-y-2 mb-4 pt-2.5 border-t border-sky-500/15">
+                    <div className="space-y-1.5 mb-3 pt-2.5 border-t border-sky-500/15">
                       {item.learnings.map((lrn, lrnIdx) => (
                         <div key={lrnIdx} className="flex items-center gap-2 text-xs">
                           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 group-hover:scale-110 transition-transform" />
@@ -167,10 +136,7 @@ export const EducationSection: React.FC = () => {
                 <div className="relative z-10 pt-3 border-t border-sky-500/15 flex items-center justify-between">
                   <span className="text-[11px] text-sky-300/90 font-medium">{item.badge}</span>
                   {item.verified && (
-                    <div className="flex items-center gap-1.5 text-[10px] font-bold text-emerald-300 bg-emerald-950/60 px-2.5 py-1 rounded-full border border-emerald-500/30 shadow-sm">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                      <span>Verified Credential</span>
-                    </div>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   )}
                 </div>
               </div>

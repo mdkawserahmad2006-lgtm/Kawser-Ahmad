@@ -117,20 +117,11 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#072448] border border-sky-500/30 text-sky-300 text-xs font-semibold mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-sky-400" />
-              <span>{t.portfolioWorks}</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
-              <span className="text-white">{t.featured} </span>
-              <span className="text-gradient-cyan-teal">{t.projects}</span>
-            </h2>
-            <p className="text-navy-mist text-xs sm:text-sm mt-1 max-w-xl">
-              {t.portfolioSubtitle}
-            </p>
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-4">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+            <span className="text-white">{t.featured} </span>
+            <span className="text-gradient-cyan-teal">{t.projects}</span>
+          </h2>
 
           {/* Quick Action Button */}
           <div className="flex items-center gap-3">
@@ -178,25 +169,17 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'video') && (
           <div id="slot-video" className="mb-14 animate-in fade-in duration-300">
-            {/* Slot Header with Carousel Controls: Logo on LEFT, Name on SIDE */}
+            {/* Slot Header with Carousel Controls */}
             <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
               <div className="flex items-center gap-3">
                 <img
                   src="/profile.png"
                   alt="Md Kawser Ahmad"
-                  className="w-10 h-10 rounded-full border border-sky-400/60 object-cover shadow-sm flex-shrink-0"
+                  className="w-9 h-9 rounded-full border border-sky-400/60 object-cover shadow-sm flex-shrink-0"
                 />
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                    <span>Md Kawser Ahmad</span>
-                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-sky-500/20 border border-sky-400/40 text-sky-300 font-semibold">Video Reels</span>
-                    <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-cyan-300/80 bg-sky-950/60 px-2 py-0.5 rounded-full border border-sky-500/20 font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                      <span>Auto-Slide</span>
-                    </span>
-                  </h3>
-                  <p className="text-[11px] text-navy-mist">Promos, commercial reels, and motion design.</p>
-                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                  <span>{t.filterVideos}</span>
+                </h3>
               </div>
 
               <div className="flex items-center gap-1.5">
@@ -266,54 +249,18 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       </div>
                     </div>
 
-                    {/* Badge: Logo on LEFT, Name on SIDE */}
-                    <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/20 shadow">
-                      <img
-                        src="/profile.png"
-                        alt="Md Kawser Ahmad"
-                        className="w-3.5 h-3.5 rounded-full object-cover border border-sky-400/60"
-                      />
-                      <span className="text-[10px] font-bold text-white tracking-wide">
-                        Kawser Theory • {project.id === 'vid-yt-lead-short' ? 'Featured Promo' : project.id === 'vid-promo' ? 'Promo Reel' : 'Reel'}
-                      </span>
-                    </div>
-
                     {project.isVertical && (
                       <div className="absolute top-2.5 right-2.5 flex items-center gap-1 px-2 py-0.5 rounded-full bg-sky-500/30 border border-sky-400/50 text-[9px] font-bold text-sky-200 backdrop-blur-sm">
                         <span>Short</span>
                       </div>
                     )}
-
-                    {project.metrics?.results && (
-                      <div className="absolute bottom-2.5 right-2.5">
-                        <span className="text-[10px] font-bold text-emerald-300 bg-black/80 px-2 py-0.5 rounded shadow">
-                          {project.metrics.results}
-                        </span>
-                      </div>
-                    )}
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
-                    <div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors mb-1 truncate">
-                        {project.title}
-                      </h4>
-                      <p className="text-xs text-navy-mist line-clamp-1 mb-3">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {project.tags.slice(0, 2).map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-sky-300 border border-sky-500/20 group-hover:border-cyan-400/40 transition-colors"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                  <div className="p-4 flex-1 flex flex-col justify-between gap-3 relative z-10">
+                    <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
+                      {project.title}
+                    </h4>
 
                     {/* Direct Watch Button */}
                     <button
@@ -321,7 +268,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#051c35] via-[#07284d] to-[#051c35] hover:from-sky-500 hover:to-cyan-400 hover:text-slate-950 border border-sky-500/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-sm cursor-pointer group/btn"
                     >
                       <Play className="w-3.5 h-3.5 fill-current text-sky-400 group-hover/btn:text-slate-950 transition-colors" />
-                      <span>Watch Full Video</span>
+                      <span>Watch</span>
                     </button>
                   </div>
                 </div>
@@ -335,25 +282,17 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'graphics') && (
           <div id="slot-graphics" className="mb-14 animate-in fade-in duration-300">
-            {/* Slot Header with Carousel Controls: Logo on LEFT, Name on SIDE */}
+            {/* Slot Header with Carousel Controls */}
             <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
               <div className="flex items-center gap-3">
                 <img
                   src="/profile.png"
                   alt="Md Kawser Ahmad"
-                  className="w-10 h-10 rounded-full border border-cyan-400/60 object-cover shadow-sm flex-shrink-0"
+                  className="w-9 h-9 rounded-full border border-cyan-400/60 object-cover shadow-sm flex-shrink-0"
                 />
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                    <span>Md Kawser Ahmad</span>
-                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 font-semibold">Graphic Works</span>
-                    <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-cyan-300/80 bg-sky-950/60 px-2 py-0.5 rounded-full border border-sky-500/20 font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                      <span>Auto-Slide</span>
-                    </span>
-                  </h3>
-                  <p className="text-[11px] text-navy-mist">Social posts, branding, and commercial layouts.</p>
-                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                  <span>{t.filterGraphics}</span>
+                </h3>
               </div>
 
               <div className="flex items-center gap-1.5">
@@ -421,43 +360,13 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                         <Eye className="w-5 h-5 stroke-[2.5]" />
                       </div>
                     </div>
-
-                    <div className="absolute top-2.5 left-2.5">
-                      <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md border border-cyan-400/40">
-                        Behance
-                      </span>
-                    </div>
-
-                    {project.metrics?.results && (
-                      <div className="absolute bottom-2.5 right-2.5">
-                        <span className="text-[10px] font-bold text-cyan-300 bg-black/80 px-2 py-0.5 rounded shadow">
-                          {project.metrics.results}
-                        </span>
-                      </div>
-                    )}
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
-                    <div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors mb-1 truncate">
-                        {project.title}
-                      </h4>
-                      <p className="text-xs text-navy-mist line-clamp-1 mb-3">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {project.tags.slice(0, 2).map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-cyan-300 border border-cyan-500/20 group-hover:border-cyan-400/40 transition-colors"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                  <div className="p-4 flex-1 flex flex-col justify-between gap-3 relative z-10">
+                    <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors truncate">
+                      {project.title}
+                    </h4>
 
                     {/* Action Buttons */}
                     <div className="grid grid-cols-2 gap-2 mt-auto">
@@ -499,21 +408,17 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
         {/* ========================================================================= */}
         {(activeCategory === 'all' || activeCategory === 'meta') && (
           <div id="slot-meta" className="animate-in fade-in duration-300">
-            {/* Slot Header with Carousel Controls: Logo on LEFT, Name on SIDE */}
+            {/* Slot Header with Carousel Controls */}
             <div className="flex items-center justify-between pb-3 mb-5 border-b border-sky-500/20">
               <div className="flex items-center gap-3">
                 <img
                   src="/profile.png"
                   alt="Md Kawser Ahmad"
-                  className="w-10 h-10 rounded-full border border-emerald-400/60 object-cover shadow-sm flex-shrink-0"
+                  className="w-9 h-9 rounded-full border border-emerald-400/60 object-cover shadow-sm flex-shrink-0"
                 />
-                <div>
-                  <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
-                    <span>Md Kawser Ahmad</span>
-                    <span className="text-[11px] px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-semibold">Meta Campaigns</span>
-                  </h3>
-                  <p className="text-[11px] text-navy-mist">Campaign architecture, CAPI tracking, and scaling.</p>
-                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                  <span>{t.filterMeta}</span>
+                </h3>
               </div>
 
               <div className="flex items-center gap-1.5">
@@ -593,26 +498,10 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                   </div>
 
                   {/* Card Content */}
-                  <div className="p-4 flex-1 flex flex-col justify-between relative z-10">
-                    <div>
-                      <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors mb-1 truncate">
-                        {project.title}
-                      </h4>
-                      <p className="text-xs text-navy-mist line-clamp-1 mb-3">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {project.tags.slice(0, 2).map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-[#06203d] text-emerald-300 border border-emerald-500/20 group-hover:border-emerald-400/40 transition-colors"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                  <div className="p-4 flex-1 flex flex-col justify-between gap-3 relative z-10">
+                    <h4 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors truncate">
+                      {project.title}
+                    </h4>
 
                     {/* Case Study Button */}
                     <button
@@ -620,7 +509,7 @@ export const PortfolioShowcase: React.FC<PortfolioShowcaseProps> = ({
                       className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#051c35] via-[#062947] to-[#051c35] hover:from-emerald-500 hover:to-teal-400 hover:text-slate-950 border border-emerald-500/30 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-300 shadow-sm cursor-pointer group/btn"
                     >
                       <BarChart3 className="w-3.5 h-3.5 text-emerald-400 group-hover/btn:text-slate-950 transition-colors" />
-                      <span>View Strategy & Metrics</span>
+                      <span>View Case Study</span>
                     </button>
                   </div>
                 </div>

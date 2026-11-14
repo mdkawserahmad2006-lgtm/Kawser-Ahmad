@@ -96,16 +96,9 @@ Sent via Kawser Theory Portfolio`;
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2">
-            <MessageCircle className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{t.contactBadge}</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
             <span className="text-white">{t.contactTitle}</span>
           </h2>
-          <p className="text-navy-mist text-xs sm:text-sm mt-1">
-            {t.contactSubtitle}
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -176,13 +169,7 @@ Sent via Kawser Theory Portfolio`;
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-base font-bold text-white group-hover:text-cyan-200 transition-colors">Official Direct Email</h3>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-500/20 text-sky-300 border border-sky-400/30">
-                      Primary
-                    </span>
-                  </div>
-                  <p className="text-xs text-navy-mist">Direct hiring, briefs & contract inquiries</p>
+                  <h3 className="text-base font-bold text-white group-hover:text-cyan-200 transition-colors">Direct Email</h3>
                 </div>
               </div>
 
@@ -286,7 +273,6 @@ Sent via Kawser Theory Portfolio`;
 
                 <div>
                   <h3 className="text-base font-bold text-white group-hover:text-emerald-200 transition-colors">Direct WhatsApp</h3>
-                  <p className="text-xs text-navy-mist">Fastest response for urgent projects & quotes</p>
                 </div>
               </div>
 
@@ -314,9 +300,6 @@ Sent via Kawser Theory Portfolio`;
                 <Phone className="w-4 h-4 text-sky-400 flex-shrink-0" />
                 <span className="text-navy-ice">{profile.phone}</span>
               </div>
-              <div className="pt-2 border-t border-cyan-500/20 text-[11px] text-navy-steel">
-                * Open for remote client contracts, agency partnerships, and worldwide freelance projects.
-              </div>
             </div>
 
           </div>
@@ -326,17 +309,8 @@ Sent via Kawser Theory Portfolio`;
             <div className="navy-glass-card rounded-3xl p-6 sm:p-8 border border-cyan-500/30 relative overflow-hidden">
               
               {/* Header inside form */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
-                <div>
-                  <h3 className="text-xl font-bold text-navy-ice">Send a Direct Inquiry</h3>
-                  <p className="text-xs text-navy-mist mt-0.5">
-                    Connects directly to <span className="text-sky-300 font-semibold">{targetEmail}</span> or WhatsApp
-                  </p>
-                </div>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/30 text-sky-300 text-[11px] font-semibold self-start sm:self-auto">
-                  <Mail className="w-3 h-3 text-sky-400" />
-                  <span>Email & WhatsApp Linked</span>
-                </div>
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-navy-ice">Send a Direct Inquiry</h3>
               </div>
 
               {submitted ? (
@@ -474,7 +448,7 @@ Sent via Kawser Theory Portfolio`;
                       className="w-full py-3.5 px-6 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-cyan-400 via-sky-400 to-teal-400 hover:from-cyan-300 hover:to-teal-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
                     >
                       <Mail className="w-4 h-4" />
-                      <span>{t.contactSendEmailBtn} ({targetEmail})</span>
+                      <span>{t.contactSendEmailBtn}</span>
                     </button>
 
                     {/* Secondary Row: WhatsApp & Gmail Web */}

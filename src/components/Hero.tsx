@@ -120,15 +120,10 @@ export const Hero: React.FC<HeroProps> = ({
                   {/* Gradient Vignette at bottom */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#020e18] via-transparent to-transparent opacity-85" />
 
-                  {/* Floating Action Pill: Status */}
-                  <div className="absolute bottom-3 left-3 right-3 bg-[#031326]/90 backdrop-blur-md rounded-xl p-2.5 border border-sky-500/25 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                      <span className="text-xs font-semibold text-white">{t.availableBadge}</span>
-                    </div>
-                    <span className="text-[10px] font-bold text-sky-300 bg-[#06203d] px-2 py-0.5 rounded border border-sky-500/35">
-                      {t.directChatBadge}
-                    </span>
+                  {/* Floating Status Pill */}
+                  <div className="absolute bottom-3 left-3 right-3 bg-[#031326]/90 backdrop-blur-md rounded-xl p-2.5 border border-sky-500/25 flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                    <span className="text-xs font-semibold text-white">{t.availableBadge}</span>
                   </div>
                 </div>
 
@@ -147,10 +142,7 @@ export const Hero: React.FC<HeroProps> = ({
 
                 {/* Profile Card Bottom Info */}
                 <div className="mt-3 pt-3 border-t border-sky-950/80 flex items-center justify-between">
-                  <div>
-                    <h3 className="text-sm font-bold text-white tracking-wide">{profile.name}</h3>
-                    <p className="text-[11px] text-sky-400 font-medium">Video • Graphics • Meta Ads</p>
-                  </div>
+                  <h3 className="text-sm font-bold text-white tracking-wide">{profile.name}</h3>
                   <button
                     onClick={onOpenCustomizer}
                     className="text-sky-400 hover:text-sky-300 font-medium text-[11px] underline cursor-pointer"
@@ -177,7 +169,6 @@ export const Hero: React.FC<HeroProps> = ({
                     <div className="text-base sm:text-lg font-black text-[#00e5ff] tracking-tight">
                       {t.statExperienceValue || profile.experienceYears || '1 Year'}
                     </div>
-                    <span className="text-[9px] text-cyan-200/60 font-medium">Professional</span>
                   </div>
 
                   {/* Stat 2: Completed Projects */}
@@ -193,7 +184,6 @@ export const Hero: React.FC<HeroProps> = ({
                     <div className="text-base sm:text-lg font-black text-white group-hover:text-cyan-200 transition-colors tracking-tight">
                       {profile.completedProjects}
                     </div>
-                    <span className="text-[9px] text-sky-300/60 font-medium">Delivered</span>
                   </div>
 
                   {/* Stat 3: Average ROAS */}
@@ -209,7 +199,6 @@ export const Hero: React.FC<HeroProps> = ({
                     <div className="text-base sm:text-lg font-black text-emerald-400 tracking-tight">
                       {profile.avgRoas}
                     </div>
-                    <span className="text-[9px] text-emerald-300/60 font-medium">Campaign Avg</span>
                   </div>
 
                   {/* Stat 4: Client Satisfaction */}
@@ -225,7 +214,6 @@ export const Hero: React.FC<HeroProps> = ({
                     <div className="text-base sm:text-lg font-black text-amber-400 tracking-tight">
                       {profile.clientSatisfaction}
                     </div>
-                    <span className="text-[9px] text-amber-300/60 font-medium">Rating</span>
                   </div>
                 </div>
 
@@ -236,12 +224,6 @@ export const Hero: React.FC<HeroProps> = ({
           {/* RIGHT SIDE: Concise Info, Specialties, Modern CTAs & Large Previews */}
           <div id="hero-right-documents" className="lg:col-span-7 flex flex-col items-start text-left order-2">
             
-            {/* Minimal Availability Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span>{t.availableBadge}</span>
-            </div>
-
             {/* Main Greeting & Name */}
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-3">
               <span className="block text-sky-400 text-base sm:text-lg font-medium mb-1">
@@ -254,10 +236,7 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Dynamic Typewriter Roles (User Requested: Graphic Designer, Video Editor, Meta Marketer one by one) */}
             <div className="flex items-center flex-wrap gap-2 mb-5 min-h-[42px] px-3.5 py-1.5 rounded-2xl bg-gradient-to-r from-[#031d3b]/90 via-[#03162b]/70 to-transparent border border-sky-500/30 shadow-lg">
-              <span className="text-sky-300 text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>{language === 'bn' ? 'স্পেশালিস্ট:' : language === 'ar' ? 'متخصص في:' : 'Specialized in:'}</span>
-              </span>
+              <Sparkles className="w-4 h-4 text-cyan-400" />
               <span className="text-base sm:text-xl lg:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00e5ff] via-sky-300 to-cyan-300 tracking-wide">
                 {displayText}
               </span>
@@ -275,27 +254,17 @@ export const Hero: React.FC<HeroProps> = ({
                 }}
                 className="relative group overflow-hidden rounded-2xl p-3 sm:p-3.5 bg-gradient-to-b from-[#07192f]/90 via-[#041224]/95 to-[#020b16] border border-sky-500/30 hover:border-sky-400 hover:ring-1 hover:ring-sky-400/50 hover:shadow-[0_0_35px_rgba(56,189,248,0.45),0_12px_24px_rgba(2,132,199,0.3)] transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1.5 active:scale-95 flex flex-col items-start cursor-pointer"
               >
-                {/* Top Lens-flare Laser Line */}
                 <span className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-60 group-hover:opacity-100 group-hover:via-cyan-300 transition-opacity duration-300" />
-                
-                {/* Ambient Radial Backlight Glow */}
                 <span className="absolute inset-0 bg-radial from-sky-400/25 via-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
 
-                <div className="relative w-full flex items-center justify-between mb-2">
-                  <div className="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-sky-500/15 border border-sky-400/35 flex items-center justify-center text-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.25)] group-hover:bg-sky-400 group-hover:text-slate-950 group-hover:shadow-[0_0_18px_rgba(56,189,248,0.6)] group-hover:scale-110 transition-all duration-300">
-                    <Film className="w-4 h-4" />
-                  </div>
-                  <span className="text-[9px] font-black tracking-wider px-1.5 py-0.5 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-300 group-hover:bg-sky-400 group-hover:text-slate-950 transition-colors">
-                    4K REELS
-                  </span>
+                <div className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-sky-500/15 border border-sky-400/35 flex items-center justify-center text-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.25)] group-hover:bg-sky-400 group-hover:text-slate-950 group-hover:shadow-[0_0_18px_rgba(56,189,248,0.6)] group-hover:scale-110 transition-all duration-300 mb-2">
+                  <Film className="w-4 h-4" />
                 </div>
 
-                <h2 className="relative text-xs sm:text-sm font-bold text-white group-hover:text-sky-300 transition-colors tracking-tight">
-                  {t.pillarVideoTitle}
+                <h2 className="relative text-xs sm:text-sm font-bold text-white group-hover:text-sky-300 transition-colors tracking-tight flex items-center gap-1">
+                  <span>{t.pillarVideoTitle}</span>
+                  <ArrowRight className="w-3 h-3 text-sky-400 group-hover:translate-x-1 transition-transform duration-300" />
                 </h2>
-                <span className="relative text-[10px] text-navy-mist group-hover:text-sky-200 mt-0.5 flex items-center gap-1 transition-colors">
-                  {t.pillarVideoSub} <ArrowRight className="w-2.5 h-2.5 text-sky-400 group-hover:translate-x-1.5 transition-transform duration-300" />
-                </span>
               </a>
 
               {/* Pillar 2: Cinematic Graphic Design */}
@@ -307,27 +276,17 @@ export const Hero: React.FC<HeroProps> = ({
                 }}
                 className="relative group overflow-hidden rounded-2xl p-3 sm:p-3.5 bg-gradient-to-b from-[#150a26]/90 via-[#0d071c]/95 to-[#04020a] border border-purple-500/30 hover:border-purple-400 hover:ring-1 hover:ring-purple-400/50 hover:shadow-[0_0_35px_rgba(168,85,247,0.45),0_12px_24px_rgba(147,51,234,0.3)] transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1.5 active:scale-95 flex flex-col items-start cursor-pointer"
               >
-                {/* Top Lens-flare Laser Line */}
                 <span className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-60 group-hover:opacity-100 group-hover:via-fuchsia-300 transition-opacity duration-300" />
-                
-                {/* Ambient Radial Backlight Glow */}
                 <span className="absolute inset-0 bg-radial from-purple-500/25 via-fuchsia-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
 
-                <div className="relative w-full flex items-center justify-between mb-2">
-                  <div className="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-purple-500/15 border border-purple-400/35 flex items-center justify-center text-purple-400 shadow-[0_0_12px_rgba(168,85,247,0.25)] group-hover:bg-purple-400 group-hover:text-slate-950 group-hover:shadow-[0_0_18px_rgba(168,85,247,0.6)] group-hover:scale-110 transition-all duration-300">
-                    <Palette className="w-4 h-4" />
-                  </div>
-                  <span className="text-[9px] font-black tracking-wider px-1.5 py-0.5 rounded-full bg-purple-500/15 border border-purple-400/30 text-purple-300 group-hover:bg-purple-400 group-hover:text-slate-950 transition-colors">
-                    CREATIVE
-                  </span>
+                <div className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-purple-500/15 border border-purple-400/35 flex items-center justify-center text-purple-400 shadow-[0_0_12px_rgba(168,85,247,0.25)] group-hover:bg-purple-400 group-hover:text-slate-950 group-hover:shadow-[0_0_18px_rgba(168,85,247,0.6)] group-hover:scale-110 transition-all duration-300 mb-2">
+                  <Palette className="w-4 h-4" />
                 </div>
 
-                <h2 className="relative text-xs sm:text-sm font-bold text-white group-hover:text-purple-300 transition-colors tracking-tight">
-                  {t.pillarGraphicsTitle}
+                <h2 className="relative text-xs sm:text-sm font-bold text-white group-hover:text-purple-300 transition-colors tracking-tight flex items-center gap-1">
+                  <span>{t.pillarGraphicsTitle}</span>
+                  <ArrowRight className="w-3 h-3 text-purple-400 group-hover:translate-x-1 transition-transform duration-300" />
                 </h2>
-                <span className="relative text-[10px] text-navy-mist group-hover:text-purple-200 mt-0.5 flex items-center gap-1 transition-colors">
-                  {t.pillarGraphicsSub} <ArrowRight className="w-2.5 h-2.5 text-purple-400 group-hover:translate-x-1.5 transition-transform duration-300" />
-                </span>
               </a>
 
               {/* Pillar 3: Cinematic Meta Marketing */}
@@ -339,34 +298,19 @@ export const Hero: React.FC<HeroProps> = ({
                 }}
                 className="relative group overflow-hidden rounded-2xl p-3 sm:p-3.5 bg-gradient-to-b from-[#06241e]/90 via-[#031713]/95 to-[#010c09] border border-emerald-500/30 hover:border-emerald-400 hover:ring-1 hover:ring-emerald-400/50 hover:shadow-[0_0_35px_rgba(16,185,129,0.45),0_12px_24px_rgba(13,148,136,0.3)] transition-all duration-300 ease-out hover:scale-105 hover:-translate-y-1.5 active:scale-95 flex flex-col items-start cursor-pointer"
               >
-                {/* Top Lens-flare Laser Line */}
                 <span className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-60 group-hover:opacity-100 group-hover:via-teal-300 transition-opacity duration-300" />
-                
-                {/* Ambient Radial Backlight Glow */}
                 <span className="absolute inset-0 bg-radial from-emerald-500/25 via-teal-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
 
-                <div className="relative w-full flex items-center justify-between mb-2">
-                  <div className="w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-emerald-500/15 border border-emerald-400/35 flex items-center justify-center text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)] group-hover:bg-emerald-400 group-hover:text-slate-950 group-hover:shadow-[0_0_18px_rgba(16,185,129,0.6)] group-hover:scale-110 transition-all duration-300">
-                    <TrendingUp className="w-4 h-4" />
-                  </div>
-                  <span className="text-[9px] font-black tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 group-hover:bg-emerald-400 group-hover:text-slate-950 transition-colors">
-                    ROAS
-                  </span>
+                <div className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl bg-emerald-500/15 border border-emerald-400/35 flex items-center justify-center text-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.25)] group-hover:bg-emerald-400 group-hover:text-slate-950 group-hover:shadow-[0_0_18px_rgba(16,185,129,0.6)] group-hover:scale-110 transition-all duration-300 mb-2">
+                  <TrendingUp className="w-4 h-4" />
                 </div>
 
-                <h2 className="relative text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors tracking-tight">
-                  {t.pillarMetaTitle}
+                <h2 className="relative text-xs sm:text-sm font-bold text-white group-hover:text-emerald-300 transition-colors tracking-tight flex items-center gap-1">
+                  <span>{t.pillarMetaTitle}</span>
+                  <ArrowRight className="w-3 h-3 text-emerald-400 group-hover:translate-x-1 transition-transform duration-300" />
                 </h2>
-                <span className="relative text-[10px] text-navy-mist group-hover:text-emerald-200 mt-0.5 flex items-center gap-1 transition-colors">
-                  {t.pillarMetaSub} <ArrowRight className="w-2.5 h-2.5 text-emerald-400 group-hover:translate-x-1.5 transition-transform duration-300" />
-                </span>
               </a>
             </div>
-
-            {/* Brief Bio */}
-            <p className="text-navy-mist text-xs sm:text-sm leading-relaxed mb-5 max-w-xl">
-              {profile.bio}
-            </p>
 
             {/* 
               MODERN 3 PRIMARY CTA BUTTONS + CV Pill
@@ -527,25 +471,7 @@ export const Hero: React.FC<HeroProps> = ({
                         />
 
                         {/* Subtle multi-stop gradient overlay for contrast */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40 pointer-events-none" />
-
-                        {/* Top Left Branding Pill: Logo on LEFT, Name on SIDE */}
-                        <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/20 shadow-md">
-                          <img
-                            src="/profile.png"
-                            alt="Md Kawser Ahmad"
-                            className="w-3.5 h-3.5 sm:w-4 sm:h-4 rounded-full object-cover"
-                          />
-                          <span className="text-[10px] sm:text-xs font-bold text-white tracking-wide">
-                            Kawser Theory • Promo Video
-                          </span>
-                        </div>
-
-                        {/* Top Right: Full HD Quality Badge */}
-                        <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-sky-500/30 border border-sky-400/60 text-[10px] sm:text-xs font-extrabold text-cyan-200 backdrop-blur-md shadow">
-                          <Film className="w-3.5 h-3.5 text-cyan-300" />
-                          <span>1080p HD</span>
-                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent pointer-events-none" />
 
                         {/* Prominent Glowing Play Button in Center */}
                         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -553,69 +479,28 @@ export const Hero: React.FC<HeroProps> = ({
                             <Play className="w-5 h-5 sm:w-6 sm:h-6 fill-slate-950 ml-0.5 text-slate-950" />
                           </div>
                         </div>
-
-                        {/* Bottom Bar Inside Thumbnail Frame */}
-                        <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between pointer-events-none">
-                          <span className="inline-block text-[10px] sm:text-xs font-bold px-2.5 py-0.5 sm:py-1 rounded-lg bg-black/80 border border-sky-400/30 text-sky-300 backdrop-blur-sm">
-                            Full Resolution 16:9 • Official Promo
-                          </span>
-                          <span className="inline-flex items-center gap-1 text-[10px] sm:text-xs font-medium text-cyan-200 bg-sky-950/80 px-2.5 py-0.5 sm:py-1 rounded-lg border border-cyan-500/30 backdrop-blur-sm">
-                            <span>Click to Watch</span>
-                            <ArrowRight className="w-3 h-3 group-hover/poster:translate-x-1 transition-transform" />
-                          </span>
-                        </div>
                       </button>
 
                       {/* Video Details & Quick Action Row */}
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-0.5">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gradient-to-r from-sky-500/20 to-cyan-500/20 border border-sky-400/40 text-[10px] sm:text-[11px] font-extrabold text-cyan-300">
-                              <Sparkles className="w-3 h-3 text-cyan-400" />
-                              <span>Featured Promo Spotlight</span>
-                            </span>
-                            <span className="text-[10px] text-emerald-300 font-bold bg-emerald-500/20 border border-emerald-400/30 px-2 py-0.5 rounded-md">
-                              Commercial Polish
-                            </span>
-                          </div>
-                          
-                          <h4 className="text-base sm:text-lg font-extrabold text-white group-hover:text-cyan-200 transition-colors leading-snug">
-                            {featuredVideos[0].title}
-                          </h4>
-                          <p className="text-xs sm:text-sm text-navy-mist line-clamp-1 mt-0.5">
-                            {featuredVideos[0].description}
-                          </p>
-                        </div>
+                        <h4 className="text-base sm:text-lg font-extrabold text-white group-hover:text-cyan-200 transition-colors leading-snug">
+                          {featuredVideos[0].title}
+                        </h4>
 
-                        {/* Direct Play & View Actions */}
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              if (onPlayVideo) {
-                                onPlayVideo(featuredVideos[0]);
-                              } else {
-                                document.getElementById('slot-video')?.scrollIntoView({ behavior: 'smooth' });
-                              }
-                            }}
-                            className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 hover:from-sky-300 hover:to-cyan-200 text-slate-950 text-xs sm:text-sm font-extrabold transition-all duration-200 shadow-md shadow-sky-500/40 hover:scale-[1.02] cursor-pointer"
-                          >
-                            <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-slate-950 text-slate-950" />
-                            <span>Watch Promo Video</span>
-                          </button>
-
-                          <a
-                            href="#slot-video"
-                            onClick={(e) => {
-                              e.preventDefault();
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (onPlayVideo) {
+                              onPlayVideo(featuredVideos[0]);
+                            } else {
                               document.getElementById('slot-video')?.scrollIntoView({ behavior: 'smooth' });
-                            }}
-                            className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-3.5 py-2 sm:py-2.5 rounded-xl bg-[#031528] hover:bg-[#072445] border border-sky-500/30 hover:border-sky-400/50 text-sky-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
-                          >
-                            <span>{t.seeAll}</span>
-                            <ArrowRight className="w-3.5 h-3.5" />
-                          </a>
-                        </div>
+                            }
+                          }}
+                          className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 hover:from-sky-300 hover:to-cyan-200 text-slate-950 text-xs sm:text-sm font-extrabold transition-all duration-200 shadow-md shadow-sky-500/40 hover:scale-[1.02] cursor-pointer flex-shrink-0"
+                        >
+                          <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-slate-950 text-slate-950" />
+                          <span>{t.ctaWatchPromo}</span>
+                        </button>
                       </div>
 
                     </div>
